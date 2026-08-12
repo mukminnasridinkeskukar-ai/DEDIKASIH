@@ -88,6 +88,109 @@
       
       return supabaseInitPromise;
     }
+    
+    // Test connection and detect CORS issues
+    async function testSupabaseConnection() {
+      if (!supabase || !supabaseReady) {
+        return { success: false, error: 'Supabase client not initialized', isCORS: false };
+      }
+      
+      try {
+        console.log('%c[DEDIKASIH] 🔄 Testing connection to Supabase...', 'color:#64748b');
+        
+        // Simple query to test connection
+        const { data, error } = await supabase.from('pengumuman').select('count').limit(1);
+        
+        if (error) {
+          // Detect CORS error
+          if (error.message && (
+            error.message.includes('CORS') || 
+            error.message.includes('cross-origin') ||
+            error.message.includes('Failed to fetch') ||
+            error.message.includes('NetworkError')
+          )) {
+            return { 
+              success: false, 
+              error: 'CORS Error - GitHub Pages domain not allowed in Supabase', 
+              isCORS: true 
+            };
+          }
+          
+          // Table might not exist yet - still means connection works!
+          if (error.code === '42P01' || error.message.includes('does not exist')) {
+            console.log('%c[DEDIKASIH] ✅ Connected! (Table not created yet - run SQL schema)', 'color:#f59e0b');
+            return { success: true, warning: 'Tables need to be created', isCORS: false };
+          }
+          
+          return { success: false, error: error.message, isCORS: false };
+        }
+        
+        console.log('%c[DEDIKASIH] ✅ Supabase connection successful!', 'color:#14b8a6');
+        return { success: true, isCORS: false };
+        
+      } catch (err) {
+        console.error('%c[DEDIKASIH] Connection test error:', 'color:#ef4444', err);
+        
+        // Detect CORS from catch block
+        if (err.message && (
+          err.message.includes('CORS') || 
+          err.message.includes('cross-origin') ||
+          err.message.includes('Failed to fetch') ||
+          err.message.includes('NetworkError') ||
+          err.message.includes('Network request failed')
+        )) {
+          return { 
+            success: false, 
+            error: 'CORS Error - GitHub Pages blocked by Supabase', 
+            isCORS: true,
+            details: err.message
+          };
+        }
+        
+        return { success: false, error: err.message, isCORS: false };
+      }
+    }
+    
+    // Show CORS help modal
+    function showCORSHelp() {
+      var currentOrigin = window.location.origin;
+      var helpHTML = `
+        <div style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
+          <div style="background:white;border-radius:16px;max-width:600px;width:100%;padding:24px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);">
+            <div style="display:flex;align-items:center;margin-bottom:16px;">
+              <i class="fa-solid fa-triangle-exclamation text-amber-500" style="font-size:24px;margin-right:12px;"></i>
+              <h2 style="margin:0;font-size:18px;font-weight:600;">⚠️ CORS Error Terdeteksi</h2>
+            </div>
+            
+            <p style="color:#64748b;margin-bottom:16px;line-height:1.6;">
+              GitHub Pages tidak bisa terhubung ke Supabase karena <strong>kebijakan keamanan browser</strong> (CORS).
+            </p>
+            
+            <div style="background:#fef3c7;border-radius:8px;padding:16px;margin-bottom:16px;">
+              <h3 style="margin:0 0 8px 0;font-size:14px;color:#92400e;">🔧 Solusi - Tambahkan URL ini di Supabase:</h3>
+              <code style="background:white;padding:8px 12px;border-radius:6px;display:block;font-size:13px;color:#0f766e;word-break:break-all;">
+                ${currentOrigin}
+              </code>
+            </div>
+            
+            <ol style="color:#475569;padding-left:20px;margin-bottom:16px;line-height:2;">
+              <li>Buka <a href="https://supabase.com/dashboard" target="_blank" style="color:#0f766e;">Supabase Dashboard</a></li>
+              <li>Pilih project <strong>kfxueyoddhwjszcyiukp</strong></li>
+              <li>Menu <strong>Authentication → URL Configuration</strong></li>
+              <li>Tambahkan <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;">${currentOrigin}</code> di Site URL</li>
+              <li>Klik <strong>Save</strong></li>
+              <li>Refresh halaman ini</li>
+            </ol>
+            
+            <button onclick="location.reload()" 
+                    style="width:100%;padding:12px;background:linear-gradient(135deg,#0f766e,#14b8a6);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:500;">
+              ✅ Tutup & Refresh Halaman
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', helpHTML);
+    }
   </script>
 
   <!-- SUPABASE CLIENT LIBRARY (CDN) - Using UMD build for browser compatibility -->
@@ -2141,6 +2244,41 @@
           statusEl.className = 'hidden sm:block text-[10px] text-amber-400';
         }
         return;
+      }
+      
+      // Test actual connection to detect CORS issues
+      console.log('%c[DEDIKASIH] 🔄 Testing database connection...', 'color:#64748b');
+      var connectionTest = await testSupabaseConnection();
+      
+      if (!connectionTest.success) {
+        console.error('%c[DEDIKASIH] ❌ Connection failed:', 'color:#ef4444', connectionTest.error);
+        
+        // If it's a CORS error, show help modal
+        if (connectionTest.isCORS) {
+          console.error('%c[DEDIKASIH] 🔒 This is a CORS error - GitHub Pages needs to be whitelisted in Supabase', 'color:#f59e0b');
+          showCORSHelp();  // Show help modal with instructions
+          return;
+        }
+        
+        // For other errors, show demo mode with error message
+        showToast('Error: ' + connectionTest.error, 'error');
+        showLoading(false);
+        document.getElementById('view-dashboard').classList.remove('hidden');
+        document.getElementById('nav-dashboard').classList.add('active');
+        
+        var statusEl = document.getElementById('dbStatusIndicator');
+        if (statusEl) {
+          statusEl.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1 text-red-500"></i>Connection Error';
+          statusEl.className = 'hidden sm:block text-[10px] text-red-400';
+        }
+        return;
+      }
+      
+      // Connection successful!
+      if (connectionTest.warning) {
+        showToast(connectionTest.warning, 'warning');
+      } else {
+        console.log('%c[DEDIKASIH] ✅ Connected to Supabase successfully!', 'color:#14b8a6');
       }
       
       showLoading(true);
