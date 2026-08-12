@@ -536,7 +536,7 @@
         <span class="text-[10px] px-2 py-0.5 rounded-lg bg-teal-500/10 text-teal-400 border border-teal-500/20">LIVE</span>
       </div>
       <div class="flex items-center gap-3">
-        <span class="hidden sm:block text-[10px] text-slate-500"><i class="fa-solid fa-database mr-1 text-emerald-500"></i>Supabase Connected</span>
+        <span id="dbStatusIndicator" class="hidden sm:block text-[10px] text-slate-500"><i class="fa-solid fa-database mr-1 text-emerald-500"></i>Supabase Connected</span>
         <kbd class="hidden md:inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-800 text-[10px] text-slate-400 border border-slate-700">⌘/</kbd>
       </div>
     </header>
@@ -2094,10 +2094,11 @@
         document.getElementById('view-dashboard').classList.remove('hidden');
         document.getElementById('nav-dashboard').classList.add('active');
         
-        // Update status indicator
-        var statusEl = document.querySelector('.text-[10px].text-slate-500');
+        // Update status indicator - using getElementById instead of querySelector
+        var statusEl = document.getElementById('dbStatusIndicator');
         if (statusEl) {
           statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1 text-amber-500"></i>Demo Mode (No DB)';
+          statusEl.className = 'hidden sm:block text-[10px] text-amber-400';
         }
         return;
       }
