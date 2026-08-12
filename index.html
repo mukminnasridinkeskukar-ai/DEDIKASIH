@@ -1389,7 +1389,7 @@
         const { data, error } = await supabase
           .from('sertifikat')
           .select('*')
-          .order('no', { ascending: true });
+          .order('id', { ascending: true });
 
         if (error) throw error;
 
@@ -1397,14 +1397,13 @@
           success: true,
           data: data.map(row => ({
             id: row.id,
-            no: row.no,
-            namaPeserta: row.nama_peserta,
-            profesi: row.profesi,
-            tempatBekerja: row.tempat_bekerja,
+            nomorSertifikat: row.nomor_sertifikat,
+            namaLengkap: row.nama_lengkap,
+            nik: row.nik,
             namaKegiatan: row.nama_kegiatan,
-            tanggalKegiatan: row.tanggal_kegiatan,
-            tempatKegiatan: row.tempat_kegiatan,
-            link: row.link
+            penyelenggara: row.penyelenggara,
+            tanggalTerbit: row.tanggal_terbit,
+            linkSertifikat: row.link_sertifikat
           }))
         };
       } catch (error) {
@@ -1719,14 +1718,13 @@
         const { error } = await supabase
           .from('sertifikat')
           .insert({
-            no: data.no,
-            nama_peserta: data.namaPeserta,
-            profesi: data.profesi,
-            tempat_bekerja: data.tempatBekerja,
+            nomor_sertifikat: data.nomorSertifikat,
+            nama_lengkap: data.namaLengkap,
+            nik: data.nik,
             nama_kegiatan: data.namaKegiatan,
-            tanggal_kegiatan: data.tanggalKegiatan,
-            tempat_kegiatan: data.tempatKegiatan,
-            link: data.link
+            penyelenggara: data.penyelenggara,
+            tanggal_terbit: data.tanggalTerbit,
+            link_sertifikat: data.linkSertifikat
           });
 
         if (error) throw error;
@@ -1858,23 +1856,22 @@
       var q=(document.getElementById('searchSertifikat').value||'').toLowerCase();
       var fk=document.getElementById('filterKegiatan').value;
       var filtered=allSertifikat.filter(function(s){
-        return (!q||s.namaPeserta.toLowerCase().includes(q)||s.no.toLowerCase().includes(q))&&(!fk||s.namaKegiatan===fk);
+        return (!q||s.namaLengkap.toLowerCase().includes(q)||s.nomorSertifikat.toLowerCase().includes(q))&&(!fk||s.namaKegiatan===fk);
       });
       var totalPages=Math.ceil(filtered.length/SERTIFIKAT_PER_PAGE);
       if(sertifikatPage>totalPages) sertifikatPage=1;
       var paged=filtered.slice((sertifikatPage-1)*SERTIFIKAT_PER_PAGE,sertifikatPage*SERTIFIKAT_PER_PAGE);
       if(paged.length){
         tb.innerHTML=paged.map(function(s){
-          return '<tr class="border-b border-slate-700/50"><td class="px-4 py-3 font-mono text-teal-300">'+s.no+'</td>'+
-            '<td class="px-4 py-3"><div class="font-medium">'+s.namaPeserta+'</div><div class="text-[10px] text-slate-400">'+(s.profesi||'-')+'</div></td>'+
-            '<td class="px-4 py-3">'+(s.profesi||'-')+'</td>'+
-            '<td class="px-4 py-3 hidden md:table-cell text-slate-400">'+(s.tempatBekerja||'-')+'</td>'+
+          return '<tr class="border-b border-slate-700/50"><td class="px-4 py-3 font-mono text-teal-300">'+s.nomorSertifikat+'</td>'+
+            '<td class="px-4 py-3"><div class="font-medium">'+s.namaLengkap+'</div><div class="text-[10px] text-slate-400">NIK: '+(s.nik||'-')+'</div></td>'+
             '<td class="px-4 py-3">'+s.namaKegiatan+'</td>'+
-            '<td class="px-4 py-3 hidden lg:table-cell text-slate-400">'+(s.tanggalKegiatan||'-')+'</td>'+
-            '<td class="px-4 py-3"><button onclick="window.open(\''+((s.link||'').replace(/'/g,"\\'"))+'\',\'_blank\')" class="text-xs px-3 py-1 bg-emerald-600 hover:bg-emerald-500 rounded-2xl flex items-center gap-1">'+
+            '<td class="px-4 py-3 hidden md:table-cell text-slate-400">'+(s.penyelenggara||'-')+'</td>'+
+            '<td class="px-4 py-3 hidden lg:table-cell text-slate-400">'+(s.tanggalTerbit||'-')+'</td>'+
+            '<td class="px-4 py-3"><button onclick="window.open(\''+((s.linkSertifikat||'').replace(/'/g,"\\'"))+'\',\'_blank\')" class="text-xs px-3 py-1 bg-emerald-600 hover:bg-emerald-500 rounded-2xl flex items-center gap-1">'+
             '<i class="fa-solid fa-download text-[10px]"></i> <span class="hidden md:inline">Unduh</span></button></td></tr>';
         }).join('');
-      } else { tb.innerHTML='<tr><td colspan="7" class="px-6 py-7 text-center text-xs text-slate-400">Tidak ada data</td></tr>'; }
+      } else { tb.innerHTML='<tr><td colspan="6" class="px-6 py-7 text-center text-xs text-slate-400">Tidak ada data</td></tr>'; }
       var pag = document.getElementById('sertifikatPagination');
       pag.innerHTML = '';
       if(totalPages>1) {
@@ -2086,9 +2083,9 @@
       var res=await getAllSertifikat(); if(!res.success)return;
       var list=res.data||[];
       if(list.length){
-        var html='<table class="premium-table w-full text-xs"><thead><tr><th class="px-4 py-2 text-left">No</th><th class="px-4 py-2 text-left">Nama</th><th class="px-4 py-2 text-left">Kegiatan</th><th class="px-4 py-2 text-right">Aksi</th></tr></thead><tbody>';
+        var html='<table class="premium-table w-full text-xs"><thead><tr><th class="px-4 py-2 text-left">No.Sertifikat</th><th class="px-4 py-2 text-left">Nama</th><th class="px-4 py-2 text-left">Kegiatan</th><th class="px-4 py-2 text-right">Aksi</th></tr></thead><tbody>';
         html+=list.map(function(s){
-          return '<tr class="border-b border-slate-700/40"><td class="px-4 py-1.5 font-mono">'+s.no+'</td><td class="px-4 py-1.5">'+s.namaPeserta+'</td><td class="px-4 py-1.5">'+s.namaKegiatan+'</td><td class="px-4 py-1.5 text-right"><button onclick="deleteSertifikat('+s.id+')" class="text-red-400 px-2">Hapus</button></td></tr>';
+          return '<tr class="border-b border-slate-700/40"><td class="px-4 py-1.5 font-mono">'+s.nomorSertifikat+'</td><td class="px-4 py-1.5">'+s.namaLengkap+'</td><td class="px-4 py-1.5">'+s.namaKegiatan+'</td><td class="px-4 py-1.5 text-right"><button onclick="deleteSertifikat('+s.id+')" class="text-red-400 px-2">Hapus</button></td></tr>';
         }).join('');
         html+='</tbody></table>'; c.innerHTML=html;
       } else { c.innerHTML='<div class="p-4 text-xs text-center">Kosong</div>'; }
@@ -2123,12 +2120,11 @@
       genericModalData={type:'sertifikat'};
       document.getElementById('modalGenericTitle').textContent='Tambah Data Sertifikat';
       document.getElementById('modalGenericBody').innerHTML=
-        '<div class="grid grid-cols-2 gap-3"><input id="g-no" placeholder="No Sertifikat" class="form-input bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm"><input id="g-nama" placeholder="Nama Peserta" class="form-input bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm"></div>'+
-        '<input id="g-profesi" placeholder="Profesi Kesehatan" class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm">'+
-        '<input id="g-tempat" placeholder="Tempat Bekerja" class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm">'+
+        '<input id="g-nomor" placeholder="Nomor Sertifikat" class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm">'+
+        '<div class="grid grid-cols-2 gap-3"><input id="g-nama" placeholder="Nama Lengkap" class="form-input bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm"><input id="g-nik" placeholder="NIK (16 digit)" maxlength="16" class="form-input bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm"></div>'+
         '<input id="g-kegiatan" placeholder="Nama Kegiatan" class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm">'+
-        '<div class="grid grid-cols-2 gap-3"><input id="g-tanggal" placeholder="Tanggal" class="form-input bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm"><input id="g-tempatkeg" placeholder="Tempat Kegiatan" class="form-input bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm"></div>'+
-        '<input id="g-link" placeholder="https://drive.google.com/..." class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm">';
+        '<input id="g-penyelenggara" placeholder="Penyelenggara" class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm">'+
+        '<div class="grid grid-cols-2 gap-3"><input id="g-tanggal" type="date" class="form-input bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm"><input id="g-link" placeholder="Link Sertifikat (URL)" class="form-input bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-sm"></div>';
       document.getElementById('modalGeneric').classList.remove('hidden');
     }
     async function submitGenericModal() {
@@ -2143,7 +2139,7 @@
         if(res.success){showToast(res.message,'success');loadAdminJadwal();}else showToast(res.message,'error');
       }
       else if(t==='sertifikat'){
-        var res=await addSertifikat({no:body.querySelector('#g-no').value,namaPeserta:body.querySelector('#g-nama').value,profesi:body.querySelector('#g-profesi').value,tempatBekerja:body.querySelector('#g-tempat').value,namaKegiatan:body.querySelector('#g-kegiatan').value,tanggalKegiatan:body.querySelector('#g-tanggal').value,tempatKegiatan:body.querySelector('#g-tempatkeg').value,link:body.querySelector('#g-link').value});
+        var res=await addSertifikat({nomorSertifikat:body.querySelector('#g-nomor').value,namaLengkap:body.querySelector('#g-nama').value,nik:body.querySelector('#g-nik').value,namaKegiatan:body.querySelector('#g-kegiatan').value,penyelenggara:body.querySelector('#g-penyelenggara').value,tanggalTerbit:body.querySelector('#g-tanggal').value,linkSertifikat:body.querySelector('#g-link').value});
         if(res.success){showToast(res.message,'success');loadAdminSertifikat();}else showToast(res.message,'error');
       }
     }
@@ -2171,8 +2167,8 @@
         results[2].data.forEach(function(r){csv+=csvRow([r.namaKegiatan,r.tempat,r.tanggal,r.waktu,r.pic])+'\n';}); csv+='\n';
       }
       if(results[3].success&&results[3].data.length){
-        csv+='SERTIFIKAT\nNo,Nama,Profesi,Tempat Bekerja,Kegiatan,Tanggal,Tempat Kegiatan,Link\n';
-        results[3].data.forEach(function(r){csv+=csvRow([r.no,r.namaPeserta,r.profesi,r.tempatBekerja,r.namaKegiatan,r.tanggalKegiatan,r.tempatKegiatan,r.link])+'\n';});
+        csv+='SERTIFIKAT\nNomor Sertifikat,Nama Lengkap,NIK,Nama Kegiatan,Penyelenggara,Tanggal Terbit,Link Sertifikat\n';
+        results[3].data.forEach(function(r){csv+=csvRow([r.nomorSertifikat,r.namaLengkap,r.nik,r.namaKegiatan,r.penyelenggara,r.tanggalTerbit,r.linkSertifikat])+'\n';});
       }
       var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
       var url=URL.createObjectURL(blob);
