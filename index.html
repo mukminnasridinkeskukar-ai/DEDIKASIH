@@ -16,9 +16,6 @@
   <!-- jsPDF for PDF Export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   
-  <!-- SUPABASE CLIENT LIBRARY (CDN) - Using UMD build for browser compatibility -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
-
   <!-- ============================================ -->
   <!-- SUPABASE CONFIGURATION - GANTI DENGAN CREDENTIAL ANDA -->
   <!-- ============================================ -->
@@ -32,11 +29,13 @@
     // 4. Copy "Project URL" dan "anon public key"
     // ================================================================
     
-    const SUPABASE_URL = 'https://kfxueyoddhwjszcyiukp.supabase.co';
+    const SUPABASE_URL = 'https://kfxueyoddhwjszcyiukp.supabase.co/rest/v1/';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtmeHVleW9kZGh3anN6Y3lpdWtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1MDQyOTAsImV4cCI6MjEwMjA4MDI5MH0.xv5Lr6QhbUZuMjQ8RtPvtiBcd8dvoG_S7wwZ7eTelzk';
     
     // Initialize Supabase Client with error handling
     var supabase = null;
+    var supabaseReady = false;
+    var supabaseInitPromise = null;
     
     function initSupabase() {
       try {
@@ -51,6 +50,7 @@
         
         console.log('%c[DEDIKASIH] ✅ Supabase Client Initialized', 'color:#14b8a6');
         console.log('%c[DEDIKASIH] Project URL:', 'color:#64748b', SUPABASE_URL);
+        supabaseReady = true;
         return true;
       } catch (error) {
         console.error('%c[DEDIKASIH] Error initializing Supabase:', 'color:#ef4444', error);
@@ -58,9 +58,45 @@
       }
     }
     
-    // Initialize immediately
-    var supabaseReady = initSupabase();
+    // Promise-based initialization that waits for library to load
+    function waitForSupabase() {
+      if (supabaseInitPromise) return supabaseInitPromise;
+      
+      supabaseInitPromise = new Promise(function(resolve) {
+        // Try immediate init first
+        if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+          resolve(initSupabase());
+          return;
+        }
+        
+        // Wait for library to load (max 10 seconds)
+        var attempts = 0;
+        var maxAttempts = 100; // 100 x 100ms = 10 seconds
+        
+        var checkInterval = setInterval(function() {
+          attempts++;
+          if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+            clearInterval(checkInterval);
+            resolve(initSupabase());
+          } else if (attempts >= maxAttempts) {
+            clearInterval(checkInterval);
+            console.error('%c[DEDIKASIH] ❌ Supabase library failed to load after 10 seconds', 'color:#ef4444');
+            resolve(false);
+          }
+        }, 100);
+      });
+      
+      return supabaseInitPromise;
+    }
   </script>
+
+  <!-- SUPABASE CLIENT LIBRARY (CDN) - Using UMD build for browser compatibility -->
+  <!-- Loaded AFTER config so we can detect when it's ready -->
+  <script 
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"
+    onload="console.log('%c[DEDIKASIH] 📦 Supabase library loaded from CDN', 'color:#14b8a6')"
+    onerror="console.error('%c[DEDIKASIH] ❌ Failed to load Supabase library from CDN', 'color:#ef4444')"
+  ></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
@@ -2085,8 +2121,12 @@
       if(localStorage.getItem('dedikasi_dark')==='0'){document.documentElement.classList.remove('dark');document.getElementById('themeIcon').className='fa-solid fa-sun';}
       initFormHelpers();
       
-      // Check Supabase connection first
-      if (!supabaseReady) {
+      // Wait for Supabase library to load and initialize (with timeout)
+      console.log('%c[DEDIKASIH] 🔄 Initializing Supabase connection...', 'color:#64748b');
+      var connected = await waitForSupabase();
+      
+      // Check Supabase connection after waiting
+      if (!connected || !supabaseReady) {
         console.warn('%c[DEDIKASIH] ⚠️ Supabase not connected. Running in demo mode.', 'color:#f59e0b');
         showToast('Mode Demo: Database tidak terhubung', 'warning');
         // Still show the UI but with empty data
