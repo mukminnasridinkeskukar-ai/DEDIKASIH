@@ -16,8 +16,8 @@
   <!-- jsPDF for PDF Export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   
-  <!-- SUPABASE CLIENT LIBRARY (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- SUPABASE CLIENT LIBRARY (CDN) - Using UMD build for browser compatibility -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
 
   <!-- ============================================ -->
   <!-- SUPABASE CONFIGURATION - GANTI DENGAN CREDENTIAL ANDA -->
@@ -32,14 +32,34 @@
     // 4. Copy "Project URL" dan "anon public key"
     // ================================================================
     
-    const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-    const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+    const SUPABASE_URL = 'https://kfxueyoddhwjszcyiukp.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtmeHVleW9kZGh3anN6Y3lpdWtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1MDQyOTAsImV4cCI6MjEwMjA4MDI5MH0.xv5Lr6QhbUZuMjQ8RtPvtiBcd8dvoG_S7wwZ7eTelzk';
     
-    // Initialize Supabase Client
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Initialize Supabase Client with error handling
+    var supabase = null;
     
-    console.log('%c[DEDIKASIH] Supabase Client Initialized', 'color:#14b8a6');
-    console.log('%c[DEDIKASIH] Project:', 'color:#64748b', SUPABASE_URL);
+    function initSupabase() {
+      try {
+        // Check if Supabase library is loaded
+        if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
+          console.error('%c[DEDIKASIH] ERROR: Supabase library not loaded!', 'color:#ef4444');
+          console.error('%c[DEDIKASIH] Please check your internet connection or CDN availability', 'color:#ef4444');
+          return false;
+        }
+        
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        console.log('%c[DEDIKASIH] ✅ Supabase Client Initialized', 'color:#14b8a6');
+        console.log('%c[DEDIKASIH] Project URL:', 'color:#64748b', SUPABASE_URL);
+        return true;
+      } catch (error) {
+        console.error('%c[DEDIKASIH] Error initializing Supabase:', 'color:#ef4444', error);
+        return false;
+      }
+    }
+    
+    // Initialize immediately
+    var supabaseReady = initSupabase();
   </script>
 
   <style>
@@ -1009,6 +1029,27 @@
       return new Date().toISOString().split('T')[0];
     }
 
+    /**
+     * Check if Supabase client is ready and initialized
+     * Returns true if ready, false otherwise (shows error)
+     */
+    function checkSupabaseReady() {
+      if (!supabase || typeof supabase.from !== 'function') {
+        console.error('%c[DEDIKASIH] ❌ Supabase client not ready!', 'color:#ef4444');
+        console.error('%c[DEDIKASIH] Please check:', 'color:#f59e0b', {
+          supabaseExists: typeof supabase !== 'undefined',
+          fromFunction: supabase ? typeof supabase.from : 'N/A',
+          urlConfigured: SUPABASE_URL !== 'https://YOUR_PROJECT_ID.supabase.co',
+          keyConfigured: SUPABASE_ANON_KEY !== 'YOUR_ANON_KEY_HERE'
+        });
+        
+        // Show user-friendly error
+        showToast('Koneksi database gagal. Periksa console untuk detail.', 'error');
+        return false;
+      }
+      return true;
+    }
+
     /* ============================================
        NAVIGATION
     ============================================ */
@@ -1091,6 +1132,11 @@
      * Mengambil data statistik dari Supabase
      */
     async function getDashboardStats() {
+      // Guard: Check if Supabase client is ready
+      if (!checkSupabaseReady()) {
+        return { success: false, message: 'Supabase client tidak terinisialisasi' };
+      }
+      
       try {
         // Hitung semua stats secara paralel
         const [usulanRes, menungguRes, disetujuiRes, ditolakRes, pengumumanRes, jadwalRes, sertifikatRes] = await Promise.all([
@@ -1127,6 +1173,7 @@
      * Get Recent Usulan (5 terbaru)
      */
     async function getRecentUsulan(limit = 5) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { data, error } = await supabase
           .from('formulir_usulan')
@@ -1156,6 +1203,7 @@
      * Get All Pengumuman
      */
     async function getAllPengumuman() {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { data, error } = await supabase
           .from('pengumuman')
@@ -1183,6 +1231,7 @@
      * Get All Jadwal Kegiatan
      */
     async function getAllJadwal() {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { data, error } = await supabase
           .from('jadwal_kegiatan')
@@ -1212,6 +1261,7 @@
      * Get All Sertifikat
      */
     async function getAllSertifikat() {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { data, error } = await supabase
           .from('sertifikat')
@@ -1244,6 +1294,7 @@
      * Submit Form Usulan (INSERT)
      */
     async function submitFormUsulan(formData) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { data, error } = await supabase
           .from('formulir_usulan')
@@ -1288,6 +1339,7 @@
      * Check Status Usulan (by NIK or Nomor Registrasi)
      */
     async function checkStatusUsulan(query) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         // Cek apakah query adalah NIK (16 digit) atau nomor registrasi
         const isNIK = /^\d{16}$/.test(query);
@@ -1338,6 +1390,7 @@
      * Admin Login (via RPC or direct query)
      */
     async function adminLoginSupabase(username, password) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         // Query admin_users table
         const { data, error } = await supabase
@@ -1378,6 +1431,7 @@
      * Get All Formulir for Admin
      */
     async function getFormulirForAdmin() {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { data, error } = await supabase
           .from('formulir_usulan')
@@ -1415,6 +1469,7 @@
      * Update Status Usulan
      */
     async function updateStatusUsulan(nomorRegistrasi, status, catatan) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { error } = await supabase
           .from('formulir_usulan')
@@ -1438,6 +1493,7 @@
      * Delete Formulir
      */
     async function deleteFormulirByNomor(nomorRegistrasi) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { error } = await supabase
           .from('formulir_usulan')
@@ -1457,6 +1513,7 @@
      * Add Pengumuman
      */
     async function addPengumuman(judul, isi, tanggal) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { error } = await supabase
           .from('pengumuman')
@@ -1475,6 +1532,7 @@
      * Delete Pengumuman
      */
     async function deletePengumumanById(id) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { error } = await supabase
           .from('pengumuman')
@@ -1494,6 +1552,7 @@
      * Add Jadwal Kegiatan
      */
     async function addJadwal(namaKegiatan, tempat, tanggal, waktu, pic) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { error } = await supabase
           .from('jadwal_kegiatan')
@@ -1512,6 +1571,7 @@
      * Delete Jadwal
      */
     async function deleteJadwalById(id) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { error } = await supabase
           .from('jadwal_kegiatan')
@@ -1531,6 +1591,7 @@
      * Add Sertifikat
      */
     async function addSertifikat(data) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { error } = await supabase
           .from('sertifikat')
@@ -1558,6 +1619,7 @@
      * Delete Sertifikat
      */
     async function deleteSertifikatById(id) {
+      if (!checkSupabaseReady()) return { success: false, message: 'Supabase tidak siap' };
       try {
         const { error } = await supabase
           .from('sertifikat')
@@ -2022,6 +2084,24 @@
       initTailwind();
       if(localStorage.getItem('dedikasi_dark')==='0'){document.documentElement.classList.remove('dark');document.getElementById('themeIcon').className='fa-solid fa-sun';}
       initFormHelpers();
+      
+      // Check Supabase connection first
+      if (!supabaseReady) {
+        console.warn('%c[DEDIKASIH] ⚠️ Supabase not connected. Running in demo mode.', 'color:#f59e0b');
+        showToast('Mode Demo: Database tidak terhubung', 'warning');
+        // Still show the UI but with empty data
+        showLoading(false);
+        document.getElementById('view-dashboard').classList.remove('hidden');
+        document.getElementById('nav-dashboard').classList.add('active');
+        
+        // Update status indicator
+        var statusEl = document.querySelector('.text-[10px].text-slate-500');
+        if (statusEl) {
+          statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1 text-amber-500"></i>Demo Mode (No DB)';
+        }
+        return;
+      }
+      
       showLoading(true);
       
       // Load semua data dari Supabase secara paralel
