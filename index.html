@@ -17,189 +17,173 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   
   <!-- ============================================ -->
-  <!-- SUPABASE CONFIGURATION - GANTI DENGAN CREDENTIAL ANDA -->
+  <!-- SUPABASE CONFIGURATION (EMBEDDED) -->
   <!-- ============================================ -->
   <script>
     // ==================== SUPABASE CREDENTIALS ====================
-    // Ganti URL dan ANON KEY di bawah dengan credential dari project Supabase Anda
-    // Cara mendapatkan:
-    // 1. Login ke https://supabase.com
-    // 2. Pilih project Anda
-    // 3. Settings > API
-    // 4. Copy "Project URL" dan "anon public key"
-    // ================================================================
-    
     const SUPABASE_URL = 'https://kfxueyoddhwjszcyiukp.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtmeHVleW9kZGh3anN6Y3lpdWtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1MDQyOTAsImV4cCI6MjEwMjA4MDI5MH0.xv5Lr6QhbUZuMjQ8RtPvtiBcd8dvoG_S7wwZ7eTelzk';
     
-    // Initialize Supabase Client with error handling
-    var supabase = null;
-    var supabaseReady = false;
-    var supabaseInitPromise = null;
+    // Internal state (hidden from UI)
+    var _supabase = null;
+    var _ready = false;
+    var _retryCount = 0;
+    var _maxRetries = 3;
+    var _corsDetected = false;
+    var _initPromise = null;
     
-    function initSupabase() {
+    // Silent initialization - no UI feedback
+    function _initClient() {
       try {
-        // Check if Supabase library is loaded
         if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
-          console.error('%c[DEDIKASIH] ERROR: Supabase library not loaded!', 'color:#ef4444');
-          console.error('%c[DEDIKASIH] Please check your internet connection or CDN availability', 'color:#ef4444');
           return false;
         }
-        
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        
-        console.log('%c[DEDIKASIH] ✅ Supabase Client Initialized', 'color:#14b8a6');
-        console.log('%c[DEDIKASIH] Project URL:', 'color:#64748b', SUPABASE_URL);
-        supabaseReady = true;
+        _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        _ready = true;
+        console.log('[DEDIKASIH] Client initialized');
         return true;
-      } catch (error) {
-        console.error('%c[DEDIKASIH] Error initializing Supabase:', 'color:#ef4444', error);
+      } catch(e) {
+        console.error('[DEDIKASIH] Init error:', e.message);
         return false;
       }
     }
     
-    // Promise-based initialization that waits for library to load
-    function waitForSupabase() {
-      if (supabaseInitPromise) return supabaseInitPromise;
-      
-      supabaseInitPromise = new Promise(function(resolve) {
-        // Try immediate init first
+    // Wait for library with timeout
+    function _waitForLib() {
+      if (_initPromise) return _initPromise;
+      _initPromise = new Promise(function(resolve) {
         if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
-          resolve(initSupabase());
+          resolve(_initClient());
           return;
         }
-        
-        // Wait for library to load (max 10 seconds)
-        var attempts = 0;
-        var maxAttempts = 100; // 100 x 100ms = 10 seconds
-        
-        var checkInterval = setInterval(function() {
-          attempts++;
+        var tries = 0;
+        var interval = setInterval(function() {
+          tries++;
           if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
-            clearInterval(checkInterval);
-            resolve(initSupabase());
-          } else if (attempts >= maxAttempts) {
-            clearInterval(checkInterval);
-            console.error('%c[DEDIKASIH] ❌ Supabase library failed to load after 10 seconds', 'color:#ef4444');
+            clearInterval(interval);
+            resolve(_initClient());
+          } else if (tries >= 50) {
+            clearInterval(interval);
             resolve(false);
           }
         }, 100);
       });
-      
-      return supabaseInitPromise;
+      return _initPromise;
     }
     
-    // Test connection and detect CORS issues
-    async function testSupabaseConnection() {
-      if (!supabase || !supabaseReady) {
-        return { success: false, error: 'Supabase client not initialized', isCORS: false };
-      }
+    // Silent connection test
+    async function _testConnection() {
+      if (!_supabase || !_ready) return { ok: false, retry: false };
       
       try {
-        console.log('%c[DEDIKASIH] 🔄 Testing connection to Supabase...', 'color:#64748b');
-        
-        // Simple query to test connection
-        const { data, error } = await supabase.from('pengumuman').select('count').limit(1);
+        var { data, error, status } = await _supabase.from('pengumuman').select('id').limit(1);
         
         if (error) {
-          // Detect CORS error
-          if (error.message && (
-            error.message.includes('CORS') || 
-            error.message.includes('cross-origin') ||
-            error.message.includes('Failed to fetch') ||
-            error.message.includes('NetworkError')
-          )) {
-            return { 
-              success: false, 
-              error: 'CORS Error - GitHub Pages domain not allowed in Supabase', 
-              isCORS: true 
-            };
+          var msg = (error.message || '').toLowerCase();
+          
+          // CORS detection
+          if (msg.includes('cors') || msg.includes('cross-origin') || 
+              msg.includes('failed to fetch') || msg.includes('networkerror') ||
+              msg.includes('network request failed') || status === 0) {
+            _corsDetected = true;
+            console.error('[DEDIKASIH] CORS blocked - need to whitelist:', window.location.origin);
+            return { ok: false, retry: true, cors: true };
           }
           
-          // Table might not exist yet - still means connection works!
-          if (error.code === '42P01' || error.message.includes('does not exist')) {
-            console.log('%c[DEDIKASIH] ✅ Connected! (Table not created yet - run SQL schema)', 'color:#f59e0b');
-            return { success: true, warning: 'Tables need to be created', isCORS: false };
+          // Table missing - connection works!
+          if (error.code === '42P01' || msg.includes('does not exist')) {
+            console.warn('[DEDIKASIH] Connected but tables missing');
+            return { ok: true, needTables: true };
           }
           
-          return { success: false, error: error.message, isCORS: false };
+          // Other errors
+          console.error('[DEDIKASIH] Query error:', error.message, '(status:', status + ')');
+          return { ok: false, retry: _retryCount < _maxRetries };
         }
         
-        console.log('%c[DEDIKASIH] ✅ Supabase connection successful!', 'color:#14b8a6');
-        return { success: true, isCORS: false };
+        return { ok: true };
         
-      } catch (err) {
-        console.error('%c[DEDIKASIH] Connection test error:', 'color:#ef4444', err);
-        
-        // Detect CORS from catch block
-        if (err.message && (
-          err.message.includes('CORS') || 
-          err.message.includes('cross-origin') ||
-          err.message.includes('Failed to fetch') ||
-          err.message.includes('NetworkError') ||
-          err.message.includes('Network request failed')
-        )) {
-          return { 
-            success: false, 
-            error: 'CORS Error - GitHub Pages blocked by Supabase', 
-            isCORS: true,
-            details: err.message
-          };
+      } catch(e) {
+        var errMsg = (e.message || '').toLowerCase();
+        if (errMsg.includes('cors') || errMsg.includes('failed to fetch') || 
+            errMsg.includes('networkerror') || errMsg.includes('network request failed')) {
+          _corsDetected = true;
+          return { ok: false, retry: true, cors: true };
         }
-        
-        return { success: false, error: err.message, isCORS: false };
+        console.error('[DEDIKASIH] Connection exception:', e.message);
+        return { ok: false, retry: _retryCount < _maxRetries };
       }
     }
     
-    // Show CORS help modal
-    function showCORSHelp() {
-      var currentOrigin = window.location.origin;
-      var helpHTML = `
-        <div style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
-          <div style="background:white;border-radius:16px;max-width:600px;width:100%;padding:24px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);">
-            <div style="display:flex;align-items:center;margin-bottom:16px;">
-              <i class="fa-solid fa-triangle-exclamation text-amber-500" style="font-size:24px;margin-right:12px;"></i>
-              <h2 style="margin:0;font-size:18px;font-weight:600;">⚠️ CORS Error Terdeteksi</h2>
-            </div>
-            
-            <p style="color:#64748b;margin-bottom:16px;line-height:1.6;">
-              GitHub Pages tidak bisa terhubung ke Supabase karena <strong>kebijakan keamanan browser</strong> (CORS).
-            </p>
-            
-            <div style="background:#fef3c7;border-radius:8px;padding:16px;margin-bottom:16px;">
-              <h3 style="margin:0 0 8px 0;font-size:14px;color:#92400e;">🔧 Solusi - Tambahkan URL ini di Supabase:</h3>
-              <code style="background:white;padding:8px 12px;border-radius:6px;display:block;font-size:13px;color:#0f766e;word-break:break-all;">
-                ${currentOrigin}
-              </code>
-            </div>
-            
-            <ol style="color:#475569;padding-left:20px;margin-bottom:16px;line-height:2;">
-              <li>Buka <a href="https://supabase.com/dashboard" target="_blank" style="color:#0f766e;">Supabase Dashboard</a></li>
-              <li>Pilih project <strong>kfxueyoddhwjszcyiukp</strong></li>
-              <li>Menu <strong>Authentication → URL Configuration</strong></li>
-              <li>Tambahkan <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;">${currentOrigin}</code> di Site URL</li>
-              <li>Klik <strong>Save</strong></li>
-              <li>Refresh halaman ini</li>
-            </ol>
-            
-            <button onclick="location.reload()" 
-                    style="width:100%;padding:12px;background:linear-gradient(135deg,#0f766e,#14b8a6);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:500;">
-              ✅ Tutup & Refresh Halaman
-            </button>
-          </div>
-        </div>
-      `;
-      document.body.insertAdjacentHTML('beforeend', helpHTML);
+    // Main connection handler with auto-retry
+    async function connectSupabase() {
+      console.log('[DEDIKASIH] Connecting...');
+      
+      // Step 1: Wait for library
+      var libReady = await _waitForLib();
+      if (!libReady) {
+        console.error('[DEDIKASIH] Library failed to load');
+        return false;
+      }
+      
+      // Step 2: Test connection with retries
+      for (_retryCount = 0; _retryCount <= _maxRetries; _retryCount++) {
+        var result = await _testConnection();
+        
+        if (result.ok) {
+          console.log('[DEDIKASIH] ✓ Connected successfully');
+          if (result.needTables) {
+            console.warn('[DEDIKASIH] ⚠ Run SQL schema to create tables');
+          }
+          return true;
+        }
+        
+        if (result.cors) {
+          // CORS error - redirect to config after retries
+          console.error('[DEDIKASIH] ✗ CORS error detected');
+          if (_retryCount >= 1) {
+            // Auto-redirect to Supabase config on 2nd CORS attempt
+            var currentUrl = window.location.origin + '/';
+            var configUrl = 'https://supabase.com/dashboard/project/kfxueyoddhwjszcyiukp/auth/url-configuration';
+            console.log('[DEDIKASIH] Redirecting to configure CORS...');
+            console.log('[DEDIKASIH] Add this URL to Site URL:', currentUrl);
+            // Optional: uncomment next line to auto-redirect
+            // window.location.href = configUrl;
+          }
+          return false;
+        }
+        
+        if (result.retry && _retryCount < _maxRetries) {
+          console.log('[DEDIKASIH] Retrying... (' + (_retryCount + 1) + '/' + _maxRetries + ')');
+          await new Promise(r => setTimeout(r, 1000 * (_retryCount + 1))); // Exponential backoff
+        }
+      }
+      
+      console.error('[DEDIKASIH] ✗ Connection failed after retries');
+      return false;
+    }
+    
+    // Public API (used by app)
+    var supabase = null;
+    var supabaseReady = false;
+    
+    async function initSupabase() {
+      var connected = await connectSupabase();
+      if (connected) {
+        supabase = _supabase;
+        supabaseReady = _ready;
+      }
+      return connected;
+    }
+    
+    // Helper: check if connected
+    function isSupabaseConnected() {
+      return _ready && _supabase !== null;
     }
   </script>
 
-  <!-- SUPABASE CLIENT LIBRARY (CDN) - Using UMD build for browser compatibility -->
-  <!-- Loaded AFTER config so we can detect when it's ready -->
-  <script 
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"
-    onload="console.log('%c[DEDIKASIH] 📦 Supabase library loaded from CDN', 'color:#14b8a6')"
-    onerror="console.error('%c[DEDIKASIH] ❌ Failed to load Supabase library from CDN', 'color:#ef4444')"
-  ></script>
+  <!-- Supabase Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js" defer></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
@@ -2224,86 +2208,54 @@
       if(localStorage.getItem('dedikasi_dark')==='0'){document.documentElement.classList.remove('dark');document.getElementById('themeIcon').className='fa-solid fa-sun';}
       initFormHelpers();
       
-      // Wait for Supabase library to load and initialize (with timeout)
-      console.log('%c[DEDIKASIH] 🔄 Initializing Supabase connection...', 'color:#64748b');
-      var connected = await waitForSupabase();
+      // Connect to Supabase (silent - no UI feedback)
+      var connected = await initSupabase();
       
-      // Check Supabase connection after waiting
-      if (!connected || !supabaseReady) {
-        console.warn('%c[DEDIKASIH] ⚠️ Supabase not connected. Running in demo mode.', 'color:#f59e0b');
-        showToast('Mode Demo: Database tidak terhubung', 'warning');
-        // Still show the UI but with empty data
-        showLoading(false);
-        document.getElementById('view-dashboard').classList.remove('hidden');
-        document.getElementById('nav-dashboard').classList.add('active');
-        
-        // Update status indicator - using getElementById instead of querySelector
-        var statusEl = document.getElementById('dbStatusIndicator');
-        if (statusEl) {
-          statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1 text-amber-500"></i>Demo Mode (No DB)';
-          statusEl.className = 'hidden sm:block text-[10px] text-amber-400';
-        }
-        return;
-      }
-      
-      // Test actual connection to detect CORS issues
-      console.log('%c[DEDIKASIH] 🔄 Testing database connection...', 'color:#64748b');
-      var connectionTest = await testSupabaseConnection();
-      
-      if (!connectionTest.success) {
-        console.error('%c[DEDIKASIH] ❌ Connection failed:', 'color:#ef4444', connectionTest.error);
-        
-        // If it's a CORS error, show help modal
-        if (connectionTest.isCORS) {
-          console.error('%c[DEDIKASIH] 🔒 This is a CORS error - GitHub Pages needs to be whitelisted in Supabase', 'color:#f59e0b');
-          showCORSHelp();  // Show help modal with instructions
-          return;
-        }
-        
-        // For other errors, show demo mode with error message
-        showToast('Error: ' + connectionTest.error, 'error');
-        showLoading(false);
-        document.getElementById('view-dashboard').classList.remove('hidden');
-        document.getElementById('nav-dashboard').classList.add('active');
-        
-        var statusEl = document.getElementById('dbStatusIndicator');
-        if (statusEl) {
-          statusEl.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1 text-red-500"></i>Connection Error';
-          statusEl.className = 'hidden sm:block text-[10px] text-red-400';
-        }
-        return;
-      }
-      
-      // Connection successful!
-      if (connectionTest.warning) {
-        showToast(connectionTest.warning, 'warning');
-      } else {
-        console.log('%c[DEDIKASIH] ✅ Connected to Supabase successfully!', 'color:#14b8a6');
-      }
-      
-      showLoading(true);
-      
-      // Load semua data dari Supabase secara paralel
-      await Promise.all([
-        loadDashboard(),
-        getAllPengumuman().then(function(r){if(r.success)publicData.pengumuman=r.data||[];}),
-        getAllJadwal().then(function(r){if(r.success)publicData.jadwal=r.data||[];}),
-        getAllSertifikat().then(function(r){if(r.success)allSertifikat=r.data||[];})
-      ]);
-      
+      // Show UI regardless of connection status
       showLoading(false);
       document.getElementById('view-dashboard').classList.remove('hidden');
       document.getElementById('nav-dashboard').classList.add('active');
-      if(allSertifikat.length){
-        var sel=document.getElementById('filterKegiatan'); if(sel){
-          var unique=[];
-          allSertifikat.forEach(function(s){if(unique.indexOf(s.namaKegiatan)===-1)unique.push(s.namaKegiatan);});
-          unique.sort().forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=k;sel.appendChild(o);});
+      
+      // Update status indicator
+      var statusEl = document.getElementById('dbStatusIndicator');
+      if (statusEl) {
+        if (connected && supabaseReady) {
+          statusEl.innerHTML = '<i class="fa-solid fa-database mr-1 text-emerald-500"></i>Connected';
+          statusEl.className = 'hidden sm:block text-[10px] text-emerald-500';
+        } else {
+          statusEl.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1 text-red-500"></i>Offline';
+          statusEl.className = 'hidden sm:block text-[10px] text-red-400';
         }
       }
+      
+      // Load data only if connected
+      if (connected && supabaseReady) {
+        try {
+          await Promise.all([
+            loadDashboard(),
+            getAllPengumuman().then(function(r){if(r.success)publicData.pengumuman=r.data||[];}),
+            getAllJadwal().then(function(r){if(r.success)publicData.jadwal=r.data||[];}),
+            getAllSertifikat().then(function(r){if(r.success)allSertifikat=r.data||[];})
+          ]);
+          
+          // Populate filter dropdown
+          if(allSertifikat.length){
+            var sel=document.getElementById('filterKegiatan'); 
+            if(sel){
+              var unique=[];
+              allSertifikat.forEach(function(s){if(unique.indexOf(s.namaKegiatan)===-1)unique.push(s.namaKegiatan);});
+              unique.sort().forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=k;sel.appendChild(o);});
+            }
+          }
+        } catch(e) {
+          console.error('[DEDIKASIH] Data load error:', e);
+        }
+      }
+      
+      // Final setup
       if(window.innerWidth<1024)document.getElementById('sidebar').style.transform='translateX(-100%)';
       document.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='/'){e.preventDefault();navigateTo('cekstatus');document.getElementById('searchStatus').focus();}});
-      console.log('%c[DEDIKASIH v1.0] Platform siap produksi | Backend: Supabase','color:#14b8a6');
+      console.log('[DEDIKASIH v1.0] Ready | DB:', connected ? 'OK' : 'OFFLINE');
     }
     window.onload = initializeApp;
 
