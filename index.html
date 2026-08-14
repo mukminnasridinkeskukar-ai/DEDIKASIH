@@ -115,6 +115,375 @@
     }
     
     function isSupabaseConnected() { return _ready && _supabase !== null; }
+  
+    /* ============================================
+       EXPORT TO EXCEL FUNCTION
+       Exports table data to CSV format (opens in Excel)
+       ============================================ */
+    function exportToExcel(type) {
+      var data, filename, headers;
+      
+      switch(type) {
+        case 'usulan':
+          data = publicData.formulirAdmin || [];
+          headers = ['No.Registrasi', 'NIK', 'Nama Pengusul', 'Asal Institusi', 'No. Telepon', 
+                     'Nama Kegiatan', 'Tempat Kegiatan', 'Tanggal Kegiatan', 'Waktu Pelaksanaan',
+                     'Jumlah Peserta', 'Status', 'Catatan', 
+                     'Link Spreadsheet', 'Link Surat Tugas', 'Link Foto', 'Link Video',
+                     'Link Pemberitahuan', 'Link Daftar Hadir', 'Link Berita Acara'];
+          filename = 'Data_Usulan_DEDIKASIH_' + new Date().toISOString().slice(0,10) + '.csv';
+          break;
+          
+        case 'pengumuman':
+          data = publicData.pengumumanAdmin || [];
+          headers = ['ID', 'Judul Pengumuman', 'Tanggal Publikasi', 'Isi Pengumuman'];
+          filename = 'Data_Pengumuman_DEDIKASIH_' + new Date().toISOString().slice(0,10) + '.csv';
+          break;
+          
+        case 'jadwal':
+          data = publicData.jadwalAdmin || [];
+          headers = ['ID', 'Nama Kegiatan', 'Tempat', 'PIC', 'Tanggal', 'Waktu', 'Keterangan'];
+          filename = 'Data_Jadwal_Kegiatan_DEDIKASIH_' + new Date().toISOString().slice(0,10) + '.csv';
+          break;
+          
+        case 'sertifikat':
+          data = publicData.sertifikatAdmin || [];
+          headers = ['No. Sertifikat', 'Nama Lengkap', 'NIK', 'Penyelenggara', 
+                     'Nama Kegiatan', 'Tanggal Terbit', 'Link Sertifikat'];
+          filename = 'Data_Sertifikat_DEDIKASIH_' + new Date().toISOString().slice(0,10) + '.csv';
+          break;
+          
+        default:
+          showToast('Tipe data tidak valid!', 'error');
+          return;
+      }
+      
+      if (!data || data.length === 0) {
+        showToast('Tidak ada data untuk diekspor!', 'warning');
+        return;
+      }
+      
+      // Build CSV content
+      var csvContent = '\uFEFF'; // BOM for UTF-8
+      csvContent += headers.join(',') + '\n';
+      
+      data.forEach(function(row) {
+        var values = headers.map(function(header) {
+          // Map header to actual field name
+          var value = '';
+          switch(header) {
+            case 'No.Registrasi': value = row.nomorRegistrasi || ''; break;
+            case 'NIK': value = row.nik || ''; break;
+            case 'Nama Pengusul': value = row.namaPengusul || ''; break;
+            case 'Asal Institusi': value = row.asalInstitusi || ''; break;
+            case 'No. Telepon': value = row.telpon || ''; break;
+            case 'Nama Kegiatan': value = row.namaKegiatan || ''; break;
+            case 'Tempat Kegiatan': value = row.tempatKegiatan || ''; break;
+            case 'Tanggal Kegiatan': value = row.tanggalKegiatan || ''; break;
+            case 'Waktu Pelaksanaan': value = row.waktuPelaksanaan || ''; break;
+            case 'Jumlah Peserta': value = row.jumlahPeserta || ''; break;
+            case 'Status': value = row.status || ''; break;
+            case 'Catatan': value = row.catatan || ''; break;
+            case 'Link Spreadsheet': value = row.linkSpreadsheetPeserta || ''; break;
+            case 'Link Surat Tugas': value = row.linkSuratTugas || ''; break;
+            case 'Link Foto': value = row.linkDokumentasiFoto || ''; break;
+            case 'Link Video': value = row.linkDokumentasiVideo || ''; break;
+            case 'Link Pemberitahuan': value = row.linkSuratPemberitahuan || ''; break;
+            case 'Link Daftar Hadir': value = row.linkDaftarHadir || ''; break;
+            case 'Link Berita Acara': value = row.linkBeritaAcara || ''; break;
+            case 'ID': value = row.id || ''; break;
+            case 'Judul Pengumuman': value = row.judul || ''; break;
+            case 'Tanggal Publikasi': value = row.tanggal || ''; break;
+            case 'Isi Pengumuman': value = (row.isi || '').replace(/\n/g, ' '); break;
+            case 'PIC': value = row.pic || ''; break;
+            case 'Keterangan': value = row.keterangan || ''; break;
+            case 'Waktu': value = row.waktu || ''; break;
+            case 'No. Sertifikat': value = row.nomorSertifikat || ''; break;
+            case 'Nama Lengkap': value = row.nama || ''; break;
+            case 'Penyelenggara': value = row.penyelenggara || ''; break;
+            case 'Nama Kegiatan': value = (type === 'sertifikat' ? (row.kegiatan || '') : (row.nama_kegiatan || '')); break;
+            case 'Tanggal Terbit': value = row.tanggalTerbit || ''; break;
+            case 'Link Sertifikat': value = row.linkSertifikat || ''; break;
+            default: value = '';
+          }
+          // Escape quotes and wrap in quotes
+          value = String(value).replace(/"/g, '""');
+          return '"' + value + '"';
+        });
+        csvContent += values.join(',') + '\n';
+      });
+      
+      // Create download link
+      var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      var link = document.createElement('a');
+      var url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      showToast('Data berhasil diekspor ke Excel!', 'success');
+    }
+    
+    /* ============================================
+       PRINT DATA FUNCTION
+       Opens print-friendly view of table data
+       ============================================ */
+        function printData(type) {
+          var title, content, data;
+          
+          switch(type) {
+            case 'usulan':
+              title = 'Laporan Data Usulan - DEDIKASIH';
+              data = publicData.formulirAdmin || [];
+              content = generatePrintContent('usulan', data);
+              break;
+            
+            case 'pengumuman':
+              title = 'Laporan Data Pengumuman - DEDIKASIH';
+              data = publicData.pengumumanAdmin || [];
+              content = generatePrintContent('pengumuman', data);
+              break;
+            
+            case 'jadwal':
+              title = 'Laporan Jadwal Kegiatan - DEDIKASIH';
+              data = publicData.jadwalAdmin || [];
+              content = generatePrintContent('jadwal', data);
+              break;
+            
+            case 'sertifikat':
+              title = 'Laporan Data Sertifikat - DEDIKASIH';
+              data = publicData.sertifikatAdmin || [];
+              content = generatePrintContent('sertifikat', data);
+              break;
+            
+            default:
+              showToast('Tipe data tidak valid!', 'error');
+              return;
+          }
+          
+          if (!data || data.length === 0) {
+            showToast('Tidak ada data untuk dicetak!', 'warning');
+            return;
+          }
+          
+          // Build print HTML using string concatenation
+          var printHtml = "<!DOCTYPE html><html lang=\"id\"><head><meta charset=\"UTF-8\"><title>" + title + "</title>";
+          printHtml += "<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;padding:20px;color:#333}";
+          printHtml += ".header{text-align:center;margin-bottom:30px;border-bottom:2px solid #0f766e;padding-bottom:15px}";
+          printHtml += ".header h1{color:#0f766e;font-size:24px;margin-bottom:5px}.header p{color:#666;font-size:14px}";
+          printHtml += ".meta{display:flex;justify-content:space-between;margin-bottom:20px;font-size:12px;color:#666}";
+          printHtml += "table{width:100%;border-collapse:collapse;font-size:12px}th{background:#0f766e;color:white;padding:10px 8px;text-align:left}";
+          printHtml += "td{padding:8px;border-bottom:1px solid #ddd}tr:nth-child(even){background:#f9f9f9}";
+          printHtml += ".footer{margin-top:30px;text-align:center;font-size:11px;color:#999}</style></head><body>";
+          printHtml += '<div class="header"><h1>DEDIKASIH v1.0</h1><p>Digitalisasi Kegiatan Pengabdian Masyarakat SDM Kesehatan</p>';
+          printHtml += '<p>Dinas Kesehatan Kabupaten Kutai Kartanegara</p></div>';
+          printHtml += "<h2 style=\"margin-bottom:15px\">" + title + "</h2>";
+          printHtml += '<div class="meta"><span>Tanggal Cetak: ' + new Date().toLocaleDateString("id-ID", {weekday:"long",year:"numeric",month:"long",day:"numeric"}) + '</span>';
+          printHtml += "<span>Total Data: " + data.length + " record</span></div>";
+          printHtml += content;
+          printHtml += '<div class="footer"><p>Dokumen ini dicetak dari sistem DEDIKASIH</p><p>&copy; 2026 Dinas Kesehatan Kabupaten Kutai Kartanegara</p></div>';
+          printHtml += '<' + 'script>window.onload=function(){window.print()}<' + '/script></body></html>';
+          
+          // Open print window
+          var printWindow = window.open("", "_blank");
+          if (printWindow) {
+            printWindow.document.write(printHtml);
+            printWindow.document.close();
+            printWindow.focus();
+          } else {
+            showToast("Popup diblokir! Izinkan popup untuk fitur print.", "warning");
+          }
+        }
+    function generatePrintContent(type, data) {
+      var html = '<table>';
+      
+      // Headers based on type
+      switch(type) {
+        case 'usulan':
+          html += `<thead><tr>
+            <th>No</th>
+            <th>No.Registrasi</th>
+            <th>Nama Pengusul</th>
+            <th>NIK</th>
+            <th>Institusi</th>
+            <th>Kegiatan</th>
+            <th>Tanggal</th>
+            <th>Status</th>
+          </tr></thead><tbody>`;
+          data.forEach(function(item, i) {
+            html += `<tr>
+              <td>${i+1}</td>
+              <td>${item.nomorRegistrasi || '-'}</td>
+              <td>${item.namaPengusul || '-'}</td>
+              <td>${item.nik || '-'}</td>
+              <td>${item.asalInstitusi || '-'}</td>
+              <td>${item.namaKegiatan || '-'}</td>
+              <td>${item.tanggalKegiatan || '-'}</td>
+              <td>${item.status || '-'}</td>
+            </tr>`;
+          });
+          break;
+          
+        case 'pengumuman':
+          html += `<thead><tr>
+            <th>No</th>
+            <th>Judul</th>
+            <th>Tanggal</th>
+            <th>Isi Pengumuman</th>
+          </tr></thead><tbody>`;
+          data.forEach(function(item, i) {
+            html += `<tr>
+              <td>${i+1}</td>
+              <td>${item.judul || '-'}</td>
+              <td>${item.tanggal || '-'}</td>
+              <td>${(item.isi || '').substring(0, 100)}...</td>
+            </tr>`;
+          });
+          break;
+          
+        case 'jadwal':
+          html += `<thead><tr>
+            <th>No</th>
+            <th>Kegiatan</th>
+            <th>Tempat</th>
+            <th>PIC</th>
+            <th>Tanggal</th>
+            <th>Waktu</th>
+          </tr></thead><tbody>`;
+          data.forEach(function(item, i) {
+            html += `<tr>
+              <td>${i+1}</td>
+              <td>${item.nama_kegiatan || item.namaKegiatan || '-'}</td>
+              <td>${item.tempat || '-'}</td>
+              <td>${item.pic || '-'}</td>
+              <td>${item.tanggal || '-'}</td>
+              <td>${item.waktu || '-'}</td>
+            </tr>`;
+          });
+          break;
+          
+        case 'sertifikat':
+          html += `<thead><tr>
+            <th>No</th>
+            <th>No.Sertifikat</th>
+            <th>Nama</th>
+            <th>NIK</th>
+            <th>Kegiatan</th>
+            <th>Tanggal Terbit</th>
+          </tr></thead><tbody>`;
+          data.forEach(function(item, i) {
+            html += `<tr>
+              <td>${i+1}</td>
+              <td>${item.nomorSertifikat || '-'}</td>
+              <td>${item.nama || '-'}</td>
+              <td>${item.nik || '-'}</td>
+              <td>${item.kegiatan || '-'}</td>
+              <td>${item.tanggalTerbit || '-'}</td>
+            </tr>`;
+          });
+          break;
+      }
+      
+      html += '</tbody></table>';
+      return html;
+    }
+    
+    /* ============================================
+       FILTER ADMIN TABLE FUNCTION
+       Real-time search/filter for all admin tables
+       ============================================ */
+    function filterAdminTable(type) {
+      var searchTerm = '';
+      var tableBodyId = '';
+      
+      switch(type) {
+        case 'usulan':
+          searchTerm = document.getElementById('searchUsulan').value.toLowerCase();
+          filterTableRows('adminUsulanTable', searchTerm, [0, 1, 2, 3, 4]);
+          break;
+        case 'pengumuman':
+          searchTerm = document.getElementById('searchPengumuman').value.toLowerCase();
+          filterTableRows('adminPengumumanTable', searchTerm, [0, 1, 2]);
+          break;
+        case 'jadwal':
+          searchTerm = document.getElementById('searchJadwal').value.toLowerCase();
+          filterTableRows('adminJadwalTable', searchTerm, [0, 1, 2]);
+          break;
+        case 'sertifikat':
+          searchTerm = document.getElementById('searchSertifikat').value.toLowerCase();
+          filterTableRows('adminSertifikatTable', searchTerm, [0, 1, 2, 3]);
+          break;
+      }
+    }
+    
+    function filterTableRows(tableId, searchTerm, searchColumns) {
+      var table = document.getElementById(tableId);
+      if (!table) return;
+      
+      var rows = table.getElementsByTagName('tr');
+      var visibleCount = 0;
+      
+      for (var i = 0; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName('td');
+        if (cells.length === 1 && cells[0].colSpan) continue; // Skip empty state row
+        
+        var found = false;
+        for (var j = 0; j < searchColumns.length; j++) {
+          var colIndex = searchColumns[j];
+          if (cells[colIndex]) {
+            var cellText = cells[colIndex].textContent || cells[colIndex].innerText;
+            if (cellText.toLowerCase().indexOf(searchTerm) > -1) {
+              found = true;
+              break;
+            }
+          }
+        }
+        
+        rows[i].style.display = found ? '' : 'none';
+        if (found) visibleCount++;
+      }
+      
+      // Update count badge if exists
+      // Could add badge update logic here
+    }
+    
+    /* ============================================
+       UPDATE COUNT BADGES
+       Updates the data count badges in each tab
+       ============================================ */
+    function updateCountBadges() {
+      // Usulan count
+      var usulanBadge = document.getElementById('usulanCountBadge');
+      if (usulanBadge && publicData.formulirAdmin) {
+        usulanBadge.textContent = publicData.formulirAdmin.length + ' data';
+      }
+      
+      // Pengumuman count
+      var pengumumanBadge = document.getElementById('pengumumanCountBadge');
+      if (pengumumanBadge && publicData.pengumumanAdmin) {
+        pengumumanBadge.textContent = publicData.pengumumanAdmin.length + ' data';
+      }
+      
+      // Jadwal count
+      var jadwalBadge = document.getElementById('jadwalCountBadge');
+      if (jadwalBadge && publicData.jadwalAdmin) {
+        jadwalBadge.textContent = publicData.jadwalAdmin.length + ' data';
+      }
+      
+      // Sertifikat count
+      var sertifikatBadge = document.getElementById('sertifikatCountBadge');
+      if (sertifikatBadge && publicData.sertifikatAdmin) {
+        sertifikatBadge.textContent = publicData.sertifikatAdmin.length + ' data';
+      }
+    }
+
+    // Call updateCountBadges after loading data
+    var originalLoadAdminData = typeof loadAdminData !== 'undefined' ? loadAdminData : null;
+    
+
   </script>
 
   <!-- Supabase Library -->
@@ -1262,10 +1631,251 @@
       font-style: italic;
     }
 
-</style>
+
+    /* ============================================ */
+    /* LIGHT THEME STYLES (when .dark is NOT present) */
+    /* ============================================ */
+    
+    /* Base body styles for light mode */
+    body:not(.dark) {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdfa 100%) !important;
+      color: #1e293b !important;
+    }
+    
+    body:not(.dark) #sidebar {
+      background: rgba(255,255,255,0.95) !important;
+      border-right: 1px solid rgba(148,163,184,0.25) !important;
+    }
+    
+    body:not(.dark) #mainContent {
+      background: transparent !important;
+    }
+    
+    body:not(.dark) .glass {
+      background: rgba(255,255,255,0.92) !important;
+      border: 1px solid rgba(148,163,184,0.2) !important;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important;
+    }
+    
+    body:not(.dark) .nav-item {
+      color: #475569 !important;
+    }
+    
+    body:not(.dark) .nav-item:hover {
+      background: rgba(15,118,110,0.08) !important;
+      color: #0f766e !important;
+    }
+    
+    body:not(.dark) .nav-item.active {
+      background: linear-gradient(90deg, rgba(15,118,110,0.12), rgba(20,184,166,0.1)) !important;
+      color: #0f766e !important;
+      font-weight: 600 !important;
+    }
+    
+    body:not(.dark) .section-title,
+    body:not(.dark) h1, 
+    body:not(.dark) h2, 
+    body:not(.dark) h3 {
+      color: #0f172a !important;
+    }
+    
+    body:not(.dark) .text-slate-400,
+    body:not(.dark) .text-slate-500 {
+      color: #64748b !important;
+    }
+    
+    body:not(.dark) .premium-table th {
+      background: linear-gradient(180deg, #f8fafc, #f1f5f9) !important;
+      color: #334155 !important;
+      border-bottom: 2px solid #e2e8f0 !important;
+    }
+    
+    body:not(.dark) .premium-table td {
+      color: #475569 !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+    
+    body:not(.dark) .premium-table tr:hover {
+      background: rgba(15,118,110,0.04) !important;
+    }
+    
+    body:not(.dark) .stat-card {
+      background: rgba(255,255,255,0.95) !important;
+      border: 1px solid rgba(148,163,184,0.15) !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05) !important;
+    }
+    
+    body:not(.dark) .stat-card .stat-value {
+      color: #0f172a !important;
+    }
+    
+    body:not(.dark) .stat-card .stat-label {
+      color: #64748b !important;
+    }
+    
+    body:not(.dark) input,
+    body:not(.dark) select,
+    body:not(.dark) textarea {
+      background: rgba(255,255,255,0.95) !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #1e293b !important;
+    }
+    
+    body:not(.dark) input::placeholder,
+    body:not(.dark) textarea::placeholder {
+      color: #94a3b8 !important;
+    }
+    
+    body:not(.dark) .badge-menunggu { 
+      background: #fef3c7 !important; 
+      color: #92400e !important; 
+    }
+    
+    body:not(.dark) .badge-disetujui { 
+      background: #d1fae5 !important; 
+      color: #065f46 !important; 
+    }
+    
+    body:not(.dark) .badge-ditolak { 
+      background: #fee2e2 !important; 
+      color: #991b1b !important; 
+    }
+    
+    body:not(.dark) .btn-crud {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+    }
+    
+    body:not(.dark) .btn-crud:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important;
+    }
+    
+    body:not(.dark) #headerTop {
+      background: rgba(255,255,255,0.92) !important;
+      border-bottom: 1px solid rgba(148,163,184,0.2) !important;
+      backdrop-filter: blur(12px) !important;
+    }
+    
+    body:not(.dark) #headerTop .text-white,
+    body:not(.dark) #headerTop .text-slate-200 {
+      color: #1e293b !important;
+    }
+    
+    body:not(.dark) .search-input {
+      background: rgba(255,255,255,0.95) !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #1e293b !important;
+    }
+    
+    body:not(.dark) .lightbox-container {
+      background: rgba(255,255,255,0.98) !important;
+      border: 1px solid rgba(148,163,184,0.25) !important;
+    }
+    
+    body:not(.dark) .lightbox-title {
+      color: #0f172a !important;
+    }
+    
+    body:not(.dark) .lightbox-label {
+      color: #374151 !important;
+    }
+    
+    body:not(.dark) .lightbox-input,
+    body:not(.dark) .lightbox-select,
+    body:not(.dark) .lightbox-textarea {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #1e293b !important;
+    }
+    
+    body:not(.dark) .lightbox-header {
+      border-bottom-color: #e5e7eb !important;
+    }
+    
+    body:not(.dark) .lightbox-footer {
+      border-top-color: #e5e7eb !important;
+    }
+    
+    body:not(.dark) .filter-chip {
+      background: rgba(255,255,255,0.9) !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #475569 !important;
+    }
+    
+    body:not(.dark) .filter-chip.active {
+      background: linear-gradient(135deg, #0f766e, #14b8a6) !important;
+      color: white !important;
+      border-color: transparent !important;
+    }
+    
+    body:not(.dark) .card-empty {
+      background: rgba(255,255,255,0.8) !important;
+      border: 2px dashed #cbd5e1 !important;
+    }
+    
+    body:not(.dark) .card-empty p {
+      color: #64748b !important;
+    }
+    
+    /* Landing page stays dark regardless */
+    body:not(.dark) #landingPage {
+      background: radial-gradient(ellipse at 50% 40%, #0c1f1d 0%, #0a0f1a 50%, #020617 100%) !important;
+    }
+    
+    /* Scrollbar for light mode */
+    body:not(.dark) ::-webkit-scrollbar-track {
+      background: #f1f5f9 !important;
+    }
+    
+    body:not(.dark) ::-webkit-scrollbar-thumb {
+      background: #94a3b8 !important;
+    }
+    
+    /* Text colors in light mode */
+    body:not(.dark) .text-teal-400,
+    body:not(.dark) .text-emerald-400 {
+      color: #0d9488 !important;
+    }
+    
+    body:not(.dark) .text-white {
+      color: #1e293b !important;
+    }
+    
+    /* Specific element overrides for light mode */
+    body:not(.dark) .font-display {
+      color: #0f172a !important;
+    }
+    
+    body:not(.dark) #dashboardSection,
+    body:not(.dark) #usulanSection,
+    body:not(.dark) #pengumumanSection,
+    body:not(.dark) #jadwalSection,
+    body:not(.dark) #sertifikatSection {
+      background: transparent !important;
+    }
+    
+    /* Tab buttons in light mode */
+    body:not(.dark) .tab-btn {
+      color: #64748b !important;
+      background: rgba(255,255,255,0.6) !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+    
+    body:not(.dark) .tab-btn.active {
+      background: linear-gradient(135deg, #0f766e, #14b8a6) !important;
+      color: white !important;
+      border-color: transparent !important;
+    }
+    
+    body:not(.dark) .tab-btn:hover:not(.active) {
+      background: rgba(15,118,110,0.08) !important;
+      color: #0f766e !important;
+    }
+
+  </style>
 </head>
 
-<body class="bg-slate-950 text-slate-200 dark">
+<body class="bg-slate-950 text-slate-200 dark" id="mainBody">
 
   <!-- ===== LANDING PAGE (3 DETIK) ===== -->
   <div id="landingPage" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden" style="background: radial-gradient(ellipse at 50% 40%, #0c1f1d 0%, #0a0f1a 50%, #020617 100%);">
@@ -1954,23 +2564,46 @@
               <div id="adminTab-usulan" class="p-4">
                 <div class="admin-table-header mb-4">
                   <div class="admin-table-title">
-                    <i class="fa-solid fa-file-lines text-emerald-400 mr-2"></i>Data Usulan
-                    <span id="countUsulan" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0</span>
+                    <i class="fa-solid fa-file-lines text-emerald-400 mr-2"></i>Kelola Usulan Masuk
+                    <span id="usulanCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
                   </div>
-                  <div class="admin-table-actions flex-wrap gap-2">
-                    <button onclick="showAddUsulanModal()" class="btn-crud btn-create btn-sm"><i class="fa-solid fa-plus"></i> Tambah</button>
-                    <button onclick="exportToExcel('usulan')" class="btn-crud btn-export btn-sm"><i class="fa-solid fa-file-excel"></i> Excel</button>
-                    <button onclick="printTable('usulan')" class="btn-crud btn-view btn-sm"><i class="fa-solid fa-print"></i> Print</button>
+                  <div class="admin-table-actions">
+                    <button onclick="showAddUsulanModal()" class="btn-crud btn-create btn-sm">
+                      <i class="fa-solid fa-plus"></i> Tambah
+                    </button>
+                    <button onclick="exportToExcel('usulan')" class="btn-crud btn-export btn-sm">
+                      <i class="fa-solid fa-file-excel"></i> Excel
+                    </button>
+                    <button onclick="printData('usulan')" class="btn-crud btn-view btn-sm">
+                      <i class="fa-solid fa-print"></i> Print
+                    </button>
+                    <div class="admin-search-box">
+                      <input type="text" id="searchUsulan" placeholder="Cari usulan..." onkeyup="filterAdminTable('usulan')">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
                   </div>
-                </div>
-                <div class="admin-search-box mb-3">
-                  <input type="text" id="searchUsulan" placeholder="Cari data usulan..." onkeyup="filterTable('usulan')">
-                  <i class="fa-solid fa-search"></i>
                 </div>
                 <div class="table-responsive">
                   <table class="premium-table text-xs">
-                    <thead><tr><th class="px-3 py-2 text-left">No.Reg</th><th class="px-3 py-2 text-left">Pengusul</th><th class="px-3 py-2 text-left">Kegiatan</th><th class="px-3 py-2 text-left">Status</th><th class="px-3 py-2 text-right">Aksi</th></tr></thead>
-                    <tbody id="adminUsulanTable"><tr><td colspan="5" class="p-4 text-center text-xs text-slate-400">Belum ada data</td></tr></tbody>
+                    <thead>
+                      <tr>
+                        <th class="px-3 py-2 text-left">No.Reg</th>
+                        <th class="px-3 py-2 text-left">Nama Pengusul</th>
+                        <th class="px-3 py-2 text-left">NIK</th>
+                        <th class="px-3 py-2 text-left">Institusi</th>
+                        <th class="px-3 py-2 text-left">Kegiatan</th>
+                        <th class="px-3 py-2 text-left">Tanggal</th>
+                        <th class="px-3 py-2 text-left">Status</th>
+                        <th class="px-3 py-2 text-center">Dokumen</th>
+                        <th class="px-3 py-2 text-right">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminUsulanTable">
+                      <tr><td colspan="9" class="p-6 text-center text-xs text-slate-400">
+                        <i class="fa-solid fa-inbox text-2xl mb-2 block opacity-30"></i>
+                        Belum ada data usulan
+                      </td></tr>
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -1979,23 +2612,41 @@
               <div id="adminTab-pengumuman" class="p-4 hidden">
                 <div class="admin-table-header mb-4">
                   <div class="admin-table-title">
-                    <i class="fa-solid fa-bullhorn text-purple-400 mr-2"></i>Data Pengumuman
-                    <span id="countPengumuman" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0</span>
+                    <i class="fa-solid fa-bullhorn text-purple-400 mr-2"></i>Kelola Pengumuman
+                    <span id="pengumumanCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
                   </div>
-                  <div class="admin-table-actions flex-wrap gap-2">
-                    <button onclick="showAddPengumumanModal()" class="btn-crud btn-create btn-sm"><i class="fa-solid fa-plus"></i> Tambah</button>
-                    <button onclick="exportToExcel('pengumuman')" class="btn-crud btn-export btn-sm"><i class="fa-solid fa-file-excel"></i> Excel</button>
-                    <button onclick="printTable('pengumuman')" class="btn-crud btn-view btn-sm"><i class="fa-solid fa-print"></i> Print</button>
+                  <div class="admin-table-actions">
+                    <button onclick="showAddPengumumanModal()" class="btn-crud btn-create btn-sm">
+                      <i class="fa-solid fa-plus"></i> Tambah
+                    </button>
+                    <button onclick="exportToExcel('pengumuman')" class="btn-crud btn-export btn-sm">
+                      <i class="fa-solid fa-file-excel"></i> Excel
+                    </button>
+                    <button onclick="printData('pengumuman')" class="btn-crud btn-view btn-sm">
+                      <i class="fa-solid fa-print"></i> Print
+                    </button>
+                    <div class="admin-search-box">
+                      <input type="text" id="searchPengumuman" placeholder="Cari pengumuman..." onkeyup="filterAdminTable('pengumuman')">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
                   </div>
-                </div>
-                <div class="admin-search-box mb-3">
-                  <input type="text" id="searchPengumuman" placeholder="Cari pengumuman..." onkeyup="filterTable('pengumuman')">
-                  <i class="fa-solid fa-search"></i>
                 </div>
                 <div class="table-responsive">
                   <table class="premium-table text-xs">
-                    <thead><tr><th class="px-3 py-2 text-left">Judul</th><th class="px-3 py-2 text-left">Tanggal</th><th class="px-3 py-2 text-right">Aksi</th></tr></thead>
-                    <tbody id="adminPengumumanTable"><tr><td colspan="3" class="p-4 text-center text-xs text-slate-400">Kosong</td></tr></tbody>
+                    <thead>
+                      <tr>
+                        <th class="px-3 py-2 text-left">Judul</th>
+                        <th class="px-3 py-2 text-left">Tanggal</th>
+                        <th class="px-3 py-2 text-left">Isi (Preview)</th>
+                        <th class="px-3 py-2 text-right">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminPengumumanTable">
+                      <tr><td colspan="4" class="p-6 text-center text-xs text-slate-400">
+                        <i class="fa-solid fa-bullhorn text-2xl mb-2 block opacity-30"></i>
+                        Belum ada pengumuman
+                      </td></tr>
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -2004,40 +2655,92 @@
               <div id="adminTab-jadwal" class="p-4 hidden">
                 <div class="admin-table-header mb-4">
                   <div class="admin-table-title">
-                    <i class="fa-solid fa-calendar-days text-blue-400 mr-2"></i>Jadwal Kegiatan
-                    <span id="countJadwal" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0</span>
+                    <i class="fa-solid fa-calendar-days text-blue-400 mr-2"></i>Kelola Jadwal Kegiatan
+                    <span id="jadwalCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
                   </div>
-                  <div class="admin-table-actions flex-wrap gap-2">
-                    <button onclick="showAddJadwalModal()" class="btn-crud btn-create btn-sm"><i class="fa-solid fa-plus"></i> Tambah</button>
-                    <button onclick="exportToExcel('jadwal')" class="btn-crud btn-export btn-sm"><i class="fa-solid fa-file-excel"></i> Excel</button>
-                    <button onclick="printTable('jadwal')" class="btn-crud btn-view btn-sm"><i class="fa-solid fa-print"></i> Print</button>
+                  <div class="admin-table-actions">
+                    <button onclick="showAddJadwalModal()" class="btn-crud btn-create btn-sm">
+                      <i class="fa-solid fa-plus"></i> Tambah
+                    </button>
+                    <button onclick="exportToExcel('jadwal')" class="btn-crud btn-export btn-sm">
+                      <i class="fa-solid fa-file-excel"></i> Excel
+                    </button>
+                    <button onclick="printData('jadwal')" class="btn-crud btn-view btn-sm">
+                      <i class="fa-solid fa-print"></i> Print
+                    </button>
+                    <div class="admin-search-box">
+                      <input type="text" id="searchJadwal" placeholder="Cari jadwal..." onkeyup="filterAdminTable('jadwal')">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
                   </div>
                 </div>
-                <div class="admin-search-box mb-3">
-                  <input type="text" id="searchJadwal" placeholder="Cari jadwal..." onkeyup="filterTable('jadwal')">
-                  <i class="fa-solid fa-search"></i>
+                <div class="table-responsive">
+                  <table class="premium-table text-xs">
+                    <thead>
+                      <tr>
+                        <th class="px-3 py-2 text-left">Kegiatan</th>
+                        <th class="px-3 py-2 text-left">Tempat</th>
+                        <th class="px-3 py-2 text-left">PIC</th>
+                        <th class="px-3 py-2 text-left">Tanggal</th>
+                        <th class="px-3 py-2 text-left">Waktu</th>
+                        <th class="px-3 py-2 text-right">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminJadwalTable">
+                      <tr><td colspan="6" class="p-6 text-center text-xs text-slate-400">
+                        <i class="fa-solid fa-calendar-xmark text-2xl mb-2 block opacity-30"></i>
+                        Belum ada jadwal kegiatan
+                      </td></tr>
+                    </tbody>
+                  </table>
                 </div>
-                <div id="adminJadwalTable"><div class="p-4 text-xs text-center text-slate-400">Kosong</div></div>
               </div>
 
               <!-- TAB: SERTIFIKAT -->
               <div id="adminTab-sertifikat" class="p-4 hidden">
                 <div class="admin-table-header mb-4">
                   <div class="admin-table-title">
-                    <i class="fa-solid fa-certificate text-yellow-400 mr-2"></i>Data Sertifikat
-                    <span id="countSertifikat" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0</span>
+                    <i class="fa-solid fa-certificate text-yellow-400 mr-2"></i>Kelola Data Sertifikat
+                    <span id="sertifikatCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
                   </div>
-                  <div class="admin-table-actions flex-wrap gap-2">
-                    <button onclick="showAddSertifikatModal()" class="btn-crud btn-create btn-sm"><i class="fa-solid fa-plus"></i> Tambah</button>
-                    <button onclick="exportToExcel('sertifikat')" class="btn-crud btn-export btn-sm"><i class="fa-solid fa-file-excel"></i> Excel</button>
-                    <button onclick="printTable('sertifikat')" class="btn-crud btn-view btn-sm"><i class="fa-solid fa-print"></i> Print</button>
+                  <div class="admin-table-actions">
+                    <button onclick="showAddSertifikatModal()" class="btn-crud btn-create btn-sm">
+                      <i class="fa-solid fa-plus"></i> Tambah
+                    </button>
+                    <button onclick="exportToExcel('sertifikat')" class="btn-crud btn-export btn-sm">
+                      <i class="fa-solid fa-file-excel"></i> Excel
+                    </button>
+                    <button onclick="printData('sertifikat')" class="btn-crud btn-view btn-sm">
+                      <i class="fa-solid fa-print"></i> Print
+                    </button>
+                    <div class="admin-search-box">
+                      <input type="text" id="searchSertifikat" placeholder="Cari sertifikat..." onkeyup="filterAdminTable('sertifikat')">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
                   </div>
                 </div>
-                <div class="admin-search-box mb-3">
-                  <input type="text" id="searchSertifikat" placeholder="Cari sertifikat..." onkeyup="filterTable('sertifikat')">
-                  <i class="fa-solid fa-search"></i>
+                <div class="table-responsive">
+                  <table class="premium-table text-xs">
+                    <thead>
+                      <tr>
+                        <th class="px-3 py-2 text-left">No. Sertifikat</th>
+                        <th class="px-3 py-2 text-left">Nama</th>
+                        <th class="px-3 py-2 text-left">NIK</th>
+                        <th class="px-3 py-2 text-left">Kegiatan</th>
+                        <th class="px-3 py-2 text-left">Penyelenggara</th>
+                        <th class="px-3 py-2 text-left">Tanggal Terbit</th>
+                        <th class="px-3 py-2 text-center">File</th>
+                        <th class="px-3 py-2 text-right">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminSertifikatTable">
+                      <tr><td colspan="8" class="p-6 text-center text-xs text-slate-400">
+                        <i class="fa-solid fa-certificate text-2xl mb-2 block opacity-30"></i>
+                        Belum ada data sertifikat
+                      </td></tr>
+                    </tbody>
+                  </table>
                 </div>
-                <div id="adminSertifikatTable"><div class="p-4 text-xs text-center text-slate-400">Kosong</div></div>
               </div>
             </div>
           </div>
@@ -2744,18 +3447,32 @@
       ============================================ */
     function toggleTheme() {
       var html = document.documentElement;
+      var body = document.getElementById('mainBody');
       var icon = document.getElementById('themeIcon');
       var iconMobile = document.getElementById('themeIconMobile');
+      
       if(html.classList.contains('dark')) {
+        // Switch to LIGHT mode
         html.classList.remove('dark');
-        if(icon) icon.className = 'fa-solid fa-sun text-amber-400';
-        if(iconMobile) iconMobile.className = 'fa-solid fa-sun text-amber-400';
+        if(body) {
+          body.classList.remove('bg-slate-950', 'text-slate-200', 'dark');
+          body.classList.add('bg-gradient-to-br', 'from-slate-100', 'to-slate-200', 'text-slate-800');
+        }
+        if(icon) icon.className = 'fa-solid fa-sun text-amber-500';
+        if(iconMobile) iconMobile.className = 'fa-solid fa-sun text-amber-500';
         localStorage.setItem('dedikasi_dark','0');
+        console.log('[DEDIKASIH] Theme: Light');
       } else {
+        // Switch to DARK mode
         html.classList.add('dark');
+        if(body) {
+          body.classList.remove('bg-gradient-to-br', 'from-slate-100', 'to-slate-200', 'text-slate-800');
+          body.classList.add('bg-slate-950', 'text-slate-200', 'dark');
+        }
         if(icon) icon.className = 'fa-solid fa-moon text-teal-400';
         if(iconMobile) iconMobile.className = 'fa-solid fa-moon text-teal-400';
         localStorage.setItem('dedikasi_dark','1');
+        console.log('[DEDIKASIH] Theme: Dark');
       }
     }
 
@@ -4578,162 +5295,6 @@ function renderSertifikatTable() {
       showToast('Fitur export segera hadir!', 'info');
     }
 
-    
-  
-    /* ============================================
-       ADMIN EXPORT & PRINT FUNCTIONS
-       ============================================ */
-    
-    // Export data to Excel (CSV format)
-    function exportToExcel(type) {
-      var data = [], filename = '';
-      
-      switch(type) {
-        case 'usulan':
-          data = publicData.formulirAdmin || [];
-          filename = 'Data_Usulan_DEDIKASIH_' + new Date().toISOString().slice(0,10) + '.csv';
-          break;
-        case 'pengumuman':
-          data = publicData.pengumumanAdmin || [];
-          filename = 'Data_Pengumuman_DEDIKASIH_' + new Date().toISOString().slice(0,10) + '.csv';
-          break;
-        case 'jadwal':
-          data = publicData.jadwalAdmin || [];
-          filename = 'Data_Jadwal_DEDIKASIH_' + new Date().toISOString().slice(0,10) + '.csv';
-          break;
-        case 'sertifikat':
-          data = publicData.sertifikatAdmin || [];
-          filename = 'Data_Sertifikat_DEDIKASIH_' + new Date().toISOString().slice(0,10) + '.csv';
-          break;
-        default:
-          showToast('Tipe tidak valid!', 'error');
-          return;
-      }
-      
-      if (!data.length) { showToast('Tidak ada data!', 'warning'); return; }
-      
-      // Build CSV
-      var csv = '\uFEFF'; // UTF-8 BOM
-      
-      // Headers based on type
-      if (type === 'usulan') {
-        csv += 'No,No.Reg,Nama,NIK,Institusi,Kegiatan,Tanggal,Status\n';
-        data.forEach(function(d, i) {
-          csv += (i+1) + ',' + (d.nomorRegistrasi||'-') + ',' + (d.namaPengusul||'-') + ',';
-          csv += (d.nik||'-') + ',' + (d.asalInstitusi||'-') + ',' + (d.namaKegiatan||'-') + ',';
-          csv += (d.tanggalKegiatan||'-') + ',' + (d.status||'-') + '\n';
-        });
-      } else if (type === 'pengumuman') {
-        csv += 'No,Judul,Tanggal,Isi\n';
-        data.forEach(function(d, i) {
-          csv += (i+1) + ',"' + (d.judul||'-') + '",' + (d.tanggal||'-') + ',"' + ((d.isi||'').substring(0,50)) + '"\n';
-        });
-      } else if (type === 'jadwal') {
-        csv += 'No,Kegiatan,Tempat,PIC,Tanggal,Waktu\n';
-        data.forEach(function(d, i) {
-          csv += (i+1) + ',"' + (d.nama_kegiatan||d.namaKegiatan||'-') + '","' + (d.tempat||'-') + '",';
-          csv += '"' + (d.pic||'-') + '",' + (d.tanggal||'-') + ',' + (d.waktu||'-') + '\n';
-        });
-      } else if (type === 'sertifikat') {
-        csv += 'No,No.Sertifikat,Nama,NIK,Kegiatan,Penyelenggara,Tanggal\n';
-        data.forEach(function(d, i) {
-          csv += (i+1) + ',' + (d.nomorSertifikat||'-') + ',' + (d.nama||'-') + ',';
-          csv += (d.nik||'-') + ',"' + (d.kegiatan||'-') + '","' + (d.penyelenggara||'-') + ',' + (d.tanggalTerbit||'-') + '\n';
-        });
-      }
-      
-      // Download
-      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url; a.download = filename; a.click();
-      URL.revokeObjectURL(url);
-      showToast('Export berhasil!', 'success');
-    }
-    
-    // Print table data
-    function printTable(type) {
-      var content = '';
-      var title = '';
-      
-      // Get table HTML
-      var tableId = '';
-      switch(type) {
-        case 'usulan': tableId = 'adminUsulanTable'; title = 'Data Usulan'; break;
-        case 'pengumuman': tableId = 'adminPengumumanTable'; title = 'Data Pengumuman'; break;
-        case 'jadwal': tableId = 'adminJadwalTable'; title = 'Jadwal Kegiatan'; break;
-        case 'sertifikat': tableId = 'adminSertifikatTable'; title = 'Data Sertifikat'; break;
-      }
-      
-      var table = document.getElementById(tableId);
-      if (!table) { showToast('Tabel tidak ditemukan!', 'error'); return; }
-      
-      // Create print window
-      var printWin = window.open('', '_blank');
-      printWin.document.write('<html><head><title>' + title + '</title>');
-      printWin.document.write('<style>');
-      printWin.document.write('body{font-family:Arial;padding:20px;}');
-      printWin.document.write('h1{color:#0f766e;text-align:center;}');
-      printWin.document.write('table{width:100%;border-collapse:collapse;margin-top:20px;}');
-      printWin.document.write('th,td{border:1px solid #ddd;padding:8px;text-align:left;font-size:12px;}');
-      printWin.document.write('th{background:#0f766e;color:white;}');
-      printWin.document.write('</style></head><body>');
-      printWin.document.write('<h1>DEDIKASIH - ' + title + '</h1>');
-      printWin.document.write('<p>Tanggal: ' + new Date().toLocaleDateString('id-ID') + '</p>');
-      printWin.document.write(table.outerHTML);
-      printWin.document.write('</body></html>');
-      printWin.document.close();
-      printWin.print();
-    }
-    
-    // Filter/search table
-    function filterTable(type) {
-      var inputId = '', tableId = '';
-      switch(type) {
-        case 'usulan': inputId = 'searchUsulan'; tableId = 'adminUsulanTable'; break;
-        case 'pengumuman': inputId = 'searchPengumuman'; tableId = 'adminPengumumanTable'; break;
-        case 'jadwal': inputId = 'searchJadwal'; tableId = 'adminJadwalTable'; break;
-        case 'sertifikat': inputId = 'searchSertifikat'; tableId = 'adminSertifikatTable'; break;
-      }
-      
-      var input = document.getElementById(inputId);
-      var table = document.getElementById(tableId);
-      if (!input || !table) return;
-      
-      var term = input.value.toLowerCase();
-      var rows = table.getElementsByTagName('tr');
-      
-      for (var i = 0; i < rows.length; i++) {
-        var cells = rows[i].getElementsByTagName('td');
-        if (cells.length === 1 && cells[0].colSpan) continue; // Skip empty row
-        
-        var found = false;
-        for (var j = 0; j < cells.length; j++) {
-          if (cells[j].textContent.toLowerCase().indexOf(term) > -1) {
-            found = true;
-            break;
-          }
-        }
-        rows[i].style.display = found ? '' : 'none';
-      }
-    }
-    
-    // Update count badges
-    function updateCounts() {
-      var counts = {
-        usulan: publicData.formulirAdmin ? publicData.formulirAdmin.length : 0,
-        pengumuman: publicData.pengumumanAdmin ? publicData.pengumumanAdmin.length : 0,
-        jadwal: publicData.jadwalAdmin ? publicData.jadwalAdmin.length : 0,
-        sertifikat: publicData.sertifikatAdmin ? publicData.sertifikatAdmin.length : 0
-      };
-      
-      for (var key in counts) {
-        var el = document.getElementById('count' + key.charAt(0).toUpperCase() + key.slice(1));
-        if (el) el.textContent = counts[key];
-      }
-    }
-
-
     /* ============================================
          INITIALIZATION
       ============================================ */
@@ -4765,9 +5326,26 @@ function renderSertifikatTable() {
       initTailwind();
       initFormHelpers();
       
-      // Load saved theme
-      if(localStorage.getItem('dedikasi_dark') === '0') {
-        toggleTheme();
+      // Load saved theme - apply correctly based on saved preference
+      var savedTheme = localStorage.getItem('dedikasi_dark');
+      var html = document.documentElement;
+      var body = document.getElementById('mainBody');
+      
+      if(savedTheme === '0') {
+        // User prefers LIGHT mode - remove dark classes
+        html.classList.remove('dark');
+        if(body) {
+          body.classList.remove('bg-slate-950', 'text-slate-200', 'dark');
+          body.classList.add('bg-gradient-to-br', 'from-slate-100', 'to-slate-200', 'text-slate-800');
+        }
+        var icon = document.getElementById('themeIcon');
+        var iconMobile = document.getElementById('themeIconMobile');
+        if(icon) icon.className = 'fa-solid fa-sun text-amber-500';
+        if(iconMobile) iconMobile.className = 'fa-solid fa-sun text-amber-500';
+        console.log('[DEDIKASIH] Theme initialized: Light');
+      } else {
+        // Default DARK mode
+        console.log('[DEDIKASIH] Theme initialized: Dark');
       }
       
       // Connect to Supabase
