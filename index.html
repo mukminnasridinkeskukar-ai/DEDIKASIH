@@ -2560,14 +2560,16 @@
             <!-- Tab Contents -->
             <div class="glass rounded-xl overflow-hidden enterprise-shadow">
               
-              <!-- TAB: USULAN -->
+              <!-- ============================================ -->
+              <!-- TAB 1: USULAN -->
+              <!-- ============================================ -->
               <div id="adminTab-usulan" class="p-4">
-                <div class="admin-table-header mb-4">
+                <div class="admin-table-header mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div class="admin-table-title">
                     <i class="fa-solid fa-file-lines text-emerald-400 mr-2"></i>Kelola Usulan Masuk
                     <span id="usulanCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
                   </div>
-                  <div class="admin-table-actions">
+                  <div class="admin-table-actions flex flex-wrap items-center gap-2">
                     <button onclick="showAddUsulanModal()" class="btn-crud btn-create btn-sm">
                       <i class="fa-solid fa-plus"></i> Tambah
                     </button>
@@ -2577,45 +2579,50 @@
                     <button onclick="printData('usulan')" class="btn-crud btn-view btn-sm">
                       <i class="fa-solid fa-print"></i> Print
                     </button>
-                    <div class="admin-search-box">
-                      <input type="text" id="searchUsulan" placeholder="Cari usulan..." onkeyup="filterAdminTable('usulan')">
-                      <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="admin-search-box relative">
+                      <input type="text" id="searchUsulan" placeholder="Cari usulan..." onkeyup="filterAdminTable('usulan')" class="bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
+                      <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     </div>
                   </div>
                 </div>
-                <div class="table-responsive">
-                  <table class="premium-table text-xs">
+                <div class="table-responsive overflow-x-auto">
+                  <table class="premium-table text-xs w-full min-w-[1200px]">
                     <thead>
-                      <tr>
-                        <th class="px-3 py-2 text-left">No.Reg</th>
-                        <th class="px-3 py-2 text-left">Nama Pengusul</th>
-                        <th class="px-3 py-2 text-left">NIK</th>
-                        <th class="px-3 py-2 text-left">Institusi</th>
-                        <th class="px-3 py-2 text-left">Kegiatan</th>
-                        <th class="px-3 py-2 text-left">Tanggal</th>
-                        <th class="px-3 py-2 text-left">Status</th>
-                        <th class="px-3 py-2 text-center">Dokumen</th>
-                        <th class="px-3 py-2 text-right">Aksi</th>
+                      <tr class="bg-gradient-to-r from-slate-800 to-slate-900">
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">No.Reg</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Nama Pengusul</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">NIK</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Institusi</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">No.Telp</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Nama Kegiatan</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Tempat</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Tanggal</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Waktu</th>
+                        <th class="px-3 py-3 text-center font-semibold whitespace-nowrap">Peserta</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Status</th>
+                        <th class="px-3 py-3 text-right font-semibold whitespace-nowrap w-28">Aksi</th>
                       </tr>
                     </thead>
                     <tbody id="adminUsulanTable">
-                      <tr><td colspan="9" class="p-6 text-center text-xs text-slate-400">
-                        <i class="fa-solid fa-inbox text-2xl mb-2 block opacity-30"></i>
-                        Belum ada data usulan
+                      <tr><td colspan="12" class="p-8 text-center text-slate-400">
+                        <i class="fa-solid fa-inbox text-3xl mb-3 block opacity-30"></i>
+                        <p class="text-sm">Belum ada data usulan</p>
                       </td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <!-- TAB: PENGUMUMAN -->
+              <!-- ============================================ -->
+              <!-- TAB 2: PENGUMUMAN -->
+              <!-- ============================================ -->
               <div id="adminTab-pengumuman" class="p-4 hidden">
-                <div class="admin-table-header mb-4">
+                <div class="admin-table-header mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div class="admin-table-title">
                     <i class="fa-solid fa-bullhorn text-purple-400 mr-2"></i>Kelola Pengumuman
                     <span id="pengumumanCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
                   </div>
-                  <div class="admin-table-actions">
+                  <div class="admin-table-actions flex flex-wrap items-center gap-2">
                     <button onclick="showAddPengumumanModal()" class="btn-crud btn-create btn-sm">
                       <i class="fa-solid fa-plus"></i> Tambah
                     </button>
@@ -2625,40 +2632,43 @@
                     <button onclick="printData('pengumuman')" class="btn-crud btn-view btn-sm">
                       <i class="fa-solid fa-print"></i> Print
                     </button>
-                    <div class="admin-search-box">
-                      <input type="text" id="searchPengumuman" placeholder="Cari pengumuman..." onkeyup="filterAdminTable('pengumuman')">
-                      <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="admin-search-box relative">
+                      <input type="text" id="searchPengumuman" placeholder="Cari pengumuman..." onkeyup="filterAdminTable('pengumuman')" class="bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
+                      <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     </div>
                   </div>
                 </div>
-                <div class="table-responsive">
-                  <table class="premium-table text-xs">
+                <div class="table-responsive overflow-x-auto">
+                  <table class="premium-table text-xs w-full min-w-[900px]">
                     <thead>
-                      <tr>
-                        <th class="px-3 py-2 text-left">Judul</th>
-                        <th class="px-3 py-2 text-left">Tanggal</th>
-                        <th class="px-3 py-2 text-left">Isi (Preview)</th>
-                        <th class="px-3 py-2 text-right">Aksi</th>
+                      <tr class="bg-gradient-to-r from-slate-800 to-slate-900">
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap w-16">ID</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Judul Pengumuman</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap w-32">Tanggal</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Isi Pengumuman</th>
+                        <th class="px-3 py-3 text-right font-semibold whitespace-nowrap w-28">Aksi</th>
                       </tr>
                     </thead>
                     <tbody id="adminPengumumanTable">
-                      <tr><td colspan="4" class="p-6 text-center text-xs text-slate-400">
-                        <i class="fa-solid fa-bullhorn text-2xl mb-2 block opacity-30"></i>
-                        Belum ada pengumuman
+                      <tr><td colspan="5" class="p-8 text-center text-slate-400">
+                        <i class="fa-solid fa-bullhorn text-3xl mb-3 block opacity-30"></i>
+                        <p class="text-sm">Belum ada pengumuman</p>
                       </td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <!-- TAB: JADWAL -->
+              <!-- ============================================ -->
+              <!-- TAB 3: JADWAL KEGIATAN -->
+              <!-- ============================================ -->
               <div id="adminTab-jadwal" class="p-4 hidden">
-                <div class="admin-table-header mb-4">
+                <div class="admin-table-header mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div class="admin-table-title">
                     <i class="fa-solid fa-calendar-days text-blue-400 mr-2"></i>Kelola Jadwal Kegiatan
                     <span id="jadwalCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
                   </div>
-                  <div class="admin-table-actions">
+                  <div class="admin-table-actions flex flex-wrap items-center gap-2">
                     <button onclick="showAddJadwalModal()" class="btn-crud btn-create btn-sm">
                       <i class="fa-solid fa-plus"></i> Tambah
                     </button>
@@ -2668,42 +2678,45 @@
                     <button onclick="printData('jadwal')" class="btn-crud btn-view btn-sm">
                       <i class="fa-solid fa-print"></i> Print
                     </button>
-                    <div class="admin-search-box">
-                      <input type="text" id="searchJadwal" placeholder="Cari jadwal..." onkeyup="filterAdminTable('jadwal')">
-                      <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="admin-search-box relative">
+                      <input type="text" id="searchJadwal" placeholder="Cari jadwal..." onkeyup="filterAdminTable('jadwal')" class="bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
+                      <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     </div>
                   </div>
                 </div>
-                <div class="table-responsive">
-                  <table class="premium-table text-xs">
+                <div class="table-responsive overflow-x-auto">
+                  <table class="premium-table text-xs w-full min-w-[1000px]">
                     <thead>
-                      <tr>
-                        <th class="px-3 py-2 text-left">Kegiatan</th>
-                        <th class="px-3 py-2 text-left">Tempat</th>
-                        <th class="px-3 py-2 text-left">PIC</th>
-                        <th class="px-3 py-2 text-left">Tanggal</th>
-                        <th class="px-3 py-2 text-left">Waktu</th>
-                        <th class="px-3 py-2 text-right">Aksi</th>
+                      <tr class="bg-gradient-to-r from-slate-800 to-slate-900">
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Nama Kegiatan</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Tempat</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">PIC</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap w-32">Tanggal</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap w-24">Waktu</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Keterangan</th>
+                        <th class="px-3 py-3 text-right font-semibold whitespace-nowrap w-28">Aksi</th>
                       </tr>
                     </thead>
                     <tbody id="adminJadwalTable">
-                      <tr><td colspan="6" class="p-6 text-center text-xs text-slate-400">
-                        <i class="fa-solid fa-calendar-xmark text-2xl mb-2 block opacity-30"></i>
-                        Belum ada jadwal kegiatan
+                      <tr><td colspan="7" class="p-8 text-center text-slate-400">
+                        <i class="fa-solid fa-calendar-xmark text-3xl mb-3 block opacity-30"></i>
+                        <p class="text-sm">Belum ada jadwal kegiatan</p>
                       </td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <!-- TAB: SERTIFIKAT -->
+              <!-- ============================================ -->
+              <!-- TAB 4: SERTIFIKAT -->
+              <!-- ============================================ -->
               <div id="adminTab-sertifikat" class="p-4 hidden">
-                <div class="admin-table-header mb-4">
+                <div class="admin-table-header mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div class="admin-table-title">
                     <i class="fa-solid fa-certificate text-yellow-400 mr-2"></i>Kelola Data Sertifikat
                     <span id="sertifikatCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
                   </div>
-                  <div class="admin-table-actions">
+                  <div class="admin-table-actions flex flex-wrap items-center gap-2">
                     <button onclick="showAddSertifikatModal()" class="btn-crud btn-create btn-sm">
                       <i class="fa-solid fa-plus"></i> Tambah
                     </button>
@@ -2713,38 +2726,37 @@
                     <button onclick="printData('sertifikat')" class="btn-crud btn-view btn-sm">
                       <i class="fa-solid fa-print"></i> Print
                     </button>
-                    <div class="admin-search-box">
-                      <input type="text" id="searchSertifikat" placeholder="Cari sertifikat..." onkeyup="filterAdminTable('sertifikat')">
-                      <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="admin-search-box relative">
+                      <input type="text" id="searchSertifikat" placeholder="Cari sertifikat..." onkeyup="filterAdminTable('sertifikat')" class="bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
+                      <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     </div>
                   </div>
                 </div>
-                <div class="table-responsive">
-                  <table class="premium-table text-xs">
+                <div class="table-responsive overflow-x-auto">
+                  <table class="premium-table text-xs w-full min-w-[1100px]">
                     <thead>
-                      <tr>
-                        <th class="px-3 py-2 text-left">No. Sertifikat</th>
-                        <th class="px-3 py-2 text-left">Nama</th>
-                        <th class="px-3 py-2 text-left">NIK</th>
-                        <th class="px-3 py-2 text-left">Kegiatan</th>
-                        <th class="px-3 py-2 text-left">Penyelenggara</th>
-                        <th class="px-3 py-2 text-left">Tanggal Terbit</th>
-                        <th class="px-3 py-2 text-center">File</th>
-                        <th class="px-3 py-2 text-right">Aksi</th>
+                      <tr class="bg-gradient-to-r from-slate-800 to-slate-900">
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">No. Sertifikat</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Nama Lengkap</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">NIK</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Penyelenggara</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Nama Kegiatan</th>
+                        <th class="px-3 py-3 text-left font-semibold whitespace-nowrap w-32">Tgl Terbit</th>
+                        <th class="px-3 py-3 text-center font-semibold whitespace-nowrap w-24">File</th>
+                        <th class="px-3 py-3 text-right font-semibold whitespace-nowrap w-28">Aksi</th>
                       </tr>
                     </thead>
                     <tbody id="adminSertifikatTable">
-                      <tr><td colspan="8" class="p-6 text-center text-xs text-slate-400">
-                        <i class="fa-solid fa-certificate text-2xl mb-2 block opacity-30"></i>
-                        Belum ada data sertifikat
+                      <tr><td colspan="8" class="p-8 text-center text-slate-400">
+                        <i class="fa-solid fa-certificate text-3xl mb-3 block opacity-30"></i>
+                        <p class="text-sm">Belum ada data sertifikat</p>
                       </td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
+
+            </div><!-- End Tab Contents -->
 
       </div>
     </main>
@@ -4579,7 +4591,7 @@ function renderSertifikatTable() {
       var items = publicData.formulirAdmin;
       
       if(items.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><i class="fa-solid fa-inbox"></i><h4>Belum ada data usulan</h4><p>Data usulan akan muncul di sini</p></td></tr>';
+        tbody.innerHTML = '<tr><td colspan="12" class="empty-state"><i class="fa-solid fa-inbox"></i><h4>Belum ada data usulan</h4><p>Data usulan akan muncul di sini</p></td></tr>';
         return;
       }
       
@@ -4588,12 +4600,18 @@ function renderSertifikatTable() {
                          item.status === 'Ditolak' ? 'status-rejected' : 'status-pending';
         
         return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
-          '<td class="px-4 py-3 font-mono text-xs text-teal-400">' + (item.nomorRegistrasi || '-') + '</td>' +
-          '<td class="px-4 py-3 font-medium">' + item.namaPengusul + '</td>' +
-          '<td class="px-4 py-3 max-w-[200px] truncate">' + item.namaKegiatan + '</td>' +
-          '<td class="px-4 py-3 text-xs text-slate-400">' + formatDateIndo(item.tanggalKegiatan) + '</td>' +
-          '<td class="px-4 py-3"><span class="status-badge ' + statusClass + '">' + item.status + '</span></td>' +
-          '<td class="px-4 py-3"><div class="action-cell">' +
+          '<td class="px-2 py-2 font-mono text-[10px] text-teal-400">' + (item.nomorRegistrasi || '-') + '</td>' +
+          '<td class="px-2 py-2 font-medium max-w-[120px] truncate" title="' + (item.namaPengusul || '') + '">' + item.namaPengusul + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + (item.nik || '-') + '</td>' +
+          '<td class="px-2 py-2 max-w-[100px] truncate" title="' + (item.asalInstitusi || '') + '">' + (item.asalInstitusi || '-') + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + (item.telpon || '-') + '</td>' +
+          '<td class="px-2 py-2 max-w-[120px] truncate" title="' + (item.namaKegiatan || '') + '">' + item.namaKegiatan + '</td>' +
+          '<td class="px-2 py-2 max-w-[80px] truncate" title="' + (item.tempatKegiatan || '') + '">' + (item.tempatKegiatan || '-') + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + formatDateIndo(item.tanggalKegiatan) + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + (item.waktuPelaksanaan || '-') + '</td>' +
+          '<td class="px-2 py-2 text-center text-[10px]">' + (item.jumlahPeserta || '-') + '</td>' +
+          '<td class="px-2 py-2"><span class="status-badge ' + statusClass + '">' + item.status + '</span></td>' +
+          '<td class="px-2 py-2"><div class="action-cell flex gap-1 justify-end">' +
             '<button onclick="viewUsulanDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat Detail"><i class="fa-solid fa-eye"></i></button>' +
             '<button onclick="showEditUsulanModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
             '<button onclick="showUpdateStatusModal(' + item.id + ')" class="btn-crud btn-approve btn-icon" title="Update Status"><i class="fa-solid fa-arrows-rotate"></i></button>' +
@@ -4633,15 +4651,18 @@ function renderSertifikatTable() {
       var items = publicData.pengumuman;
       
       if(items.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" class="empty-state"><i class="fa-solid fa-bullhorn"></i><h4>Belum ada pengumuman</h4><p>Buat pengumuman baru untuk memulai</p></td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><i class="fa-solid fa-bullhorn"></i><h4>Belum ada pengumuman</h4><p>Buat pengumuman baru untuk memulai</p></td></tr>';
         return;
       }
       
       tbody.innerHTML = items.map(function(item, idx) {
+        var isiPreview = (item.isi || '').substring(0, 80) + ((item.isi || '').length > 80 ? '...' : '');
         return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
-          '<td class="px-4 py-3 font-medium">' + item.judul + '</td>' +
-          '<td class="px-4 py-3 text-xs text-slate-400">' + formatDateIndo(item.tanggal) + '</td>' +
-          '<td class="px-4 py-3"><div class="action-cell">' +
+          '<td class="px-3 py-2 font-mono text-[10px] text-slate-500">' + item.id + '</td>' +
+          '<td class="px-3 py-2 font-medium">' + item.judul + '</td>' +
+          '<td class="px-3 py-2 text-[10px] whitespace-nowrap">' + formatDateIndo(item.tanggal) + '</td>' +
+          '<td class="px-3 py-2 text-[10px] text-slate-400 max-w-[300px] truncate" title="' + (item.isi || '').replace(/"/g, '&quot;') + '">' + isiPreview + '</td>' +
+          '<td class="px-3 py-2"><div class="action-cell flex gap-1 justify-end">' +
             '<button onclick="viewPengumumanDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
             '<button onclick="showEditPengumumanModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
             '<button onclick="confirmDeletePengumuman(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
@@ -4682,33 +4703,25 @@ function renderSertifikatTable() {
       var items = publicData.jadwal;
       
       if(items.length === 0) {
-        container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-calendar-xmark"></i><h4>Belum ada jadwal</h4><p>Tambahkan jadwal kegiatan baru</p></div>';
+        container.innerHTML = '<tr><td colspan="7" class="empty-state"><i class="fa-solid fa-calendar-xmark"></i><h4>Belum ada jadwal</h4><p>Tambahkan jadwal kegiatan baru</p></td></tr>';
         return;
       }
       
-      container.innerHTML = '<div class="table-responsive"><table class="premium-table text-sm">' +
-        '<thead><tr>' +
-          '<th class="px-4 py-3">Kegiatan</th>' +
-          '<th class="px-4 py-3">Tempat</th>' +
-          '<th class="px-4 py-3">Tanggal</th>' +
-          '<th class="px-4 py-3">Waktu</th>' +
-          '<th class="px-4 py-3">PIC</th>' +
-          '<th class="px-4 py-3 text-right">Aksi</th>' +
-        '</tr></thead>' +
-        '<tbody>' + items.map(function(item, idx) {
-          return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
-            '<td class="px-4 py-3 font-medium">' + item.namaKegiatan + '</td>' +
-            '<td class="px-4 py-3 text-slate-400">' + (item.tempat || '-') + '</td>' +
-            '<td class="px-4 py-3 text-xs">' + formatDateIndo(item.tanggal) + '</td>' +
-            '<td class="px-4 py-3 text-xs">' + (item.waktu || '-') + '</td>' +
-            '<td class="px-4 py-3 text-xs">' + (item.pic || '-') + '</td>' +
-            '<td class="px-4 py-3"><div class="action-cell">' +
-              '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
-              '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
-              '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
-            '</div></td>' +
-          '</tr>';
-        }).join('') + '</tbody></table></div>';
+      container.innerHTML = items.map(function(item, idx) {
+        return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
+          '<td class="px-3 py-2 font-medium">' + item.namaKegiatan + '</td>' +
+          '<td class="px-3 py-2 text-slate-400 max-w-[100px] truncate" title="' + (item.tempat || '') + '">' + (item.tempat || '-') + '</td>' +
+          '<td class="px-3 py-2 text-[10px] whitespace-nowrap">' + formatDateIndo(item.tanggal) + '</td>' +
+          '<td class="px-3 py-2 text-[10px]">' + (item.waktu || '-') + '</td>' +
+          '<td class="px-3 py-2 text-[10px]">' + (item.pic || '-') + '</td>' +
+          '<td class="px-3 py-2 text-[10px] text-slate-400 max-w-[150px] truncate" title="' + (item.keterangan || '') + '">' + (item.keterangan || '-') + '</td>' +
+          '<td class="px-3 py-2"><div class="action-cell flex gap-1 justify-end">' +
+            '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+            '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+          '</div></td>' +
+        '</tr>';
+      }).join('');
     }
     
     async function loadAdminSertifikat() {
@@ -4731,32 +4744,27 @@ function renderSertifikatTable() {
       var items = allSertifikat;
       
       if(items.length === 0) {
-        container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-certificate"></i><h4>Belum ada sertifikat</h4><p>Tambahkan data sertifikat digital</p></div>';
+        container.innerHTML = '<tr><td colspan="8" class="empty-state"><i class="fa-solid fa-certificate"></i><h4>Belum ada sertifikat</h4><p>Tambahkan data sertifikat digital</p></td></tr>';
         return;
       }
       
-      container.innerHTML = '<div class="table-responsive"><table class="premium-table text-sm">' +
-        '<thead><tr>' +
-          '<th class="px-4 py-3">No. Sertifikat</th>' +
-          '<th class="px-4 py-3">Nama</th>' +
-          '<th class="px-4 py-3">Kegiatan</th>' +
-          '<th class="px-4 py-3">Tanggal Terbit</th>' +
-          '<th class="px-4 py-3 text-right">Aksi</th>' +
-        '</tr></thead>' +
-        '<tbody>' + items.map(function(item, idx) {
-          return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
-            '<td class="px-4 py-3 font-mono text-xs text-yellow-400">' + item.nomorSertifikat + '</td>' +
-            '<td class="px-4 py-3 font-medium">' + item.namaLengkap + '</td>' +
-            '<td class="px-4 py-3 max-w-[200px] truncate">' + item.namaKegiatan + '</td>' +
-            '<td class="px-4 py-3 text-xs">' + formatDateIndo(item.tanggalTerbit) + '</td>' +
-            '<td class="px-4 py-3"><div class="action-cell">' +
-              '<button onclick="viewSertifikatDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
-              '<button onclick="showEditSertifikatModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
-              '<a href="' + item.linkSertifikat + '" target="_blank" class="btn-crud btn-export btn-icon" title="Unduh"><i class="fa-solid fa-download"></i></a>' +
-              '<button onclick="confirmDeleteSertifikat(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
-            '</div></td>' +
-          '</tr>';
-        }).join('') + '</tbody></table></div>';
+      container.innerHTML = items.map(function(item, idx) {
+        return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
+          '<td class="px-2 py-2 font-mono text-[10px] text-yellow-400">' + (item.nomorSertifikat || '-') + '</td>' +
+          '<td class="px-2 py-2 font-medium">' + item.namaLengkap + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + (item.nik || '-') + '</td>' +
+          '<td class="px-2 py-2 max-w-[100px] truncate" title="' + (item.penyelenggara || '') + '">' + (item.penyelenggara || '-') + '</td>' +
+          '<td class="px-2 py-2 max-w-[120px] truncate" title="' + (item.namaKegiatan || '') + '">' + item.namaKegiatan + '</td>' +
+          '<td class="px-2 py-2 text-[10px] whitespace-nowrap">' + formatDateIndo(item.tanggalTerbit) + '</td>' +
+          '<td class="px-2 py-2 text-center">' + (item.linkSertifikat ? '<a href="' + item.linkSertifikat + '" target="_blank" class="text-teal-400 hover:text-teal-300" title="Download Sertifikat"><i class="fa-solid fa-file-pdf"></i></a>' : '<span class="text-slate-500">-</span>') + '</td>' +
+          '<td class="px-2 py-2"><div class="action-cell flex gap-1 justify-end">' +
+            '<button onclick="viewSertifikatDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditSertifikatModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+            (item.linkSertifikat ? '<a href="' + item.linkSertifikat + '" target="_blank" class="btn-crud btn-export btn-icon" title="Unduh"><i class="fa-solid fa-download"></i></a>' : '') +
+            '<button onclick="confirmDeleteSertifikat(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+          '</div></td>' +
+        '</tr>';
+      }).join('');
     }
     
     /* ============================================
@@ -4824,12 +4832,18 @@ function renderSertifikatTable() {
         var statusClass = item.status === 'Disetujui' ? 'status-approved' : 
                          item.status === 'Ditolak' ? 'status-rejected' : 'status-pending';
         return '<tr class="admin-row-animate">' +
-          '<td class="px-4 py-3 font-mono text-xs text-teal-400">' + (item.nomorRegistrasi || '-') + '</td>' +
-          '<td class="px-4 py-3 font-medium">' + item.namaPengusul + '</td>' +
-          '<td class="px-4 py-3 max-w-[200px] truncate">' + item.namaKegiatan + '</td>' +
-          '<td class="px-4 py-3 text-xs text-slate-400">' + formatDateIndo(item.tanggalKegiatan) + '</td>' +
-          '<td class="px-4 py-3"><span class="status-badge ' + statusClass + '">' + item.status + '</span></td>' +
-          '<td class="px-4 py-3"><div class="action-cell">' +
+          '<td class="px-2 py-2 font-mono text-[10px] text-teal-400">' + (item.nomorRegistrasi || '-') + '</td>' +
+          '<td class="px-2 py-2 font-medium">' + item.namaPengusul + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + (item.nik || '-') + '</td>' +
+          '<td class="px-2 py-2 max-w-[80px] truncate">' + (item.asalInstitusi || '-') + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + (item.telpon || '-') + '</td>' +
+          '<td class="px-2 py-2 max-w-[100px] truncate">' + item.namaKegiatan + '</td>' +
+          '<td class="px-2 py-2 max-w-[70px] truncate">' + (item.tempatKegiatan || '-') + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + formatDateIndo(item.tanggalKegiatan) + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + (item.waktuPelaksanaan || '-') + '</td>' +
+          '<td class="px-2 py-2 text-center text-[10px]">' + (item.jumlahPeserta || '-') + '</td>' +
+          '<td class="px-2 py-2"><span class="status-badge ' + statusClass + '">' + item.status + '</span></td>' +
+          '<td class="px-2 py-2"><div class="action-cell flex gap-1 justify-end">' +
             '<button onclick="viewUsulanDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat Detail"><i class="fa-solid fa-eye"></i></button>' +
             '<button onclick="showEditUsulanModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
             '<button onclick="showUpdateStatusModal(' + item.id + ')" class="btn-crud btn-approve btn-icon" title="Update Status"><i class="fa-solid fa-arrows-rotate"></i></button>' +
@@ -4849,10 +4863,13 @@ function renderSertifikatTable() {
       }
       
       tbody.innerHTML = items.map(function(item) {
+        var isiPreview = (item.isi || '').substring(0, 80) + ((item.isi || '').length > 80 ? '...' : '');
         return '<tr class="admin-row-animate">' +
-          '<td class="px-4 py-3 font-medium">' + item.judul + '</td>' +
-          '<td class="px-4 py-3 text-xs text-slate-400">' + formatDateIndo(item.tanggal) + '</td>' +
-          '<td class="px-4 py-3"><div class="action-cell">' +
+          '<td class="px-3 py-2 font-mono text-[10px]">' + item.id + '</td>' +
+          '<td class="px-3 py-2 font-medium">' + item.judul + '</td>' +
+          '<td class="px-3 py-2 text-[10px]">' + formatDateIndo(item.tanggal) + '</td>' +
+          '<td class="px-3 py-2 text-[10px] text-slate-400 max-w-[300px] truncate">' + isiPreview + '</td>' +
+          '<td class="px-3 py-2"><div class="action-cell flex gap-1 justify-end">' +
             '<button onclick="viewPengumumanDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
             '<button onclick="showEditPengumumanModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
             '<button onclick="confirmDeletePengumuman(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
@@ -4870,29 +4887,21 @@ function renderSertifikatTable() {
         return;
       }
       
-      container.innerHTML = '<div class="table-responsive"><table class="premium-table text-sm">' +
-        '<thead><tr>' +
-          '<th class="px-4 py-3">Kegiatan</th>' +
-          '<th class="px-4 py-3">Tempat</th>' +
-          '<th class="px-4 py-3">Tanggal</th>' +
-          '<th class="px-4 py-3">Waktu</th>' +
-          '<th class="px-4 py-3">PIC</th>' +
-          '<th class="px-4 py-3 text-right">Aksi</th>' +
-        '</tr></thead>' +
-        '<tbody>' + items.map(function(item) {
-          return '<tr class="admin-row-animate">' +
-            '<td class="px-4 py-3 font-medium">' + item.namaKegiatan + '</td>' +
-            '<td class="px-4 py-3 text-slate-400">' + (item.tempat || '-') + '</td>' +
-            '<td class="px-4 py-3 text-xs">' + formatDateIndo(item.tanggal) + '</td>' +
-            '<td class="px-4 py-3 text-xs">' + (item.waktu || '-') + '</td>' +
-            '<td class="px-4 py-3 text-xs">' + (item.pic || '-') + '</td>' +
-            '<td class="px-4 py-3"><div class="action-cell">' +
-              '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
-              '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
-              '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
-            '</div></td>' +
-          '</tr>';
-        }).join('') + '</tbody></table></div>';
+      container.innerHTML = items.map(function(item) {
+        return '<tr class="admin-row-animate">' +
+          '<td class="px-3 py-2 font-medium">' + item.namaKegiatan + '</td>' +
+          '<td class="px-3 py-2 text-slate-400">' + (item.tempat || '-') + '</td>' +
+          '<td class="px-3 py-2 text-[10px]">' + formatDateIndo(item.tanggal) + '</td>' +
+          '<td class="px-3 py-2 text-[10px]">' + (item.waktu || '-') + '</td>' +
+          '<td class="px-3 py-2 text-[10px]">' + (item.pic || '-') + '</td>' +
+          '<td class="px-3 py-2 text-[10px]">' + (item.keterangan || '-') + '</td>' +
+          '<td class="px-3 py-2"><div class="action-cell flex gap-1 justify-end">' +
+            '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+            '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+          '</div></td>' +
+        '</tr>';
+      }).join('');
     }
     
     function renderFilteredSertifikat(items) {
@@ -4904,28 +4913,23 @@ function renderSertifikatTable() {
         return;
       }
       
-      container.innerHTML = '<div class="table-responsive"><table class="premium-table text-sm">' +
-        '<thead><tr>' +
-          '<th class="px-4 py-3">No. Sertifikat</th>' +
-          '<th class="px-4 py-3">Nama</th>' +
-          '<th class="px-4 py-3">Kegiatan</th>' +
-          '<th class="px-4 py-3">Tanggal Terbit</th>' +
-          '<th class="px-4 py-3 text-right">Aksi</th>' +
-        '</tr></thead>' +
-        '<tbody>' + items.map(function(item) {
-          return '<tr class="admin-row-animate">' +
-            '<td class="px-4 py-3 font-mono text-xs text-yellow-400">' + item.nomorSertifikat + '</td>' +
-            '<td class="px-4 py-3 font-medium">' + item.namaLengkap + '</td>' +
-            '<td class="px-4 py-3 max-w-[200px] truncate">' + item.namaKegiatan + '</td>' +
-            '<td class="px-4 py-3 text-xs">' + formatDateIndo(item.tanggalTerbit) + '</td>' +
-            '<td class="px-4 py-3"><div class="action-cell">' +
-              '<button onclick="viewSertifikatDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
-              '<button onclick="showEditSertifikatModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
-              '<a href="' + item.linkSertifikat + '" target="_blank" class="btn-crud btn-export btn-icon" title="Unduh"><i class="fa-solid fa-download"></i></a>' +
-              '<button onclick="confirmDeleteSertifikat(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
-            '</div></td>' +
-          '</tr>';
-        }).join('') + '</tbody></table></div>';
+      container.innerHTML = items.map(function(item) {
+        return '<tr class="admin-row-animate">' +
+          '<td class="px-2 py-2 font-mono text-[10px] text-yellow-400">' + (item.nomorSertifikat || '-') + '</td>' +
+          '<td class="px-2 py-2 font-medium">' + item.namaLengkap + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + (item.nik || '-') + '</td>' +
+          '<td class="px-2 py-2">' + (item.penyelenggara || '-') + '</td>' +
+          '<td class="px-2 py-2 max-w-[120px] truncate">' + item.namaKegiatan + '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + formatDateIndo(item.tanggalTerbit) + '</td>' +
+          '<td class="px-2 py-2 text-center">' + (item.linkSertifikat ? '<a href="' + item.linkSertifikat + '" target="_blank" class="text-teal-400"><i class="fa-solid fa-file-pdf"></i></a>' : '-') + '</td>' +
+          '<td class="px-2 py-2"><div class="action-cell flex gap-1 justify-end">' +
+            '<button onclick="viewSertifikatDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditSertifikatModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+            (item.linkSertifikat ? '<a href="' + item.linkSertifikat + '" target="_blank" class="btn-crud btn-export btn-icon" title="Unduh"><i class="fa-solid fa-download"></i></a>' : '') +
+            '<button onclick="confirmDeleteSertifikat(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+          '</div></td>' +
+        '</tr>';
+      }).join('');
     }
 
 
