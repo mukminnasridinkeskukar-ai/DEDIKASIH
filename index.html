@@ -277,7 +277,8 @@
           printHtml += ".meta{display:flex;justify-content:space-between;margin-bottom:20px;font-size:12px;color:#666}";
           printHtml += "table{width:100%;border-collapse:collapse;font-size:12px}th{background:#0f766e;color:white;padding:10px 8px;text-align:left}";
           printHtml += "td{padding:8px;border-bottom:1px solid #ddd}tr:nth-child(even){background:#f9f9f9}";
-          printHtml += ".footer{margin-top:30px;text-align:center;font-size:11px;color:#999}</style></head><body>";
+          printHtml += ".footer{margin-top:30px;text-align:center;font-size:11px;color:#999}";
+          printHtml += "</style></head><body>";
           printHtml += '<div class="header"><h1>DEDIKASIH v1.0</h1><p>Digitalisasi Kegiatan Pengabdian Masyarakat SDM Kesehatan</p>';
           printHtml += '<p>Dinas Kesehatan Kabupaten Kutai Kartanegara</p></div>';
           printHtml += "<h2 style=\"margin-bottom:15px\">" + title + "</h2>";
@@ -479,10 +480,6 @@
         sertifikatBadge.textContent = publicData.sertifikatAdmin.length + ' data';
       }
     }
-
-    // Call updateCountBadges after loading data
-    var originalLoadAdminData = typeof loadAdminData !== 'undefined' ? loadAdminData : null;
-    
 
   </script>
 
@@ -1872,7 +1869,437 @@
       color: #0f766e !important;
     }
 
-  </style>
+  
+    /* ============================================
+       ADMIN TABLE PROFESSIONAL STYLING
+       ============================================ */
+    
+    /* Admin Panel Container */
+    .admin-panel-container {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    
+    body:not(.dark) .admin-panel-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    }
+    
+    /* Admin Tabs */
+    .admin-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .admin-tabs::-webkit-scrollbar { display: none; }
+    
+    .admin-tab-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #94a3b8;
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .admin-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+    }
+    
+    .admin-tab-btn.active {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+      color: white;
+      border-color: rgba(20, 184, 166, 0.3);
+      box-shadow: 0 2px 12px rgba(15, 118, 110, 0.3);
+    }
+    
+    body:not(.dark) .admin-tab-btn {
+      color: #64748b;
+    }
+    body:not(.dark) .admin-tab-btn:hover {
+      background: rgba(0, 0, 0, 0.04);
+      color: #334155;
+    }
+    body:not(.dark) .admin-tab-btn.active {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+      color: white;
+    }
+    
+    /* Admin Table Header Section */
+    .admin-table-header {
+      padding: 16px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .admin-table-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    body:not(.dark) .admin-table-title {
+      color: #1e293b;
+    }
+    
+    .admin-table-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Premium Table Styling */
+    .premium-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 12px;
+    }
+    
+    .premium-table thead th {
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      color: #cbd5e1;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 2px solid #0f766e;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      white-space: nowrap;
+    }
+    
+    .premium-table thead th:last-child {
+      text-align: right;
+    }
+    
+    .premium-table tbody tr {
+      transition: all 0.15s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    
+    .premium-table tbody tr:hover {
+      background: rgba(15, 118, 110, 0.08);
+    }
+    
+    .premium-table tbody td {
+      padding: 12px 16px;
+      color: #e2e8f0;
+      vertical-align: middle;
+    }
+    
+    .premium-table tbody tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    /* Light mode table */
+    body:not(.dark) .premium-table thead th {
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      color: #475569;
+      border-bottom-color: #0f766e;
+    }
+    
+    body:not(.dark) .premium-table tbody td {
+      color: #334155;
+      border-bottom-color: #e2e8f0;
+    }
+    
+    body:not(.dark) .premium-table tbody tr:hover {
+      background: rgba(15, 118, 110, 0.04);
+    }
+    
+    body:not(.dark) .premium-table tbody tr:nth-child(even) {
+      background: rgba(248, 250, 252, 0.5);
+    }
+    
+    /* Action Cell Buttons */
+    .action-cell {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    
+    .btn-crud {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    
+    .btn-crud.btn-sm {
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+    
+    .btn-crud.btn-icon {
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border-radius: 6px;
+      font-size: 11px;
+    }
+    
+    .btn-crud.btn-create {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .btn-crud.btn-create:hover {
+      background: linear-gradient(135deg, #047857, #059669);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+    }
+    
+    .btn-crud.btn-edit {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+    .btn-crud.btn-edit:hover {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    
+    .btn-crud.btn-delete {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .btn-crud.btn-delete:hover {
+      background: linear-gradient(135deg, #b91c1c, #dc2626);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+    
+    .btn-crud.btn-view {
+      background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+      color: white;
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+    .btn-crud.btn-view:hover {
+      background: linear-gradient(135deg, #6d28d9, #7c3aed);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    }
+    
+    .btn-crud.btn-export {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: white;
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+    .btn-crud.btn-export:hover {
+      background: linear-gradient(135deg, #b45309, #d97706);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+    }
+    
+    .btn-crud.btn-approve {
+      background: linear-gradient(135deg, #0891b2, #06b6d4);
+      color: white;
+      border-color: rgba(6, 182, 212, 0.3);
+    }
+    .btn-crud.btn-approve:hover {
+      background: linear-gradient(135deg, #0e7490, #0891b2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+    }
+    
+    .btn-crud.btn-reject {
+      background: linear-gradient(135deg, #475569, #64748b);
+      color: white;
+      border-color: rgba(100, 116, 139, 0.3);
+    }
+    .btn-crud.btn-reject:hover {
+      background: linear-gradient(135deg, #334155, #475569);
+    }
+    
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .status-approved {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    .status-rejected {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    
+    .status-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    
+    /* Search Box */
+    .admin-search-box {
+      position: relative;
+    }
+    
+    .admin-search-box input {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 8px;
+      padding: 8px 12px 8px 36px;
+      font-size: 12px;
+      color: #e2e8f0;
+      transition: all 0.2s ease;
+      min-width: 160px;
+    }
+    
+    .admin-search-box input:focus {
+      outline: none;
+      border-color: #0f766e;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+      min-width: 240px;
+    }
+    
+    .admin-search-box input::placeholder {
+      color: #64748b;
+    }
+    
+    body:not(.dark) .admin-search-box input {
+      background: white;
+      border-color: #e2e8f0;
+      color: #334155;
+    }
+    body:not(.dark) .admin-search-box input:focus {
+      border-color: #0f766e;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+    }
+    
+    /* Table Responsive Container */
+    .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #47556b transparent;
+    }
+    
+    .table-responsive::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .table-responsive::-webkit-scrollbar-thumb {
+      background: #47556b;
+      border-radius: 4px;
+    }
+    
+    /* Row Animation */
+    .admin-row-animate {
+      animation: fadeInRow 0.3s ease forwards;
+      opacity: 0;
+    }
+    
+    @keyframes fadeInRow {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px !important;
+      color: #64748b;
+    }
+    
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.3;
+      display: block;
+    }
+    
+    .empty-state h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #94a3b8;
+    }
+    
+    .empty-state p {
+      font-size: 12px;
+      color: #64748b;
+    }
+    
+    /* Count Badge */
+    .count-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      background: rgba(15, 118, 110, 0.2);
+      color: #5eead4;
+      border: 1px solid rgba(15, 118, 110, 0.3);
+    }
+    
+    body:not(.dark) .count-badge {
+      background: rgba(15, 118, 110, 0.1);
+      color: #0d9488;
+    }
+
+</style>
 </head>
 
 <body class="bg-slate-950 text-slate-200 dark" id="mainBody">
@@ -4709,16 +5136,23 @@ function renderSertifikatTable() {
       
       container.innerHTML = items.map(function(item, idx) {
         return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
-          '<td class="px-3 py-2 font-medium">' + item.namaKegiatan + '</td>' +
+          // Kolom 1: Nama Kegiatan
+          '<td class="px-3 py-2 font-medium max-w-[180px] truncate" title="' + (item.namaKegiatan || '') + '">' + (item.namaKegiatan || '-') + '</td>' +
+          // Kolom 2: Tempat
           '<td class="px-3 py-2 text-slate-400 max-w-[100px] truncate" title="' + (item.tempat || '') + '">' + (item.tempat || '-') + '</td>' +
+          // Kolom 3: PIC
+          '<td class="px-3 py-2 text-[10px] whitespace-nowrap">' + (item.pic || '-') + '</td>' +
+          // Kolom 4: Tanggal
           '<td class="px-3 py-2 text-[10px] whitespace-nowrap">' + formatDateIndo(item.tanggal) + '</td>' +
-          '<td class="px-3 py-2 text-[10px]">' + (item.waktu || '-') + '</td>' +
-          '<td class="px-3 py-2 text-[10px]">' + (item.pic || '-') + '</td>' +
+          // Kolom 5: Waktu
+          '<td class="px-3 py-2 text-[10px] whitespace-nowrap">' + (item.waktu || '-') + '</td>' +
+          // Kolom 6: Keterangan
           '<td class="px-3 py-2 text-[10px] text-slate-400 max-w-[150px] truncate" title="' + (item.keterangan || '') + '">' + (item.keterangan || '-') + '</td>' +
+          // Kolom 7: Aksi (CRUD buttons)
           '<td class="px-3 py-2"><div class="action-cell flex gap-1 justify-end">' +
-            '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
-            '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
-            '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+            '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat Detail"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>' +
+            '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash-can"></i></button>' +
           '</div></td>' +
         '</tr>';
       }).join('');
@@ -4889,16 +5323,23 @@ function renderSertifikatTable() {
       
       container.innerHTML = items.map(function(item) {
         return '<tr class="admin-row-animate">' +
-          '<td class="px-3 py-2 font-medium">' + item.namaKegiatan + '</td>' +
-          '<td class="px-3 py-2 text-slate-400">' + (item.tempat || '-') + '</td>' +
-          '<td class="px-3 py-2 text-[10px]">' + formatDateIndo(item.tanggal) + '</td>' +
-          '<td class="px-3 py-2 text-[10px]">' + (item.waktu || '-') + '</td>' +
-          '<td class="px-3 py-2 text-[10px]">' + (item.pic || '-') + '</td>' +
-          '<td class="px-3 py-2 text-[10px]">' + (item.keterangan || '-') + '</td>' +
+          // Kolom 1: Nama Kegiatan
+          '<td class="px-3 py-2 font-medium max-w-[180px] truncate" title="' + (item.namaKegiatan || '') + '">' + (item.namaKegiatan || '-') + '</td>' +
+          // Kolom 2: Tempat
+          '<td class="px-3 py-2 text-slate-400 max-w-[100px] truncate" title="' + (item.tempat || '') + '">' + (item.tempat || '-') + '</td>' +
+          // Kolom 3: PIC
+          '<td class="px-3 py-2 text-[10px] whitespace-nowrap">' + (item.pic || '-') + '</td>' +
+          // Kolom 4: Tanggal
+          '<td class="px-3 py-2 text-[10px] whitespace-nowrap">' + formatDateIndo(item.tanggal) + '</td>' +
+          // Kolom 5: Waktu
+          '<td class="px-3 py-2 text-[10px] whitespace-nowrap">' + (item.waktu || '-') + '</td>' +
+          // Kolom 6: Keterangan
+          '<td class="px-3 py-2 text-[10px] text-slate-400 max-w-[150px] truncate" title="' + (item.keterangan || '') + '">' + (item.keterangan || '-') + '</td>' +
+          // Kolom 7: Aksi
           '<td class="px-3 py-2"><div class="action-cell flex gap-1 justify-end">' +
-            '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
-            '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
-            '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+            '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat Detail"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>' +
+            '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash-can"></i></button>' +
           '</div></td>' +
         '</tr>';
       }).join('');
