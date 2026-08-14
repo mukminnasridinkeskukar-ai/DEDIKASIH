@@ -14,9 +14,9 @@
   <meta name="msapplication-TileColor" content="#0f766e">
   <meta name="format-detection" content="telephone=no">
   
-  <!-- PWA Icons - Logo Dinas Kesehatan Kab. Kutai Kartanegara -->
-  <link rel="icon" type="image/png" sizes="192x192" href="Lambang_Kab._Kutai_Kertanegara.png">
-  <link rel="apple-touch-icon" href="Lambang_Kab._Kutai_Kertanegara.png">
+  <!-- PWA Icons - Using inline SVG favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230f766e'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230f766e'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
   
   <title>DEDIKASIH v1.0 • Digitalisasi Kegiatan Pengabdian Masyarakat SDM Kesehatan</title>
   
@@ -2463,14 +2463,19 @@
 
       <!-- Logo Dinas Kesehatan Kab. Kutai Kartanegara -->
       <div class="logo-ring mb-6 sm:mb-8" style="animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;">
-        <img src="Lambang_Kab._Kutai_Kertanegara.png"
-             alt="Logo Dinas Kesehatan Kabupaten Kutai Kartanegara"
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
              class="w-20 h-20 sm:w-28 sm:h-28 rounded-full object-contain bg-white p-1.5 shadow-[0_0_40px_rgba(20,184,166,0.25)] border-2 border-teal-400/30"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <!-- Fallback jika logo gagal load -->
-        <div class="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-teal-500 to-emerald-600 items-center justify-center shadow-[0_0_40px_rgba(20,184,166,0.25)]" style="display:none;">
-          <i class="fa-solid fa-hospital text-white text-3xl sm:text-5xl"></i>
-        </div>
+             alt="Logo Dinas Kesehatan Kabupaten Kutai Kartanegara">
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#0f766e"/>
+              <stop offset="100%" style="stop-color:#14b8a6"/>
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#logoGrad)"/>
+          <text x="50" y="62" font-size="36" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="bold">D</text>
+          <circle cx="50" cy="50" r="43" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        </svg>
       </div>
 
       <!-- Platform name -->
@@ -2515,8 +2520,10 @@
       <span class="hamburger-line"></span>
     </button>
     <div class="flex items-center gap-3">
-      <img src="Lambang_Kab._Kutai_Kertanegara.png" alt="Logo Dinkes Kukar" class="w-8 h-8 rounded-full object-contain bg-white p-0.5 border border-teal-400/30"
-           onerror="this.innerHTML='<i class=\'fa-solid fa-hospital text-teal-500\'></i>'">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" alt="Logo Dinkes Kukar" class="w-8 h-8 rounded-full object-contain bg-white p-0.5 border border-teal-400/30">
+        <circle cx="50" cy="50" r="46" fill="#0f766e"/>
+        <text x="50" y="65" font-size="40" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="bold">D</text>
+      </svg>
       <span class="font-display text-sm font-semibold text-teal-400">DEDIKASIH</span>
     </div>
     <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-800/50 flex items-center justify-center" aria-label="Toggle theme">
@@ -2532,13 +2539,18 @@
       
       <!-- Sidebar Header -->
       <div class="p-4 lg:p-6 border-b border-white/5 hidden lg:flex flex-col items-center text-center">
-        <img src="Lambang_Kab._Kutai_Kertanegara.png"
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
              alt="Logo Dinas Kesehatan Kab. Kutai Kartanegara"
-             class="w-16 h-16 rounded-full object-contain bg-white p-1 shadow-lg mb-3 border-2 border-teal-400/30"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-teal-500 to-emerald-600 items-center justify-center shadow-lg mb-3" style="display:none;">
-          <i class="fa-solid fa-hospital text-white text-2xl"></i>
-        </div>
+             class="w-16 h-16 rounded-full object-contain bg-white p-1 shadow-lg mb-3 border-2 border-teal-400/30">
+          <defs>
+            <linearGradient id="sidebarLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#0f766e"/>
+              <stop offset="100%" style="stop-color:#14b8a6"/>
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#sidebarLogoGrad)"/>
+          <text x="50" y="65" font-size="38" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="bold">D</text>
+        </svg>
         <h2 class="font-display text-base text-teal-400">DEDIKASIH</h2>
         <p class="text-[10px] text-slate-500 mt-1">v1.0 • Dinkes Kab. Kukar</p>
       </div>
@@ -5899,9 +5911,6 @@ function renderSertifikatTable() {
         }
       }, 3000);
     }
-
-    // Main App Initialization
-    async 
 
     /* ============================================
        DASHBOARD STAT LIGHTBOX FUNCTIONS
