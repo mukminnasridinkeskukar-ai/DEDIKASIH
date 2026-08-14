@@ -737,7 +737,532 @@
       .nav-item { border: 1px solid transparent; }
       .nav-item.active { border-color: currentColor; }
     }
-  </style>
+  
+    /* ============================================
+       CRUD BUTTONS - Colorful & Attractive
+       ============================================ */
+    
+    .btn-crud {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      outline: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-crud:active { transform: scale(0.96); }
+    .btn-crud::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .btn-crud:hover::before { left: 100%; }
+    
+    /* CREATE - Emerald Green */
+    .btn-create {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-create:hover {
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+    
+    /* READ/VIEW - Blue Indigo */
+    .btn-view {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: white;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-view:hover {
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+    
+    /* UPDATE/EDIT - Amber Orange */
+    .btn-edit {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: white;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-edit:hover {
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+    
+    /* DELETE - Rose Red */
+    .btn-delete {
+      background: linear-gradient(135deg, #e11d48, #f43f5e);
+      color: white;
+      box-shadow: 0 4px 14px rgba(244, 63, 94, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-delete:hover {
+      box-shadow: 0 6px 20px rgba(244, 63, 94, 0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+    
+    /* APPROVE - Teal */
+    .btn-approve {
+      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      color: white;
+      box-shadow: 0 4px 14px rgba(20, 184, 166, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-approve:hover {
+      box-shadow: 0 6px 20px rgba(20, 184, 166, 0.45), transform: translateY(-2px);
+    }
+    
+    /* REJECT - Slate */
+    .btn-reject {
+      background: linear-gradient(135deg, #475569, #64748b);
+      color: white;
+      box-shadow: 0 4px 14px rgba(100, 116, 139, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-reject:hover {
+      box-shadow: 0 6px 20px rgba(100, 116, 139, 0.45), transform: translateY(-2px);
+    }
+    
+    /* EXPORT - Purple */
+    .btn-export {
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      color: white;
+      box-shadow: 0 4px 14px rgba(167, 139, 250, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-export:hover {
+      box-shadow: 0 6px 20px rgba(167, 139, 250, 0.45), transform: translateY(-2px);
+    }
+    
+    /* Small variant */
+    .btn-crud.btn-sm {
+      padding: 6px 10px;
+      font-size: 11px;
+      border-radius: 8px;
+    }
+    
+    /* Icon only variant */
+    .btn-crud.btn-icon {
+      padding: 8px;
+      border-radius: 10px;
+      min-width: 36px;
+      justify-content: center;
+    }
+
+    /* ============================================
+       LIGHTBOX / MODAL ENHANCEMENTS
+       ============================================ */
+    
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .lightbox-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .lightbox-container {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.9) translateY(30px);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+                  0 0 0 1px rgba(148, 163, 184, 0.05),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .lightbox-overlay.active .lightbox-container {
+      transform: scale(1) translateY(0);
+    }
+    
+    .lightbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 1.5rem 0;
+      margin-bottom: 1rem;
+    }
+    .lightbox-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .lightbox-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .lightbox-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .lightbox-close:hover {
+      background: rgba(239, 68, 68, 0.2);
+      transform: rotate(90deg);
+    }
+    
+    .lightbox-body {
+      padding: 0 1.5rem 1.5rem;
+    }
+    
+    .lightbox-form-group {
+      margin-bottom: 1.25rem;
+    }
+    .lightbox-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+    }
+    .lightbox-input,
+    .lightbox-select,
+    .lightbox-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 12px;
+      color: #e2e8f0;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .lightbox-input:focus,
+    .lightbox-select:focus,
+    .lightbox-textarea:focus {
+      outline: none;
+      border-color: #14b8a6;
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+    }
+    .lightbox-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .lightbox-footer {
+      display: flex;
+      gap: 12px;
+      padding: 1rem 1.5rem 1.5rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.1);
+      margin-top: auto;
+    }
+    
+    /* Detail View Styles */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .detail-item {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .detail-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      margin-bottom: 0.375rem;
+    }
+    .detail-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: #f1f5f9;
+    }
+    
+    /* Admin Table Enhancement */
+    .admin-table-wrapper {
+      background: rgba(15, 23, 42, 0.3);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .admin-table-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      background: rgba(15, 23, 42, 0.5);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+    .admin-table-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .admin-table-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    /* Status Badge Enhancement */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .status-pending {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+    .status-approved {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .status-rejected {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(244, 63, 94, 0.05));
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.2);
+    }
+    
+    /* Action Cell in Table */
+    .action-cell {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: #64748b;
+    }
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 1rem;
+      opacity: 0.3;
+    }
+    .empty-state h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #94a3b8;
+    }
+    .empty-state p {
+      font-size: 13px;
+      color: #64748b;
+    }
+    
+    /* Search Box in Admin */
+    .admin-search-box {
+      position: relative;
+      flex: 1;
+      max-width: 280px;
+    }
+    .admin-search-box input {
+      width: 100%;
+      padding: 10px 16px 10px 42px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 10px;
+      color: #e2e8f0;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .admin-search-box input:focus {
+      outline: none;
+      border-color: #14b8a6;
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+    }
+    .admin-search-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+    }
+    
+    /* Animation for table rows */
+    @keyframes rowFadeIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .admin-row-animate {
+      animation: rowFadeIn 0.3s ease forwards;
+    }
+    
+    /* Responsive adjustments for lightbox */
+    @media (max-width: 640px) {
+      .lightbox-container {
+        border-radius: 18px;
+        max-height: 95vh;
+      }
+      .lightbox-header {
+        padding: 1.25rem 1.25rem 0;
+      }
+      .lightbox-body {
+        padding: 0 1.25rem 1.25rem;
+      }
+      .lightbox-footer {
+        flex-direction: column-reverse;
+        padding: 1rem 1.25rem 1.25rem;
+      }
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* ============================================
+       FILE LINK BUTTONS - Downloadable Links
+       ============================================ */
+       
+    .file-link-section {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.15);
+    }
+    
+    .file-link-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #14b8a6;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .file-link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.5rem;
+    }
+    
+    .file-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: rgba(20, 184, 166, 0.1);
+      border: 1px solid rgba(20, 184, 166, 0.25);
+      border-radius: 8px;
+      color: #5eead4;
+      font-size: 11px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .file-link-btn:hover {
+      background: rgba(20, 184, 166, 0.2);
+      border-color: rgba(20, 184, 166, 0.4);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    
+    .file-link-btn i { font-size: 12px; }
+    
+    .file-link-btn.btn-pdf { 
+      border-color: rgba(239, 68, 68, 0.3); 
+      background: rgba(239, 68, 68, 0.1); 
+      color: #fca5a5; 
+    }
+    .file-link-btn.btn-pdf:hover { 
+      background: rgba(239, 68, 68, 0.2); 
+      border-color: rgba(239, 68, 68, 0.5); 
+      color: #fecaca; 
+    }
+    
+    .file-link-btn.btn-sheet { 
+      border-color: rgba(34, 197, 94, 0.3); 
+      background: rgba(34, 197, 94, 0.1); 
+      color: #86efac; 
+    }
+    .file-link-btn.btn-sheet:hover { 
+      background: rgba(34, 197, 94, 0.2); 
+      border-color: rgba(34, 197, 94, 0.5); 
+      color: #bbf7d0; 
+    }
+    
+    .file-link-btn.btn-image { 
+      border-color: rgba(168, 85, 247, 0.3); 
+      background: rgba(168, 85, 247, 0.1); 
+      color: #d8b4fe; 
+    }
+    .file-link-btn.btn-image:hover { 
+      background: rgba(168, 85, 247, 0.2); 
+      border-color: rgba(168, 85, 247, 0.5); 
+      color: #e9d5ff; 
+    }
+    
+    .file-link-btn.btn-video { 
+      border-color: rgba(234, 179, 8, 0.3); 
+      background: rgba(234, 179, 8, 0.1); 
+      color: #fde047; 
+    }
+    .file-link-btn.btn-video:hover { 
+      background: rgba(234, 179, 8, 0.2); 
+      border-color: rgba(234, 179, 8, 0.5); 
+      color: #fef08a; 
+    }
+    
+    .no-file-links {
+      text-align: center;
+      padding: 1rem;
+      color: #64748b;
+      font-size: 12px;
+      font-style: italic;
+    }
+
+</style>
 </head>
 
 <body class="bg-slate-950 text-slate-200 dark">
@@ -1548,7 +2073,528 @@
     </div>
   </div>
 
+  
+
   <!-- ============================================ -->
+  <!-- LIGHTBOX: CREATE/EDIT USULAN -->
+  <!-- ============================================ -->
+  <div id="lightboxUsulan" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxUsulan')">
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <div class="lightbox-title">
+          <div class="lightbox-icon bg-gradient-to-br from-emerald-500 to-green-600 text-white">
+            <i class="fa-solid fa-file-lines" id="usulanLightboxIcon"></i>
+          </div>
+          <span id="usulanLightboxTitle">Tambah Usulan Baru</span>
+        </div>
+        <button class="lightbox-close" onclick="closeLightbox('lightboxUsulan')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <form id="usulanForm" onsubmit="submitUsulanForm(event)" class="lightbox-body">
+        <input type="hidden" id="usulanId" value="">
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-user mr-1"></i>Nama Pengusul *</label>
+          <input type="text" id="usulanNama" class="lightbox-input" placeholder="Nama lengkap pengusul" required>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-id-card mr-1"></i>NIK *</label>
+            <input type="text" id="usulanNIK" class="lightbox-input" placeholder="16 digit NIK" maxlength="16" required>
+          </div>
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-building mr-1"></i>Asal Institusi</label>
+            <input type="text" id="usulanInstitusi" class="lightbox-input" placeholder="Nama institusi/asal">
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-phone mr-1"></i>No. Telepon</label>
+            <input type="tel" id="usulanTelepon" class="lightbox-input" placeholder="Nomor HP/WA aktif">
+          </div>
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-calendar-check mr-1"></i>Tanggal Kegiatan</label>
+            <input type="date" id="usulanTanggal" class="lightbox-input">
+          </div>
+        </div>
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-flag mr-1"></i>Nama Kegiatan *</label>
+          <input type="text" id="usulanKegiatan" class="lightbox-input" placeholder="Nama kegiatan pengabdian masyarakat" required>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-location-dot mr-1"></i>Tempat Kegiatan</label>
+            <input type="text" id="usulanTempat" class="lightbox-input" placeholder="Lokasi pelaksanaan">
+          </div>
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-clock mr-1"></i>Waktu Pelaksanaan</label>
+            <input type="time" id="usulanWaktu" class="lightbox-input">
+          </div>
+        </div>
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-users mr-1"></i>Jumlah Peserta</label>
+          <input type="number" id="usulanPeserta" class="lightbox-input" placeholder="Estimasi jumlah peserta" min="1">
+        </div>
+        
+        <!-- Link Dokumentasi Section -->
+        <div class="mt-4 pt-4 border-t border-slate-700/50">
+          <div class="flex items-center gap-2 mb-3">
+            <i class="fa-solid fa-link text-teal-400 text-sm"></i>
+            <span class="text-xs font-semibold text-teal-400 uppercase tracking-wider">Link Dokumentasi & Berkas</span>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="lightbox-form-group mb-0">
+              <label class="lightbox-label"><i class="fa-solid fa-table-cells mr-1"></i>Spreadsheet Peserta</label>
+              <input type="url" id="usulanLinkSpreadsheet" class="lightbox-input" placeholder="Google Sheets URL" style="font-size:13px;">
+            </div>
+            <div class="lightbox-form-group mb-0">
+              <label class="lightbox-label"><i class="fa-solid fa-file-signature mr-1"></i>Surat Tugas</label>
+              <input type="url" id="usulanLinkSuratTugas" class="lightbox-input" placeholder="Google Drive URL" style="font-size:13px;">
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
+            <div class="lightbox-form-group mb-0">
+              <label class="lightbox-label"><i class="fa-solid fa-images mr-1"></i>Dokumentasi Foto</label>
+              <input type="url" id="usulanLinkFoto" class="lightbox-input" placeholder="Google Drive Folder URL" style="font-size:13px;">
+            </div>
+            <div class="lightbox-form-group mb-0">
+              <label class="lightbox-label"><i class="fa-solid fa-video mr-1"></i>Dokumentasi Video</label>
+              <input type="url" id="usulanLinkVideo" class="lightbox-input" placeholder="Google Drive URL" style="font-size:13px;">
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
+            <div class="lightbox-form-group mb-0">
+              <label class="lightbox-label"><i class="fa-solid fa-envelope-open-text mr-1"></i>Surat Pemberitahuan</label>
+              <input type="url" id="usulanLinkPemberitahuan" class="lightbox-input" placeholder="URL" style="font-size:13px;">
+            </div>
+            <div class="lightbox-form-group mb-0">
+              <label class="lightbox-label"><i class="fa-solid fa-clipboard-user mr-1"></i>Daftar Hadir</label>
+              <input type="url" id="usulanLinkDaftarHadir" class="lightbox-input" placeholder="URL" style="font-size:13px;">
+            </div>
+            <div class="lightbox-form-group mb-0">
+              <label class="lightbox-label"><i class="fa-solid fa-file-lines mr-1"></i>Berita Acara</label>
+              <input type="url" id="usulanLinkBeritaAcara" class="lightbox-input" placeholder="URL" style="font-size:13px;">
+            </div>
+          </div>
+        </div>
+        <div class="lightbox-footer">
+          <button type="button" onclick="closeLightbox('lightboxUsulan')" class="btn-crud btn-reject flex-1">
+            <i class="fa-solid fa-times"></i> Batal
+          </button>
+          <button type="submit" class="btn-crud btn-create flex-1">
+            <i class="fa-solid fa-save"></i> Simpan Usulan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIGHTBOX: VIEW DETAIL USULAN -->
+  <!-- ============================================ -->
+  <div id="lightboxViewUsulan" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxViewUsulan')">
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <div class="lightbox-title">
+          <div class="lightbox-icon bg-gradient-to-br from-indigo-500 to-blue-600 text-white">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <span>Detail Usulan</span>
+        </div>
+        <button class="lightbox-close" onclick="closeLightbox('lightboxViewUsulan')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <div class="lightbox-body" id="viewUsulanContent">
+        <!-- Content will be dynamically inserted -->
+      </div>
+      
+      <div class="lightbox-footer">
+        <button onclick="closeLightbox('lightboxViewUsulan')" class="btn-crud btn-reject flex-1">
+          <i class="fa-solid fa-arrow-left"></i> Tutup
+        </button>
+        <button onclick="editFromViewUsulan()" class="btn-crud btn-edit flex-1">
+          <i class="fa-solid fa-pen-to-square"></i> Edit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIGHTBOX: CREATE/EDIT PENGUMUMAN -->
+  <!-- ============================================ -->
+  <div id="lightboxPengumuman" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxPengumuman')">
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <div class="lightbox-title">
+          <div class="lightbox-icon bg-gradient-to-br from-purple-500 to-violet-600 text-white">
+            <i class="fa-solid fa-bullhorn" id="pengumumanLightboxIcon"></i>
+          </div>
+          <span id="pengumumanLightboxTitle">Tambah Pengumuman</span>
+        </div>
+        <button class="lightbox-close" onclick="closeLightbox('lightboxPengumuman')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <form id="pengumumanForm" onsubmit="submitPengumumanForm(event)" class="lightbox-body">
+        <input type="hidden" id="pengumumanId" value="">
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-heading mr-1"></i>Judul Pengumuman *</label>
+          <input type="text" id="pengumumanJudul" class="lightbox-input" placeholder="Judul singkat pengumuman" required>
+        </div>
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-calendar mr-1"></i>Tanggal</label>
+          <input type="date" id="pengumumanTanggal" class="lightbox-input">
+        </div>
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-align-left mr-1"></i>Isi Pengumuman *</label>
+          <textarea id="pengumumanIsi" class="lightbox-textarea" rows="6" placeholder="Tulis isi pengumuman lengkap di sini..." required></textarea>
+        </div>
+        
+        <div class="lightbox-footer">
+          <button type="button" onclick="closeLightbox('lightboxPengumuman')" class="btn-crud btn-reject flex-1">
+            <i class="fa-solid fa-times"></i> Batal
+          </button>
+          <button type="submit" class="btn-crud btn-create flex-1">
+            <i class="fa-solid fa-save"></i> Simpan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIGHTBOX: VIEW DETAIL PENGUMUMAN -->
+  <!-- ============================================ -->
+  <div id="lightboxViewPengumuman" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxViewPengumuman')">
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <div class="lightbox-title">
+          <div class="lightbox-icon bg-gradient-to-br from-indigo-500 to-blue-600 text-white">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <span>Detail Pengumuman</span>
+        </div>
+        <button class="lightbox-close" onclick="closeLightbox('lightboxViewPengumuman')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <div class="lightbox-body" id="viewPengumumanContent">
+        <!-- Dynamic content -->
+      </div>
+      
+      <div class="lightbox-footer">
+        <button onclick="closeLightbox('lightboxViewPengumuman')" class="btn-crud btn-reject flex-1">
+          <i class="fa-solid fa-arrow-left"></i> Tutup
+        </button>
+        <button onclick="editFromViewPengumuman()" class="btn-crud btn-edit flex-1">
+          <i class="fa-solid fa-pen-to-square"></i> Edit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIGHTBOX: CREATE/EDIT JADWAL -->
+  <!-- ============================================ -->
+  <div id="lightboxJadwal" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxJadwal')">
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <div class="lightbox-title">
+          <div class="lightbox-icon bg-gradient-to-br from-blue-500 to-cyan-600 text-white">
+            <i class="fa-solid fa-calendar-days" id="jadwalLightboxIcon"></i>
+          </div>
+          <span id="jadwalLightboxTitle">Tambah Jadwal Kegiatan</span>
+        </div>
+        <button class="lightbox-close" onclick="closeLightbox('lightboxJadwal')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <form id="jadwalForm" onsubmit="submitJadwalForm(event)" class="lightbox-body">
+        <input type="hidden" id="jadwalId" value="">
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-flag mr-1"></i>Nama Kegiatan *</label>
+          <input type="text" id="jadwalNamaKegiatan" class="lightbox-input" placeholder="Nama kegiatan" required>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-location-dot mr-1"></i>Tempat</label>
+            <input type="text" id="jadwalTempat" class="lightbox-input" placeholder="Lokasi kegiatan">
+          </div>
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-user-tie mr-1"></i>PIC</label>
+            <input type="text" id="jadwalPIC" class="lightbox-input" placeholder="Penanggung jawab">
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-calendar mr-1"></i>Tanggal</label>
+            <input type="date" id="jadwalTanggal" class="lightbox-input">
+          </div>
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-clock mr-1"></i>Waktu</label>
+            <input type="time" id="jadwalWaktu" class="lightbox-input">
+          </div>
+        </div>
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-sticky-note mr-1"></i>Keterangan</label>
+          <textarea id="jadwalKeterangan" class="lightbox-textarea" rows="3" placeholder="Keterangan tambahan (opsional)"></textarea>
+        </div>
+        
+        <div class="lightbox-footer">
+          <button type="button" onclick="closeLightbox('lightboxJadwal')" class="btn-crud btn-reject flex-1">
+            <i class="fa-solid fa-times"></i> Batal
+          </button>
+          <button type="submit" class="btn-crud btn-create flex-1">
+            <i class="fa-solid fa-save"></i> Simpan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIGHTBOX: VIEW DETAIL JADWAL -->
+  <!-- ============================================ -->
+  <div id="lightboxViewJadwal" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxViewJadwal')">
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <div class="lightbox-title">
+          <div class="lightbox-icon bg-gradient-to-br from-indigo-500 to-blue-600 text-white">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <span>Detail Jadwal</span>
+        </div>
+        <button class="lightbox-close" onclick="closeLightbox('lightboxViewJadwal')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <div class="lightbox-body" id="viewJadwalContent">
+        <!-- Dynamic content -->
+      </div>
+      
+      <div class="lightbox-footer">
+        <button onclick="closeLightbox('lightboxViewJadwal')" class="btn-crud btn-reject flex-1">
+          <i class="fa-solid fa-arrow-left"></i> Tutup
+        </button>
+        <button onclick="editFromViewJadwal()" class="btn-crud btn-edit flex-1">
+          <i class="fa-solid fa-pen-to-square"></i> Edit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIGHTBOX: CREATE/EDIT SERTIFIKAT -->
+  <!-- ============================================ -->
+  <div id="lightboxSertifikat" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxSertifikat')">
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <div class="lightbox-title">
+          <div class="lightbox-icon bg-gradient-to-br from-yellow-500 to-orange-600 text-white">
+            <i class="fa-solid fa-certificate" id="sertifikatLightboxIcon"></i>
+          </div>
+          <span id="sertifikatLightboxTitle">Tambah Sertifikat</span>
+        </div>
+        <button class="lightbox-close" onclick="closeLightbox('lightboxSertifikat')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <form id="sertifikatForm" onsubmit="submitSertifikatForm(event)" class="lightbox-body">
+        <input type="hidden" id="sertifikatId" value="">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-hashtag mr-1"></i>No. Sertifikat *</label>
+            <input type="text" id="sertifikatNomor" class="lightbox-input" placeholder="Nomor unik sertifikat" required>
+          </div>
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-user mr-1"></i>Nama Lengkap *</label>
+            <input type="text" id="sertifikatNama" class="lightbox-input" placeholder="Nama peserta" required>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-id-card mr-1"></i>NIK</label>
+            <input type="text" id="sertifikatNIK" class="lightbox-input" placeholder="16 digit NIK" maxlength="16">
+          </div>
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-building mr-1"></i>Penyelenggara</label>
+            <input type="text" id="sertifikatPenyelenggara" class="lightbox-input" placeholder="Instansi penyelenggara">
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-calendar-check mr-1"></i>Nama Kegiatan *</label>
+            <input type="text" id="sertifikatKegiatan" class="lightbox-input" placeholder="Nama kegiatan" required>
+          </div>
+          <div class="lightbox-form-group">
+            <label class="lightbox-label"><i class="fa-solid fa-calendar mr-1"></i>Tanggal Terbit</label>
+            <input type="date" id="sertifikatTanggalTerbit" class="lightbox-input">
+          </div>
+        </div>
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-link mr-1"></i>Link Sertifikat</label>
+          <input type="url" id="sertifikatLink" class="lightbox-input" placeholder="https://... URL file sertifikat digital">
+        </div>
+        
+        <div class="lightbox-footer">
+          <button type="button" onclick="closeLightbox('lightboxSertifikat')" class="btn-crud btn-reject flex-1">
+            <i class="fa-solid fa-times"></i> Batal
+          </button>
+          <button type="submit" class="btn-crud btn-create flex-1">
+            <i class="fa-solid fa-save"></i> Simpan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIGHTBOX: VIEW DETAIL SERTIFIKAT -->
+  <!-- ============================================ -->
+  <div id="lightboxViewSertifikat" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxViewSertifikat')">
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <div class="lightbox-title">
+          <div class="lightbox-icon bg-gradient-to-br from-indigo-500 to-blue-600 text-white">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <span>Detail Sertifikat</span>
+        </div>
+        <button class="lightbox-close" onclick="closeLightbox('lightboxViewSertifikat')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <div class="lightbox-body" id="viewSertifikatContent">
+        <!-- Dynamic content -->
+      </div>
+      
+      <div class="lightbox-footer">
+        <button onclick="closeLightbox('lightboxViewSertifikat')" class="btn-crud btn-reject flex-1">
+          <i class="fa-solid fa-arrow-left"></i> Tutup
+        </button>
+        <button onclick="editFromViewSertifikat()" class="btn-crud btn-edit flex-1">
+          <i class="fa-solid fa-pen-to-square"></i> Edit
+        </button>
+        <a id="downloadSertifikatBtn" href="#" target="_blank" class="btn-crud btn-export flex-1">
+          <i class="fa-solid fa-download"></i> Unduh
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIGHTBOX: CONFIRM DELETE -->
+  <!-- ============================================ -->
+  <div id="lightboxConfirmDelete" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxConfirmDelete')">
+    <div class="lightbox-container" style="max-width: 420px;">
+      <div class="lightbox-header" style="justify-content: center;">
+        <div class="lightbox-title" style="flex-direction: column; text-align: center;">
+          <div class="lightbox-icon mx-auto mb-3 w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-rose-600 text-white text-2xl">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <span>Konfirmasi Hapus</span>
+        </div>
+      </div>
+      
+      <div class="lightbox-body text-center">
+        <p class="text-slate-300 mb-2" id="deleteConfirmMessage">Apakah Anda yakin ingin menghapus data ini?</p>
+        <p class="text-red-400 text-sm font-semibold" id="deleteItemName"></p>
+      </div>
+      
+      <div class="lightbox-footer justify-center">
+        <button onclick="closeLightbox('lightboxConfirmDelete')" class="btn-crud btn-reject flex-1">
+          <i class="fa-solid fa-times"></i> Batal
+        </button>
+        <button onclick="confirmDeleteAction()" class="btn-crud btn-delete flex-1">
+          <i class="fa-solid fa-trash-can"></i> Ya, Hapus!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIGHTBOX: UPDATE STATUS USULAN -->
+  <!-- ============================================ -->
+  <div id="lightboxUpdateStatus" class="lightbox-overlay" onclick="if(event.target===this) closeLightbox('lightboxUpdateStatus')">
+    <div class="lightbox-container" style="max-width: 520px;">
+      <div class="lightbox-header">
+        <div class="lightbox-title">
+          <div class="lightbox-icon bg-gradient-to-br from-teal-500 to-emerald-600 text-white">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </div>
+          <span>Update Status Usulan</span>
+        </div>
+        <button class="lightbox-close" onclick="closeLightbox('lightboxUpdateStatus')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <form id="statusUpdateForm" onsubmit="submitStatusUpdate(event)" class="lightbox-body">
+        <input type="hidden" id="statusUpdateId" value="">
+        
+        <div class="mb-4 p-3 rounded-lg bg-slate-800/50 border border-slate-700/50">
+          <p class="text-xs text-slate-400">Nomor Registrasi:</p>
+          <p class="font-mono text-teal-400 font-semibold" id="statusUpdateNomor">-</p>
+        </div>
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-list-check mr-1"></i>Status Baru</label>
+          <select id="statusUpdateNewStatus" class="lightbox-select">
+            <option value="Menunggu Verifikasi">⏳ Menunggu Verifikasi</option>
+            <option value="Disetujui">✅ Disetujui</option>
+            <option value="Ditolak">❌ Ditolak</option>
+          </select>
+        </div>
+        
+        <div class="lightbox-form-group">
+          <label class="lightbox-label"><i class="fa-solid fa-comment mr-1"></i>Catatan (opsional)</label>
+          <textarea id="statusUpdateCatatan" class="lightbox-textarea" rows="3" placeholder="Tambahkan catatan untuk perubahan status ini..."></textarea>
+        </div>
+        
+        <div class="lightbox-footer">
+          <button type="button" onclick="closeLightbox('lightboxUpdateStatus')" class="btn-crud btn-reject flex-1">
+            <i class="fa-solid fa-times"></i> Batal
+          </button>
+          <button type="submit" class="btn-crud btn-approve flex-1">
+            <i class="fa-solid fa-check-double"></i> Update Status
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+<!-- ============================================ -->
   <!-- JAVASCRIPT - MAIN APPLICATION -->
   <!-- ============================================ -->
   <script>
@@ -2076,7 +3122,1061 @@ function renderSertifikatTable() {
 
     function changeSertifikatPage(page) { sertifikatPage = page; renderSertifikatTable(); }
 
+    
+
     /* ============================================
+         ADMIN CRUD - GLOBAL VARIABLES
+      ============================================ */
+    var currentEditId = null;
+    var currentEditType = null;
+    var deleteCallback = null;
+    var currentViewId = null;
+
+    /* ============================================
+         LIGHTBOX HELPER FUNCTIONS
+      ============================================ */
+    
+    function openLightbox(id) {
+      var lb = document.getElementById(id);
+      if(lb) {
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    
+    function closeLightbox(id) {
+      var lb = document.getElementById(id);
+      if(lb) {
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', function(e) {
+      if(e.key === 'Escape') {
+        document.querySelectorAll('.lightbox-overlay.active').forEach(function(lb) {
+          lb.classList.remove('active');
+        });
+        document.body.style.overflow = '';
+      }
+    });
+
+    /* ============================================
+         CRUD: USULAN FUNCTIONS
+      ============================================ */
+    
+    function showAddUsulanModal() {
+      currentEditType = 'create';
+      currentEditId = null;
+      
+      // Reset form
+      document.getElementById('usulanForm').reset();
+      document.getElementById('usulanId').value = '';
+      document.getElementById('usulanLightboxTitle').textContent = 'Tambah Usulan Baru';
+      document.getElementById('usulanLightboxIcon').className = 'fa-solid fa-file-lines';
+      
+      openLightbox('lightboxUsulan');
+    }
+    
+    function showEditUsulanModal(id) {
+      currentEditType = 'edit';
+      currentEditId = id;
+      
+      // Find the item data
+      var item = publicData.formulirAdmin.find(function(u) { return u.id == id; });
+      if(!item) {
+        showToast('Data tidak ditemukan!', 'error');
+        return;
+      }
+      
+      // Fill form with existing data
+      document.getElementById('usulanId').value = item.id;
+      document.getElementById('usulanNama').value = item.namaPengusul || '';
+      document.getElementById('usulanNIK').value = item.nik || '';
+      document.getElementById('usulanInstitusi').value = item.asalInstitusi || '';
+      document.getElementById('usulanTelepon').value = item.telpon || '';
+      document.getElementById('usulanKegiatan').value = item.namaKegiatan || '';
+      document.getElementById('usulanTempat').value = item.tempatKegiatan || '';
+      document.getElementById('usulanTanggal').value = formatDateISO(item.tanggalKegiatan);
+      document.getElementById('usulanWaktu').value = item.waktuPelaksanaan || '';
+      document.getElementById('usulanPeserta').value = item.jumlahPeserta || '';
+      
+      // Populate documentation link fields
+      document.getElementById('usulanLinkSpreadsheet').value = item.linkSpreadsheetPeserta || '';
+      document.getElementById('usulanLinkSuratTugas').value = item.linkSuratTugas || '';
+      document.getElementById('usulanLinkFoto').value = item.linkDokumentasiFoto || '';
+      document.getElementById('usulanLinkVideo').value = item.linkDokumentasiVideo || '';
+      document.getElementById('usulanLinkPemberitahuan').value = item.linkSuratPemberitahuan || '';
+      document.getElementById('usulanLinkDaftarHadir').value = item.linkDaftarHadir || '';
+      document.getElementById('usulanLinkBeritaAcara').value = item.linkBeritaAcara || '';
+      
+      document.getElementById('usulanLightboxTitle').textContent = 'Edit Usulan';
+      document.getElementById('usulanLightboxIcon').className = 'fa-solid fa-pen-to-square';
+      
+      openLightbox('lightboxUsulan');
+    }
+    
+    function viewUsulanDetail(id) {
+      var item = publicData.formulirAdmin.find(function(u) { return u.id == id; });
+      if(!item) return;
+      
+      currentViewId = id;
+      
+      var statusClass = item.status === 'Disetujui' ? 'status-approved' : 
+                       item.status === 'Ditolak' ? 'status-rejected' : 'status-pending';
+      
+      // Helper function to create file link button
+      var makeFileLink = function(label, url, icon, type) {
+        if (!url) return '';
+        return '<a href="' + url + '" target="_blank" rel="noopener" class="file-link-btn ' + type + '">' +
+               '<i class="' + icon + '"></i> ' + label + '</a>';
+      };
+      
+      // Check if any documentation links exist
+      var hasDocs = item.linkSpreadsheetPeserta || item.linkSuratTugas || 
+                    item.linkDokumentasiFoto || item.linkDokumentasiVideo ||
+                    item.linkSuratPemberitahuan || item.linkDaftarHadir || 
+                    item.linkBeritaAcara;
+      
+      // Build documentation section HTML
+      var docsHtml = '';
+      if (hasDocs) {
+        docsHtml = '<div class="file-link-section mt-4 pt-4 border-t border-slate-700/50">' +
+          '<div class="file-link-title mb-3"><i class="fa-solid fa-paperclip"></i> Dokumen & Berkas Terkait</div>' +
+          '<div class="file-link-grid">' +
+            makeFileLink('Spreadsheet Peserta', item.linkSpreadsheetPeserta, 'fa-solid fa-table-cells', 'btn-sheet') +
+            makeFileLink('Surat Tugas', item.linkSuratTugas, 'fa-solid fa-file-signature', 'btn-pdf') +
+            makeFileLink('Dokumentasi Foto', item.linkDokumentasiFoto, 'fa-solid fa-images', 'btn-image') +
+            makeFileLink('Dokumentasi Video', item.linkDokumentasiVideo, 'fa-solid fa-video', 'btn-video') +
+            makeFileLink('Surat Pemberitahuan', item.linkSuratPemberitahuan, 'fa-solid fa-envelope', 'btn-pdf') +
+            makeFileLink('Daftar Hadir', item.linkDaftarHadir, 'fa-solid fa-clipboard-user', 'btn-sheet') +
+            makeFileLink('Berita Acara', item.linkBeritaAcara, 'fa-solid fa-file-lines', 'btn-pdf') +
+          '</div></div>';
+      } else {
+        docsHtml = '<div class="file-link-section mt-4 pt-4 border-t border-slate-700/50">' +
+          '<div class="no-file-links text-center py-3"><i class="fa-solid fa-folder-open mr-1"></i>Tidak ada dokumen terlampir</div></div>';
+      }
+      
+      var html = '<div class="space-y-4">' +
+        // Status Badge at top
+        '<div class="flex justify-center"><span class="status-badge ' + statusClass + '">' +
+          '<i class="fa-solid fa-circle-info"></i> ' + item.status + '</span></div>' +
+        
+        // Data Pengusul Section
+        '<div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-3">' +
+          '<i class="fa-solid fa-user mr-1"></i>Data Pengusul</div>' +
+        '<div class="detail-grid">' +
+          '<div class="detail-item"><div class="detail-label">Nama Lengkap</div><div class="detail-value font-semibold">' + (item.namaPengusul || '-') + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">NIK</div><div class="detail-value font-mono">' + (item.nik || '-') + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">No. Registrasi</div><div class="detail-value font-mono text-teal-400">' + (item.nomorRegistrasi || '-') + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">Asal Institusi</div><div class="detail-value">' + (item.asalInstitusi || '-') + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">No. Telepon</div><div class="detail-value">' + (item.telpon || '-') + '</div></div>' +
+        '</div>' +
+        
+        // Detail Kegiatan Section
+        '<div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-4">' +
+          '<i class="fa-solid fa-calendar-check mr-1"></i>Detail Kegiatan</div>' +
+        '<div class="detail-grid">' +
+          '<div class="detail-item"><div class="detail-label">Nama Kegiatan</div><div class="detail-value font-semibold text-emerald-400">' + (item.namaKegiatan || '-') + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">Tempat</div><div class="detail-value">' + (item.tempatKegiatan || '-') + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">Tanggal</div><div class="detail-value">' + formatDateIndo(item.tanggalKegiatan) + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">Waktu</div><div class="detail-value">' + (item.waktuPelaksanaan || '-') + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">Jumlah Peserta</div><div class="detail-value"><span class="bg-teal-500/20 text-teal-300 px-2 py-1 rounded-lg">' + (item.jumlahPeserta || '0') + ' orang</span></div></div>' +
+        '</div>' +
+        
+        // Catatan Admin (if exists)
+        (item.catatan ? '<div class="mt-4 pt-4 border-t border-slate-700/30">' +
+          '<div class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-2">' +
+            '<i class="fa-solid fa-comment-dots mr-1"></i>Catatan Admin</div>' +
+          '<div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-sm text-amber-200">' + item.catatan + '</div></div>' : '') +
+        
+        // DOCUMENTATION LINKS SECTION - KEY FEATURE!
+        docsHtml +
+        
+      '</div>';
+      
+      document.getElementById('viewUsulanContent').innerHTML = html;
+      openLightbox('lightboxViewUsulan');
+    }
+    
+    function editFromViewUsulan() {
+      closeLightbox('lightboxViewUsulan');
+      setTimeout(function() { showEditUsulanModal(currentViewId); }, 300);
+    }
+    
+    async function submitUsulanForm(e) {
+      e.preventDefault();
+      
+      showLoading(true);
+      
+      try {
+        var formData = {
+          nik: document.getElementById('usulanNIK').value,
+          nama_pengusul: document.getElementById('usulanNama').value,
+          asal_institusi: document.getElementById('usulanInstitusi').value,
+          telpon: document.getElementById('usulanTelepon').value,
+          nama_kegiatan: document.getElementById('usulanKegiatan').value,
+          tempat_kegiatan: document.getElementById('usulanTempat').value,
+          tanggal_kegiatan: document.getElementById('usulanTanggal').value,
+          waktu_pelaksanaan: document.getElementById('usulanWaktu').value,
+          jumlah_peserta: parseInt(document.getElementById('usulanPeserta').value) || 0,
+          status: 'Menunggu Verifikasi',
+          // Documentation Links - Complete Supabase Fields
+          link_spreadsheet_peserta: document.getElementById('usulanLinkSpreadsheet').value || null,
+          link_surat_tugas: document.getElementById('usulanLinkSuratTugas').value || null,
+          link_dokumentasi_foto: document.getElementById('usulanLinkFoto').value || null,
+          link_dokumentasi_video: document.getElementById('usulanLinkVideo').value || null,
+          link_surat_pemberitahuan: document.getElementById('usulanLinkPemberitahuan').value || null,
+          link_daftar_hadir: document.getElementById('usulanLinkDaftarHadir').value || null,
+          link_berita_acara: document.getElementById('usulanLinkBeritaAcara').value || null
+        };
+        
+        if(currentEditType === 'create') {
+          var result = await submitFormUsulan(formData);
+          if(result.success) {
+            showToast('Usulan berhasil ditambahkan! No: ' + result.data.nomorRegistrasi, 'success');
+            closeLightbox('lightboxUsulan');
+            loadAdminUsulan();
+          } else {
+            showToast(result.message || 'Gagal menambahkan usulan', 'error');
+          }
+        } else {
+          // Update existing
+          var { error } = await supabase.from('formulir_usulan')
+            .update(formData)
+            .eq('id', currentEditId);
+          
+          if(error) throw error;
+          showToast('Usulan berhasil diperbarui!', 'success');
+          closeLightbox('lightboxUsulan');
+          loadAdminUsulan();
+        }
+      } catch(err) {
+        console.error('[DEDIKASIH] Error submitUsulanForm:', err);
+        showToast('Terjadi kesalahan: ' + err.message, 'error');
+      }
+      
+      showLoading(false);
+    }
+    
+    function confirmDeleteUsulan(id) {
+      var item = publicData.formulirAdmin.find(function(u) { return u.id == id; });
+      if(!item) return;
+      
+      deleteCallback = async function() {
+        showLoading(true);
+        try {
+          var { error } = await supabase.from('formulir_usulan').delete().eq('id', id);
+          if(error) throw error;
+          showToast('Usulan berhasil dihapus!', 'success');
+          loadAdminUsulan();
+        } catch(err) {
+          showToast('Gagal menghapus: ' + err.message, 'error');
+        }
+        showLoading(false);
+      };
+      
+      document.getElementById('deleteConfirmMessage').textContent = 'Apakah Anda yakin ingin menghapus usulan ini?';
+      document.getElementById('deleteItemName').textContent = item.namaPengusul + ' - ' + item.namaKegiatan;
+      openLightbox('lightboxConfirmDelete');
+    }
+    
+    function showUpdateStatusModal(id) {
+      var item = publicData.formulirAdmin.find(function(u) { return u.id == id; });
+      if(!item) return;
+      
+      currentEditId = id;
+      document.getElementById('statusUpdateId').value = id;
+      document.getElementById('statusUpdateNomor').textContent = item.nomorRegistrasi || '-';
+      document.getElementById('statusUpdateNewStatus').value = item.status || 'Menunggu Verifikasi';
+      document.getElementById('statusUpdateCatatan').value = item.catatan || '';
+      
+      openLightbox('lightboxUpdateStatus');
+    }
+    
+    async function submitStatusUpdate(e) {
+      e.preventDefault();
+      
+      showLoading(true);
+      try {
+        var newStatus = document.getElementById('statusUpdateNewStatus').value;
+        var catatan = document.getElementById('statusUpdateCatatan').value;
+        
+        var { error } = await supabase.from('formulir_usulan')
+          .update({ status: newStatus, catatan: catatan })
+          .eq('id', currentEditId);
+        
+        if(error) throw error;
+        showToast('Status berhasil diupdate menjadi "' + newStatus + '"!', 'success');
+        closeLightbox('lightboxUpdateStatus');
+        loadAdminUsulan();
+      } catch(err) {
+        showToast('Gagal update status: ' + err.message, 'error');
+      }
+      showLoading(false);
+    }
+
+    /* ============================================
+         CRUD: PENGUMUMAN FUNCTIONS
+      ============================================ */
+    
+    function showAddPengumumanModal() {
+      currentEditType = 'create';
+      currentEditId = null;
+      
+      document.getElementById('pengumumanForm').reset();
+      document.getElementById('pengumumanId').value = '';
+      document.getElementById('pengumumanLightboxTitle').textContent = 'Tambah Pengumuman';
+      document.getElementById('pengumumanLightboxIcon').className = 'fa-solid fa-bullhorn';
+      document.getElementById('pengumumanTanggal').value = getTodayISO();
+      
+      openLightbox('lightboxPengumuman');
+    }
+    
+    function showEditPengumumanModal(id) {
+      currentEditType = 'edit';
+      currentEditId = id;
+      
+      var item = publicData.pengumuman.find(function(p) { return p.id == id; });
+      if(!item) return;
+      
+      document.getElementById('pengumumanId').value = item.id;
+      document.getElementById('pengumumanJudul').value = item.judul || '';
+      document.getElementById('pengumumanIsi').value = item.isi || '';
+      document.getElementById('pengumumanTanggal').value = formatDateISO(item.tanggal);
+      
+      document.getElementById('pengumumanLightboxTitle').textContent = 'Edit Pengumuman';
+      document.getElementById('pengumumanLightboxIcon').className = 'fa-solid fa-pen-to-square';
+      
+      openLightbox('lightboxPengumuman');
+    }
+    
+    function viewPengumumanDetail(id) {
+      var item = publicData.pengumuman.find(function(p) { return p.id == id; });
+      if(!item) return;
+      
+      currentViewId = id;
+      
+      var html = '<div class="space-y-4">' +
+        '<div class="detail-item"><div class="detail-label">Judul</div><div class="detail-value text-lg font-semibold text-teal-400">' + item.judul + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Tanggal Publikasi</div><div class="detail-value">' + formatDateIndo(item.tanggal) + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Isi Pengumuman</div><div class="detail-value whitespace-pre-wrap leading-relaxed">' + item.isi + '</div></div>' +
+      '</div>';
+      
+      document.getElementById('viewPengumumanContent').innerHTML = html;
+      openLightbox('lightboxViewPengumuman');
+    }
+    
+    function editFromViewPengumuman() {
+      closeLightbox('lightboxViewPengumuman');
+      setTimeout(function() { showEditPengumumanModal(currentViewId); }, 300);
+    }
+    
+    async function submitPengumumanForm(e) {
+      e.preventDefault();
+      showLoading(true);
+      
+      try {
+        var data = {
+          judul: document.getElementById('pengumumanJudul').value,
+          isi: document.getElementById('pengumumanIsi').value,
+          tanggal: document.getElementById('pengumumanTanggal').value || getTodayISO()
+        };
+        
+        if(currentEditType === 'create') {
+          var { error } = await supabase.from('pengumuman').insert(data);
+          if(error) throw error;
+          showToast('Pengumuman berhasil ditambahkan!', 'success');
+        } else {
+          var { error } = await supabase.from('pengumuman').update(data).eq('id', currentEditId);
+          if(error) throw error;
+          showToast('Pengumuman berhasil diperbarui!', 'success');
+        }
+        
+        closeLightbox('lightboxPengumuman');
+        loadAdminPengumuman();
+      } catch(err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+      showLoading(false);
+    }
+    
+    function confirmDeletePengumuman(id) {
+      var item = publicData.pengumuman.find(function(p) { return p.id == id; });
+      if(!item) return;
+      
+      deleteCallback = async function() {
+        showLoading(true);
+        try {
+          var { error } = await supabase.from('pengumuman').delete().eq('id', id);
+          if(error) throw error;
+          showToast('Pengumuman berhasil dihapus!', 'success');
+          loadAdminPengumuman();
+        } catch(err) {
+          showToast('Gagal hapus: ' + err.message, 'error');
+        }
+        showLoading(false);
+      };
+      
+      document.getElementById('deleteConfirmMessage').textContent = 'Hapus pengumuman ini?';
+      document.getElementById('deleteItemName').textContent = item.judul;
+      openLightbox('lightboxConfirmDelete');
+    }
+
+    /* ============================================
+         CRUD: JADWAL FUNCTIONS
+      ============================================ */
+    
+    function showAddJadwalModal() {
+      currentEditType = 'create';
+      currentEditId = null;
+      
+      document.getElementById('jadwalForm').reset();
+      document.getElementById('jadwalId').value = '';
+      document.getElementById('jadwalLightboxTitle').textContent = 'Tambah Jadwal Kegiatan';
+      document.getElementById('jadwalLightboxIcon').className = 'fa-solid fa-calendar-plus';
+      
+      openLightbox('lightboxJadwal');
+    }
+    
+    function showEditJadwalModal(id) {
+      currentEditType = 'edit';
+      currentEditId = id;
+      
+      var item = publicData.jadwal.find(function(j) { return j.id == id; });
+      if(!item) return;
+      
+      document.getElementById('jadwalId').value = item.id;
+      document.getElementById('jadwalNamaKegiatan').value = item.namaKegiatan || '';
+      document.getElementById('jadwalTempat').value = item.tempat || '';
+      document.getElementById('jadwalPIC').value = item.pic || '';
+      document.getElementById('jadwalTanggal').value = formatDateISO(item.tanggal);
+      document.getElementById('jadwalWaktu').value = item.waktu || '';
+      document.getElementById('jadwalKeterangan').value = item.keterangan || '';
+      
+      document.getElementById('jadwalLightboxTitle').textContent = 'Edit Jadwal';
+      document.getElementById('jadwalLightboxIcon').className = 'fa-solid fa-pen-to-square';
+      
+      openLightbox('lightboxJadwal');
+    }
+    
+    function viewJadwalDetail(id) {
+      var item = publicData.jadwal.find(function(j) { return j.id == id; });
+      if(!item) return;
+      
+      currentViewId = id;
+      
+      var html = '<div class="detail-grid">' +
+        '<div class="detail-item"><div class="detail-label">Nama Kegiatan</div><div class="detail-value text-lg font-semibold text-blue-400">' + item.namaKegiatan + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Tempat</div><div class="detail-value">' + (item.tempat || '-') + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">PIC</div><div class="detail-value">' + (item.pic || '-') + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Tanggal</div><div class="detail-value">' + formatDateIndo(item.tanggal) + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Waktu</div><div class="detail-value">' + (item.waktu || '-') + '</div></div>' +
+        (item.keterangan ? '<div class="detail-item col-span-full"><div class="detail-label">Keterangan</div><div class="detail-value">' + item.keterangan + '</div></div>' : '') +
+      '</div>';
+      
+      document.getElementById('viewJadwalContent').innerHTML = html;
+      openLightbox('lightboxViewJadwal');
+    }
+    
+    function editFromViewJadwal() {
+      closeLightbox('lightboxViewJadwal');
+      setTimeout(function() { showEditJadwalModal(currentViewId); }, 300);
+    }
+    
+    async function submitJadwalForm(e) {
+      e.preventDefault();
+      showLoading(true);
+      
+      try {
+        var data = {
+          nama_kegiatan: document.getElementById('jadwalNamaKegiatan').value,
+          tempat: document.getElementById('jadwalTempat').value,
+          pic: document.getElementById('jadwalPIC').value,
+          tanggal: document.getElementById('jadwalTanggal').value,
+          waktu: document.getElementById('jadwalWaktu').value,
+          keterangan: document.getElementById('jadwalKeterangan').value
+        };
+        
+        if(currentEditType === 'create') {
+          var { error } = await supabase.from('jadwal_kegiatan').insert(data);
+          if(error) throw error;
+          showToast('Jadwal berhasil ditambahkan!', 'success');
+        } else {
+          var { error } = await supabase.from('jadwal_kegiatan').update(data).eq('id', currentEditId);
+          if(error) throw error;
+          showToast('Jadwal berhasil diperbarui!', 'success');
+        }
+        
+        closeLightbox('lightboxJadwal');
+        loadAdminJadwal();
+      } catch(err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+      showLoading(false);
+    }
+    
+    function confirmDeleteJadwal(id) {
+      var item = publicData.jadwal.find(function(j) { return j.id == id; });
+      if(!item) return;
+      
+      deleteCallback = async function() {
+        showLoading(true);
+        try {
+          var { error } = await supabase.from('jadwal_kegiatan').delete().eq('id', id);
+          if(error) throw error;
+          showToast('Jadwal berhasil dihapus!', 'success');
+          loadAdminJadwal();
+        } catch(err) {
+          showToast('Gagal hapus: ' + err.message, 'error');
+        }
+        showLoading(false);
+      };
+      
+      document.getElementById('deleteConfirmMessage').textContent = 'Hapus jadwal kegiatan ini?';
+      document.getElementById('deleteItemName').textContent = item.namaKegiatan;
+      openLightbox('lightboxConfirmDelete');
+    }
+
+    /* ============================================
+         CRUD: SERTIFIKAT FUNCTIONS
+      ============================================ */
+    
+    function showAddSertifikatModal() {
+      currentEditType = 'create';
+      currentEditId = null;
+      
+      document.getElementById('sertifikatForm').reset();
+      document.getElementById('sertifikatId').value = '';
+      document.getElementById('sertifikatLightboxTitle').textContent = 'Tambah Sertifikat Digital';
+      document.getElementById('sertifikatLightboxIcon').className = 'fa-solid fa-certificate';
+      
+      openLightbox('lightboxSertifikat');
+    }
+    
+    function showEditSertifikatModal(id) {
+      currentEditType = 'edit';
+      currentEditId = id;
+      
+      var item = allSertifikat.find(function(s) { return s.id == id; });
+      if(!item) return;
+      
+      document.getElementById('sertifikatId').value = item.id;
+      document.getElementById('sertifikatNomor').value = item.nomorSertifikat || '';
+      document.getElementById('sertifikatNama').value = item.namaLengkap || '';
+      document.getElementById('sertifikatNIK').value = item.nik || '';
+      document.getElementById('sertifikatPenyelenggara').value = item.penyelenggara || '';
+      document.getElementById('sertifikatKegiatan').value = item.namaKegiatan || '';
+      document.getElementById('sertifikatTanggalTerbit').value = formatDateISO(item.tanggalTerbit);
+      document.getElementById('sertifikatLink').value = item.linkSertifikat || '';
+      
+      document.getElementById('sertifikatLightboxTitle').textContent = 'Edit Sertifikat';
+      document.getElementById('sertifikatLightboxIcon').className = 'fa-solid fa-pen-to-square';
+      
+      openLightbox('lightboxSertifikat');
+    }
+    
+    function viewSertifikatDetail(id) {
+      var item = allSertifikat.find(function(s) { return s.id == id; });
+      if(!item) return;
+      
+      currentViewId = id;
+      
+      var html = '<div class="detail-grid">' +
+        '<div class="detail-item"><div class="detail-label">No. Sertifikat</div><div class="detail-value font-mono text-yellow-400">' + (item.nomorSertifikat || '-') + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Nama Lengkap</div><div class="detail-value text-lg font-semibold">' + item.namaLengkap + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">NIK</div><div class="detail-value font-mono">' + (item.nik || '-') + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Penyelenggara</div><div class="detail-value">' + (item.penyelenggara || '-') + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Nama Kegiatan</div><div class="detail-value">' + item.namaKegiatan + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Tanggal Terbit</div><div class="detail-value">' + formatDateIndo(item.tanggalTerbit) + '</div></div>' +
+        '<div class="detail-item col-span-full"><div class="detail-label">Link Sertifikat</div><div class="detail-value"><a href="' + (item.linkSertifikat || '#') + '" target="_blank" class="text-teal-400 hover:text-teal-300">' + (item.linkSertifikat || '-') + '</a></div></div>' +
+      '</div>';
+      
+      document.getElementById('viewSertifikatContent').innerHTML = html;
+      document.getElementById('downloadSertifikatBtn').href = item.linkSertifikat || '#';
+      
+      openLightbox('lightboxViewSertifikat');
+    }
+    
+    function editFromViewSertifikat() {
+      closeLightbox('lightboxViewSertifikat');
+      setTimeout(function() { showEditSertifikatModal(currentViewId); }, 300);
+    }
+    
+    async function submitSertifikatForm(e) {
+      e.preventDefault();
+      showLoading(true);
+      
+      try {
+        var data = {
+          nomor_sertifikat: document.getElementById('sertifikatNomor').value,
+          nama_lengkap: document.getElementById('sertifikatNama').value,
+          nik: document.getElementById('sertifikatNIK').value,
+          penyelenggara: document.getElementById('sertifikatPenyelenggara').value,
+          nama_kegiatan: document.getElementById('sertifikatKegiatan').value,
+          tanggal_terbit: document.getElementById('sertifikatTanggalTerbit').value,
+          link_sertifikat: document.getElementById('sertifikatLink').value
+        };
+        
+        if(currentEditType === 'create') {
+          var { error } = await supabase.from('sertifikat').insert(data);
+          if(error) throw error;
+          showToast('Sertifikat berhasil ditambahkan!', 'success');
+        } else {
+          var { error } = await supabase.from('sertifikat').update(data).eq('id', currentEditId);
+          if(error) throw error;
+          showToast('Sertifikat berhasil diperbarui!', 'success');
+        }
+        
+        closeLightbox('lightboxSertifikat');
+        loadAdminSertifikat();
+      } catch(err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+      showLoading(false);
+    }
+    
+    function confirmDeleteSertifikat(id) {
+      var item = allSertifikat.find(function(s) { return s.id == id; });
+      if(!item) return;
+      
+      deleteCallback = async function() {
+        showLoading(true);
+        try {
+          var { error } = await supabase.from('sertifikat').delete().eq('id', id);
+          if(error) throw error;
+          showToast('Sertifikat berhasil dihapus!', 'success');
+          loadAdminSertifikat();
+        } catch(err) {
+          showToast('Gagal hapus: ' + err.message, 'error');
+        }
+        showLoading(false);
+      };
+      
+      document.getElementById('deleteConfirmMessage').textContent = 'Hapus data sertifikat ini?';
+      document.getElementById('deleteItemName').textContent = item.namaLengkap + ' - ' + item.namaKegiatan;
+      openLightbox('lightboxConfirmDelete');
+    }
+
+    /* ============================================
+         DELETE CONFIRMATION HANDLER
+      ============================================ */
+    
+    function confirmDeleteAction() {
+      closeLightbox('lightboxConfirmDelete');
+      if(typeof deleteCallback === 'function') {
+        deleteCallback();
+      }
+    }
+
+    /* ============================================
+         ADMIN DATA LOADING FUNCTIONS
+      ============================================ */
+    
+    async function refreshAllAdminData() {
+      showLoading(true);
+      await Promise.all([
+        loadAdminUsulan(),
+        loadAdminPengumuman(),
+        loadAdminJadwal(),
+        loadAdminSertifikat()
+      ]);
+      showLoading(false);
+      showToast('Semua data admin berhasil dimuat!', 'success');
+    }
+    
+    async function loadAdminUsulan() {
+      if (!checkSupabaseReady()) return;
+      try {
+        const { data, error } = await supabase.from('formulir_usulan')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(100);
+        
+        if(error) throw error;
+        
+        publicData.formulirAdmin = (data || []).map(row => ({
+          id: row.id,
+          nomorRegistrasi: row.nomor_registrasi,
+          namaPengusul: row.nama_pengusul,
+          nik: row.nik,
+          asalInstitusi: row.asal_institusi,
+          telpon: row.telpon,
+          namaKegiatan: row.nama_kegiatan,
+          tempatKegiatan: row.tempat_kegiatan,
+          tanggalKegiatan: row.tanggal_kegiatan,
+          waktuPelaksanaan: row.waktu_pelaksanaan,
+          jumlahPeserta: row.jumlah_peserta,
+          status: row.status,
+          catatan: row.catatan,
+          createdAt: row.created_at
+        }));
+        
+        renderAdminUsulanTable();
+      } catch(err) {
+        console.error('[DEDIKASIH] Error loadAdminUsulan:', err);
+      }
+    }
+    
+    function renderAdminUsulanTable() {
+      var tbody = document.getElementById('adminUsulanTable');
+      if(!tbody) return;
+      
+      var items = publicData.formulirAdmin;
+      
+      if(items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><i class="fa-solid fa-inbox"></i><h4>Belum ada data usulan</h4><p>Data usulan akan muncul di sini</p></td></tr>';
+        return;
+      }
+      
+      tbody.innerHTML = items.map(function(item, idx) {
+        var statusClass = item.status === 'Disetujui' ? 'status-approved' : 
+                         item.status === 'Ditolak' ? 'status-rejected' : 'status-pending';
+        
+        return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
+          '<td class="px-4 py-3 font-mono text-xs text-teal-400">' + (item.nomorRegistrasi || '-') + '</td>' +
+          '<td class="px-4 py-3 font-medium">' + item.namaPengusul + '</td>' +
+          '<td class="px-4 py-3 max-w-[200px] truncate">' + item.namaKegiatan + '</td>' +
+          '<td class="px-4 py-3 text-xs text-slate-400">' + formatDateIndo(item.tanggalKegiatan) + '</td>' +
+          '<td class="px-4 py-3"><span class="status-badge ' + statusClass + '">' + item.status + '</span></td>' +
+          '<td class="px-4 py-3"><div class="action-cell">' +
+            '<button onclick="viewUsulanDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat Detail"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditUsulanModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+            '<button onclick="showUpdateStatusModal(' + item.id + ')" class="btn-crud btn-approve btn-icon" title="Update Status"><i class="fa-solid fa-arrows-rotate"></i></button>' +
+            '<button onclick="confirmDeleteUsulan(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+          '</div></td>' +
+        '</tr>';
+      }).join('');
+    }
+    
+    async function loadAdminPengumuman() {
+      if (!checkSupabaseReady()) return;
+      try {
+        const { data, error } = await supabase.from('pengumuman')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        if(error) throw error;
+        
+        publicData.pengumuman = (data || []).map(row => ({
+          id: row.id,
+          judul: row.judul,
+          isi: row.isi,
+          tanggal: row.tanggal,
+          createdAt: row.created_at
+        }));
+        
+        renderAdminPengumumanTable();
+      } catch(err) {
+        console.error('[DEDIKASIH] Error loadAdminPengumuman:', err);
+      }
+    }
+    
+    function renderAdminPengumumanTable() {
+      var tbody = document.getElementById('adminPengumumanTable');
+      if(!tbody) return;
+      
+      var items = publicData.pengumuman;
+      
+      if(items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" class="empty-state"><i class="fa-solid fa-bullhorn"></i><h4>Belum ada pengumuman</h4><p>Buat pengumuman baru untuk memulai</p></td></tr>';
+        return;
+      }
+      
+      tbody.innerHTML = items.map(function(item, idx) {
+        return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
+          '<td class="px-4 py-3 font-medium">' + item.judul + '</td>' +
+          '<td class="px-4 py-3 text-xs text-slate-400">' + formatDateIndo(item.tanggal) + '</td>' +
+          '<td class="px-4 py-3"><div class="action-cell">' +
+            '<button onclick="viewPengumumanDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditPengumumanModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+            '<button onclick="confirmDeletePengumuman(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+          '</div></td>' +
+        '</tr>';
+      }).join('');
+    }
+    
+    async function loadAdminJadwal() {
+      if (!checkSupabaseReady()) return;
+      try {
+        const { data, error } = await supabase.from('jadwal_kegiatan')
+          .select('*')
+          .order('tanggal', { ascending: true });
+        
+        if(error) throw error;
+        
+        publicData.jadwal = (data || []).map(row => ({
+          id: row.id,
+          namaKegiatan: row.nama_kegiatan,
+          tempat: row.tempat,
+          tanggal: row.tanggal,
+          waktu: row.waktu,
+          pic: row.pic,
+          keterangan: row.keterangan
+        }));
+        
+        renderAdminJadwalTable();
+      } catch(err) {
+        console.error('[DEDIKASIH] Error loadAdminJadwal:', err);
+      }
+    }
+    
+    function renderAdminJadwalTable() {
+      var container = document.getElementById('adminJadwalTable');
+      if(!container) return;
+      
+      var items = publicData.jadwal;
+      
+      if(items.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-calendar-xmark"></i><h4>Belum ada jadwal</h4><p>Tambahkan jadwal kegiatan baru</p></div>';
+        return;
+      }
+      
+      container.innerHTML = '<div class="table-responsive"><table class="premium-table text-sm">' +
+        '<thead><tr>' +
+          '<th class="px-4 py-3">Kegiatan</th>' +
+          '<th class="px-4 py-3">Tempat</th>' +
+          '<th class="px-4 py-3">Tanggal</th>' +
+          '<th class="px-4 py-3">Waktu</th>' +
+          '<th class="px-4 py-3">PIC</th>' +
+          '<th class="px-4 py-3 text-right">Aksi</th>' +
+        '</tr></thead>' +
+        '<tbody>' + items.map(function(item, idx) {
+          return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
+            '<td class="px-4 py-3 font-medium">' + item.namaKegiatan + '</td>' +
+            '<td class="px-4 py-3 text-slate-400">' + (item.tempat || '-') + '</td>' +
+            '<td class="px-4 py-3 text-xs">' + formatDateIndo(item.tanggal) + '</td>' +
+            '<td class="px-4 py-3 text-xs">' + (item.waktu || '-') + '</td>' +
+            '<td class="px-4 py-3 text-xs">' + (item.pic || '-') + '</td>' +
+            '<td class="px-4 py-3"><div class="action-cell">' +
+              '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+              '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+              '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+            '</div></td>' +
+          '</tr>';
+        }).join('') + '</tbody></table></div>';
+    }
+    
+    async function loadAdminSertifikat() {
+      if (!checkSupabaseReady()) return;
+      try {
+        var result = await getAllSertifikat();
+        if(result.success) {
+          allSertifikat = result.data;
+          renderAdminSertifikatTable();
+        }
+      } catch(err) {
+        console.error('[DEDIKASIH] Error loadAdminSertifikat:', err);
+      }
+    }
+    
+    function renderAdminSertifikatTable() {
+      var container = document.getElementById('adminSertifikatTable');
+      if(!container) return;
+      
+      var items = allSertifikat;
+      
+      if(items.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-certificate"></i><h4>Belum ada sertifikat</h4><p>Tambahkan data sertifikat digital</p></div>';
+        return;
+      }
+      
+      container.innerHTML = '<div class="table-responsive"><table class="premium-table text-sm">' +
+        '<thead><tr>' +
+          '<th class="px-4 py-3">No. Sertifikat</th>' +
+          '<th class="px-4 py-3">Nama</th>' +
+          '<th class="px-4 py-3">Kegiatan</th>' +
+          '<th class="px-4 py-3">Tanggal Terbit</th>' +
+          '<th class="px-4 py-3 text-right">Aksi</th>' +
+        '</tr></thead>' +
+        '<tbody>' + items.map(function(item, idx) {
+          return '<tr class="admin-row-animate" style="animation-delay:' + (idx * 50) + 'ms">' +
+            '<td class="px-4 py-3 font-mono text-xs text-yellow-400">' + item.nomorSertifikat + '</td>' +
+            '<td class="px-4 py-3 font-medium">' + item.namaLengkap + '</td>' +
+            '<td class="px-4 py-3 max-w-[200px] truncate">' + item.namaKegiatan + '</td>' +
+            '<td class="px-4 py-3 text-xs">' + formatDateIndo(item.tanggalTerbit) + '</td>' +
+            '<td class="px-4 py-3"><div class="action-cell">' +
+              '<button onclick="viewSertifikatDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+              '<button onclick="showEditSertifikatModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+              '<a href="' + item.linkSertifikat + '" target="_blank" class="btn-crud btn-export btn-icon" title="Unduh"><i class="fa-solid fa-download"></i></a>' +
+              '<button onclick="confirmDeleteSertifikat(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+            '</div></td>' +
+          '</tr>';
+        }).join('') + '</tbody></table></div>';
+    }
+    
+    /* ============================================
+         SEARCH/FILTER FOR ADMIN TABLES
+      ============================================ */
+    
+    function filterAdminTable(type) {
+      var searchInput = document.getElementById('search' + type.charAt(0).toUpperCase() + type.slice(1));
+      if(!searchInput) return;
+      
+      var query = searchInput.value.toLowerCase().trim();
+      
+      // This is a simple client-side filter implementation
+      // For production, consider server-side filtering
+      switch(type) {
+        case 'usulan':
+          var filtered = publicData.formulirAdmin.filter(function(item) {
+            return !query || 
+              (item.nomorRegistrasi && item.nomorRegistrasi.toLowerCase().includes(query)) ||
+              (item.namaPengusul && item.namaPengusul.toLowerCase().includes(query)) ||
+              (item.namaKegiatan && item.namaKegiatan.toLowerCase().includes(query)) ||
+              (item.status && item.status.toLowerCase().includes(query));
+          });
+          renderFilteredUsulan(filtered);
+          break;
+        case 'pengumuman':
+          var filteredP = publicData.pengumuman.filter(function(item) {
+            return !query || 
+              (item.judul && item.judul.toLowerCase().includes(query)) ||
+              (item.isi && item.isi.toLowerCase().includes(query));
+          });
+          renderFilteredPengumuman(filteredP);
+          break;
+        case 'jadwal':
+          var filteredJ = publicData.jadwal.filter(function(item) {
+            return !query || 
+              (item.namaKegiatan && item.namaKegiatan.toLowerCase().includes(query)) ||
+              (item.tempat && item.tempat.toLowerCase().includes(query)) ||
+              (item.pic && item.pic.toLowerCase().includes(query));
+          });
+          renderFilteredJadwal(filteredJ);
+          break;
+        case 'sertifikat':
+          var filteredS = allSertifikat.filter(function(item) {
+            return !query || 
+              (item.nomorSertifikat && item.nomorSertifikat.toLowerCase().includes(query)) ||
+              (item.namaLengkap && item.namaLengkap.toLowerCase().includes(query)) ||
+              (item.namaKegiatan && item.namaKegiatan.toLowerCase().includes(query));
+          });
+          renderFilteredSertifikat(filteredS);
+          break;
+      }
+    }
+    
+    function renderFilteredUsulan(items) {
+      var tbody = document.getElementById('adminUsulanTable');
+      if(!tbody) return;
+      
+      if(items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><i class="fa-solid fa-search"></i><h4>Tidak ada hasil</h4><p>Coba gunakan kata kunci lain</p></td></tr>';
+        return;
+      }
+      
+      tbody.innerHTML = items.map(function(item) {
+        var statusClass = item.status === 'Disetujui' ? 'status-approved' : 
+                         item.status === 'Ditolak' ? 'status-rejected' : 'status-pending';
+        return '<tr class="admin-row-animate">' +
+          '<td class="px-4 py-3 font-mono text-xs text-teal-400">' + (item.nomorRegistrasi || '-') + '</td>' +
+          '<td class="px-4 py-3 font-medium">' + item.namaPengusul + '</td>' +
+          '<td class="px-4 py-3 max-w-[200px] truncate">' + item.namaKegiatan + '</td>' +
+          '<td class="px-4 py-3 text-xs text-slate-400">' + formatDateIndo(item.tanggalKegiatan) + '</td>' +
+          '<td class="px-4 py-3"><span class="status-badge ' + statusClass + '">' + item.status + '</span></td>' +
+          '<td class="px-4 py-3"><div class="action-cell">' +
+            '<button onclick="viewUsulanDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat Detail"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditUsulanModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+            '<button onclick="showUpdateStatusModal(' + item.id + ')" class="btn-crud btn-approve btn-icon" title="Update Status"><i class="fa-solid fa-arrows-rotate"></i></button>' +
+            '<button onclick="confirmDeleteUsulan(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+          '</div></td>' +
+        '</tr>';
+      }).join('');
+    }
+    
+    function renderFilteredPengumuman(items) {
+      var tbody = document.getElementById('adminPengumumanTable');
+      if(!tbody) return;
+      
+      if(items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" class="empty-state"><i class="fa-solid fa-search"></i><h4>Tidak ada hasil</h4><p>Coba gunakan kata kunci lain</p></td></tr>';
+        return;
+      }
+      
+      tbody.innerHTML = items.map(function(item) {
+        return '<tr class="admin-row-animate">' +
+          '<td class="px-4 py-3 font-medium">' + item.judul + '</td>' +
+          '<td class="px-4 py-3 text-xs text-slate-400">' + formatDateIndo(item.tanggal) + '</td>' +
+          '<td class="px-4 py-3"><div class="action-cell">' +
+            '<button onclick="viewPengumumanDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+            '<button onclick="showEditPengumumanModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+            '<button onclick="confirmDeletePengumuman(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+          '</div></td>' +
+        '</tr>';
+      }).join('');
+    }
+    
+    function renderFilteredJadwal(items) {
+      var container = document.getElementById('adminJadwalTable');
+      if(!container) return;
+      
+      if(items.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-search"></i><h4>Tidak ada hasil</h4><p>Coba gunakan kata kunci lain</p></div>';
+        return;
+      }
+      
+      container.innerHTML = '<div class="table-responsive"><table class="premium-table text-sm">' +
+        '<thead><tr>' +
+          '<th class="px-4 py-3">Kegiatan</th>' +
+          '<th class="px-4 py-3">Tempat</th>' +
+          '<th class="px-4 py-3">Tanggal</th>' +
+          '<th class="px-4 py-3">Waktu</th>' +
+          '<th class="px-4 py-3">PIC</th>' +
+          '<th class="px-4 py-3 text-right">Aksi</th>' +
+        '</tr></thead>' +
+        '<tbody>' + items.map(function(item) {
+          return '<tr class="admin-row-animate">' +
+            '<td class="px-4 py-3 font-medium">' + item.namaKegiatan + '</td>' +
+            '<td class="px-4 py-3 text-slate-400">' + (item.tempat || '-') + '</td>' +
+            '<td class="px-4 py-3 text-xs">' + formatDateIndo(item.tanggal) + '</td>' +
+            '<td class="px-4 py-3 text-xs">' + (item.waktu || '-') + '</td>' +
+            '<td class="px-4 py-3 text-xs">' + (item.pic || '-') + '</td>' +
+            '<td class="px-4 py-3"><div class="action-cell">' +
+              '<button onclick="viewJadwalDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+              '<button onclick="showEditJadwalModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+              '<button onclick="confirmDeleteJadwal(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+            '</div></td>' +
+          '</tr>';
+        }).join('') + '</tbody></table></div>';
+    }
+    
+    function renderFilteredSertifikat(items) {
+      var container = document.getElementById('adminSertifikatTable');
+      if(!container) return;
+      
+      if(items.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-search"></i><h4>Tidak ada hasil</h4><p>Coba gunakan kata kunci lain</p></div>';
+        return;
+      }
+      
+      container.innerHTML = '<div class="table-responsive"><table class="premium-table text-sm">' +
+        '<thead><tr>' +
+          '<th class="px-4 py-3">No. Sertifikat</th>' +
+          '<th class="px-4 py-3">Nama</th>' +
+          '<th class="px-4 py-3">Kegiatan</th>' +
+          '<th class="px-4 py-3">Tanggal Terbit</th>' +
+          '<th class="px-4 py-3 text-right">Aksi</th>' +
+        '</tr></thead>' +
+        '<tbody>' + items.map(function(item) {
+          return '<tr class="admin-row-animate">' +
+            '<td class="px-4 py-3 font-mono text-xs text-yellow-400">' + item.nomorSertifikat + '</td>' +
+            '<td class="px-4 py-3 font-medium">' + item.namaLengkap + '</td>' +
+            '<td class="px-4 py-3 max-w-[200px] truncate">' + item.namaKegiatan + '</td>' +
+            '<td class="px-4 py-3 text-xs">' + formatDateIndo(item.tanggalTerbit) + '</td>' +
+            '<td class="px-4 py-3"><div class="action-cell">' +
+              '<button onclick="viewSertifikatDetail(' + item.id + ')" class="btn-crud btn-view btn-icon" title="Lihat"><i class="fa-solid fa-eye"></i></button>' +
+              '<button onclick="showEditSertifikatModal(' + item.id + ')" class="btn-crud btn-edit btn-icon" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+              '<a href="' + item.linkSertifikat + '" target="_blank" class="btn-crud btn-export btn-icon" title="Unduh"><i class="fa-solid fa-download"></i></a>' +
+              '<button onclick="confirmDeleteSertifikat(' + item.id + ')" class="btn-crud btn-delete btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>' +
+            '</div></td>' +
+          '</tr>';
+        }).join('') + '</tbody></table></div>';
+    }
+
+
+/* ============================================
          FORM HANDLERS
       ============================================ */
 
