@@ -10,13 +10,13 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="DEDIKASIH">
-  <meta name="theme-color" content="#2563EB">
-  <meta name="msapplication-TileColor" content="#2563EB">
+  <meta name="theme-color" content="#0F766E">
+  <meta name="msapplication-TileColor" content="#0F766E">
   <meta name="format-detection" content="telephone=no">
   
   <!-- PWA Icons - Using inline SVG favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232563EB'/><stop offset='50%25' stop-color='%2314B8A6'/><stop offset='100%25' stop-color='%2310B981'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23fg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232563EB'/><stop offset='50%25' stop-color='%2314B8A6'/><stop offset='100%25' stop-color='%2310B981'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23fg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%230F766E'/><stop offset='50%25' stop-color='%2314B8A6'/><stop offset='100%25' stop-color='%23F59E0B'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23fg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%230F766E'/><stop offset='50%25' stop-color='%2314B8A6'/><stop offset='100%25' stop-color='%23F59E0B'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23fg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
   
   <title>DEDIKASIH v1.0 • Digitalisasi Kegiatan Pengabdian Masyarakat SDM Kesehatan</title>
   
@@ -489,14 +489,14 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
     
     :root { 
-      --primary: #2563EB; 
+      --primary: #0F766E; 
       --accent: #14B8A6; 
-      --emerald: #10B981;
-      --bg-light: #F0F9FF;
+      --emerald: #F59E0B;
+      --bg-light: #F0FDFA;
       --bg-white: #FFFFFF;
-      --text-dark: #1E293B;
-      --text-muted: #64748B;
-      --gradient-bright: linear-gradient(135deg, #2563EB 0%, #14B8A6 50%, #10B981 100%);
+      --text-dark: #134E4A;
+      --text-muted: #5F7472;
+      --gradient-elegant: linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #F59E0B 100%);
     }
     
     /* ============================================ */
@@ -520,36 +520,36 @@
     .font-display { font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; font-weight: 600; }
     
     /* ============================================ */
-    /* GLASSMORPHISM EFFECT - BRIGHT THEME */
+    /* GLASSMORPHISM EFFECT - ELEGANT TEAL */
     /* ============================================ */
     .glass {
-      background: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.8);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(37, 99, 235, 0.12);
-      box-shadow: 0 8px 32px rgba(37, 99, 235, 0.08), 0 2px 8px rgba(20, 184, 166, 0.06);
+      border: 1px solid rgba(15, 118, 110, 0.12);
+      box-shadow: 0 8px 32px rgba(15, 118, 110, 0.08), 0 2px 8px rgba(20, 184, 166, 0.06);
     }
     .dark .glass {
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.9);
       backdrop-filter: blur(24px) saturate(200%);
       -webkit-backdrop-filter: blur(24px) saturate(200%);
-      border: 1px solid rgba(37, 99, 235, 0.15);
-      box-shadow: 0 12px 40px rgba(37, 99, 235, 0.1), 0 4px 12px rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(15, 118, 110, 0.15);
+      box-shadow: 0 12px 40px rgba(15, 118, 110, 0.1), 0 4px 12px rgba(245, 158, 11, 0.08);
     }
     
     /* ============================================ */
-    /* GRADIENTS - LUMINOUS BRIGHT */
+    /* GRADIENTS - ELEGANT TEAL */
     /* ============================================ */
     .health-gradient {
-      background: linear-gradient(135deg, #2563EB 0%, #14B8A6 50%, #10B981 100%);
+      background: linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #F59E0B 100%);
     }
     
     .neon-glow {
-      box-shadow: 0 0 20px rgba(37, 99, 235, 0.25), 0 0 40px rgba(20, 184, 166, 0.15), 0 10px 10px -3px rgba(16, 185, 129, 0.08);
+      box-shadow: 0 0 20px rgba(15, 118, 110, 0.25), 0 0 40px rgba(20, 184, 166, 0.15), 0 10px 10px -3px rgba(245, 158, 11, 0.08);
     }
     
     .gradient-text {
-      background: linear-gradient(135deg, #2563EB, #14B8A6, #10B981);
+      background: linear-gradient(135deg, #0F766E, #14B8A6, #F59E0B);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -566,7 +566,7 @@
     }
     
     /* ============================================ */
-    /* NAVIGATION ITEMS - BRIGHT */
+    /* NAVIGATION ITEMS - ELEGANT TEAL */
     /* ============================================ */
     .nav-item {
       position: relative;
@@ -581,51 +581,51 @@
       white-space: nowrap;
       user-select: none;
       -webkit-user-select: none;
-      color: #475569;
+      color: #5F7472;
     }
     .nav-item:active { transform: scale(0.97); }
     .nav-item.active {
-      background: linear-gradient(90deg, rgba(37, 99, 235, 0.08), rgba(20, 184, 166, 0.06));
-      color: #2563EB;
+      background: linear-gradient(90deg, rgba(15, 118, 110, 0.08), rgba(20, 184, 166, 0.06));
+      color: #0F766E;
       font-weight: 600;
     }
     .dark .nav-item.active {
-      background: linear-gradient(90deg, rgba(37, 99, 235, 0.12), rgba(20, 184, 166, 0.08));
-      color: #2563EB;
+      background: linear-gradient(90deg, rgba(15, 118, 110, 0.12), rgba(20, 184, 166, 0.08));
+      color: #0F766E;
     }
     .nav-item:hover {
-      background: rgba(37, 99, 235, 0.04);
-      color: #2563EB;
+      background: rgba(15, 118, 110, 0.04);
+      color: #0F766E;
     }
     .nav-item::after {
       content: '';
       position: absolute;
       left: 12px; right: 12px; bottom: 0;
       height: 2px;
-      background: linear-gradient(to right, #2563EB, #14B8A6);
+      background: linear-gradient(to right, #0F766E, #14B8A6);
       transform: scaleX(0);
       transition: transform 0.2s;
     }
     .nav-item.active::after, .nav-item:hover::after { transform: scaleX(1); }
     
     /* ============================================ */
-    /* STAT CARDS - BRIGHT */
+    /* STAT CARDS - ELEGANT TEAL */
     /* ============================================ */
     .stat-card {
       transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.2s;
       cursor: pointer;
       background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(15, 118, 110, 0.08);
       border-radius: 16px;
     }
     .stat-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.15), 0 8px 20px -8px rgba(20, 184, 166, 0.12);
+      box-shadow: 0 20px 40px -10px rgba(15, 118, 110, 0.15), 0 8px 20px -8px rgba(20, 184, 166, 0.12);
     }
     .stat-card:active { transform: scale(0.98); }
     
     /* ============================================ */
-    /* TABLES - Responsive BRIGHT */
+    /* TABLES - Responsive ELEGANT TEAL */
     /* ============================================ */
     .premium-table {
       border-collapse: separate;
@@ -634,32 +634,32 @@
       min-width: 600px;
     }
     .premium-table th {
-      background: linear-gradient(180deg, #EFF6FF, #DBEAFE);
+      background: linear-gradient(180deg, #F0FDFA, #CCFBF1);
       font-weight: 600;
-      color: #1E40AF;
+      color: #0F766E;
       padding: 12px 16px;
       text-align: left;
       font-size: 13px;
       position: sticky;
       top: 0;
       z-index: 10;
-      border-bottom: 2px solid rgba(37, 99, 235, 0.1);
+      border-bottom: 2px solid rgba(15, 118, 110, 0.1);
     }
     .dark .premium-table th {
-      background: linear-gradient(180deg, #DBEAFE, #BFDBFE);
-      color: #1E3A8A;
+      background: linear-gradient(180deg, #CCFBF1, #99F6E4);
+      color: #0D9488;
     }
     .premium-table td {
       padding: 12px 16px;
       font-size: 13px;
-      border-bottom: 1px solid rgba(37, 99, 235, 0.06);
-      color: #334155;
+      border-bottom: 1px solid rgba(15, 118, 110, 0.06);
+      color: #134E4A;
     }
     .premium-table tr {
       transition: background 0.15s;
     }
     .premium-table tr:hover {
-      background: rgba(37, 99, 235, 0.03);
+      background: rgba(15, 118, 110, 0.03);
     }
     .dark .premium-table tr:hover {
       background: rgba(20, 184, 166, 0.04);
@@ -749,7 +749,7 @@
     }
     
     /* ============================================ */
-    /* FORM INPUTS - Touch Friendly BRIGHT */
+    /* FORM INPUTS - Touch Friendly ELEGANT TEAL */
     /* ============================================ */
     .form-input {
       transition: all 0.15s;
@@ -757,22 +757,22 @@
       padding: 14px 18px !important;
       min-height: 48px;
       background: rgba(255,255,255,0.9) !important;
-      border: 1px solid rgba(37, 99, 235, 0.15) !important;
-      color: #1E293B !important;
+      border: 1px solid rgba(15, 118, 110, 0.15) !important;
+      color: #134E4A !important;
       border-radius: 12px;
     }
     .form-input:focus {
       outline: none;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12), 0 4px 12px rgba(37, 99, 235, 0.08);
-      border-color: #2563EB !important;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12), 0 4px 12px rgba(15, 118, 110, 0.08);
+      border-color: #0F766E !important;
     }
     .form-input.error {
       border-color: #EF4444 !important;
       box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
     }
     .form-input.success {
-      border-color: #10B981 !important;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      border-color: #14B8A6 !important;
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
     }
     
     /* Select dropdown styling */
@@ -787,7 +787,7 @@
     }
     
     /* ============================================ */
-    /* BUTTONS - Touch Friendly BRIGHT */
+    /* BUTTONS - Touch Friendly ELEGANT TEAL */
     /* ============================================ */
     .btn {
       min-height: 48px;
@@ -809,35 +809,35 @@
     }
     .btn:active { transform: scale(0.97); }
     .btn-primary {
-      background: linear-gradient(135deg, #2563EB, #3B82F6);
+      background: linear-gradient(135deg, #0F766E, #14B8A6);
       color: white;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+      box-shadow: 0 4px 14px rgba(15, 118, 110, 0.25), inset 0 1px 0 rgba(255,255,255,0.2);
     }
     .btn-primary:hover {
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255,255,255,0.3);
+      box-shadow: 0 6px 20px rgba(15, 118, 110, 0.35), inset 0 1px 0 rgba(255,255,255,0.3);
       transform: translateY(-1px);
     }
     .btn-secondary {
       background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(37, 99, 235, 0.2);
-      color: #2563EB;
+      border: 1px solid rgba(15, 118, 110, 0.2);
+      color: #0F766E;
     }
     .btn-secondary:hover {
-      background: rgba(37, 99, 235, 0.05);
-      border-color: rgba(37, 99, 235, 0.3);
+      background: rgba(15, 118, 110, 0.05);
+      border-color: rgba(15, 118, 110, 0.3);
     }
     
     /* ============================================ */
-    /* SKELETON LOADING - BRIGHT */
+    /* SKELETON LOADING - ELEGANT TEAL */
     /* ============================================ */
     .skeleton {
-      background: linear-gradient(90deg, #E0F2FE 25%, #F0F9FF 50%, #E0F2FE 75%);
+      background: linear-gradient(90deg, #CCFBF1 25%, #F0FDFA 50%, #CCFBF1 75%);
       background-size: 200% 100%;
       animation: shimmer 1.5s infinite;
       border-radius: 8px;
     }
     .dark .skeleton {
-      background: linear-gradient(90deg, #DBEAFE 25%, #EFF6FF 50%, #DBEAFE 75%);
+      background: linear-gradient(90deg, #99F6E4 25%, #F0FDFA 50%, #99F6E4 75%);
     }
     @keyframes shimmer { 100% { background-position: -200% 0; } }
     
@@ -849,10 +849,10 @@
     .custom-scroll::-webkit-scrollbar-track { background: transparent; }
     
     /* ============================================ */
-    /* SHADOWS - BRIGHT SOFT */
+    /* SHADOWS - ELEGANT TEAL SOFT */
     /* ============================================ */
     .enterprise-shadow {
-      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.06), 0 4px 10px -4px rgba(20, 184, 166, 0.04);
+      box-shadow: 0 10px 25px -5px rgba(15, 118, 110, 0.06), 0 4px 10px -4px rgba(20, 184, 166, 0.04);
     }
 
     .metric-value {
@@ -860,18 +860,18 @@
     }
     
     /* ============================================ */
-    /* BACKGROUND - LUMINOUS GRADIENT */
+    /* BACKGROUND - ELEGANT TEAL GRADIENT */
     /* ============================================ */
     .healthcare-bg {
       background-image: 
-        radial-gradient(circle at 15% 25%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 15% 25%, rgba(15, 118, 110, 0.08) 0%, transparent 50%),
         radial-gradient(circle at 85% 75%, rgba(20, 184, 166, 0.07) 0%, transparent 55%),
-        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 60%);
-      background-color: #F8FAFC;
+        radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.05) 0%, transparent 60%);
+      background-color: #F0FDFA;
     }
 
     /* ============================================ */
-    /* ADMIN TABS - BRIGHT */
+    /* ADMIN TABS - ELEGANT TEAL */
     /* ============================================ */
     .admin-tab {
       cursor: pointer;
@@ -880,18 +880,18 @@
       font-size: 13px;
       user-select: none;
       -webkit-user-select: none;
-      color: #64748B;
+      color: #5F7472;
       border-radius: 10px;
     }
-    .admin-tab:active { background: rgba(37, 99, 235, 0.05); }
+    .admin-tab:active { background: rgba(15, 118, 110, 0.05); }
     .admin-tab.active {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(20, 184, 166, 0.08));
-      color: #2563EB;
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(20, 184, 166, 0.08));
+      color: #0F766E;
       font-weight: 600;
     }
     .admin-tab:hover:not(.active) {
-      background: rgba(37, 99, 235, 0.04);
-      color: #2563EB;
+      background: rgba(15, 118, 110, 0.04);
+      color: #0F766E;
     }
 
     /* ============================================ */
@@ -928,8 +928,8 @@
       100% { top: 100%; }
     }
     @keyframes progressPulse {
-      0%, 100% { box-shadow: 0 0 8px rgba(37, 99, 235, 0.3), 0 0 20px rgba(20, 184, 166, 0.2); }
-      50% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.5), 0 0 40px rgba(20, 184, 166, 0.3), 0 0 60px rgba(16, 185, 129, 0.2); }
+      0%, 100% { box-shadow: 0 0 8px rgba(15, 118, 110, 0.3), 0 0 20px rgba(20, 184, 166, 0.2); }
+      50% { box-shadow: 0 0 20px rgba(15, 118, 110, 0.5), 0 0 40px rgba(20, 184, 166, 0.3), 0 0 60px rgba(245, 158, 11, 0.2); }
     }
     @keyframes landingDividerExpand {
       0% { width: 0; }
@@ -944,7 +944,7 @@
     }
     #landingPage .orb-1 {
       width: 450px; height: 450px;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.05) 70%);
+      background: radial-gradient(circle, rgba(15, 118, 110, 0.2), rgba(15, 118, 110, 0.05) 70%);
       top: 10%; left: 5%;
       animation-delay: 0s;
     }
@@ -956,15 +956,15 @@
     }
     #landingPage .orb-3 {
       width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.03) 70%);
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.03) 70%);
       top: 45%; left: 55%;
       animation-delay: 3s;
     }
     #landingPage .grid-bg {
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+        linear-gradient(rgba(15, 118, 110, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 118, 110, 0.04) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
       -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
@@ -973,7 +973,7 @@
       position: absolute;
       left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), rgba(20, 184, 166, 0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(15, 118, 110, 0.2), rgba(20, 184, 166, 0.2), transparent);
       animation: scanline 3s linear infinite;
     }
     #landingPage .logo-ring {
@@ -987,7 +987,7 @@
       position: absolute;
       inset: -8px;
       border-radius: 50%;
-      border: 2px solid rgba(37, 99, 235, 0.25);
+      border: 2px solid rgba(15, 118, 110, 0.25);
       animation: pulseGlow 3s ease-in-out infinite;
     }
     #landingPage .logo-ring::after {
@@ -1006,7 +1006,7 @@
     }
     #landingPage .landing-progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, #2563EB, #14B8A6, #10B981);
+      background: linear-gradient(90deg, #0F766E, #14B8A6, #F59E0B);
       background-size: 200% 100%;
       border-radius: 9999px;
       animation: progressPulse 1.5s ease-in-out infinite;
@@ -1016,13 +1016,13 @@
     #landingPage .hex-badge {
       position: absolute;
       width: 40px; height: 40px;
-      border: 1px solid rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(15, 118, 110, 0.12);
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       animation: float 5s ease-in-out infinite;
     }
     
     /* ============================================ */
-    /* MOBILE HAMBURGER MENU - BRIGHT */
+    /* MOBILE HAMBURGER MENU - ELEGANT TEAL */
     /* ============================================ */
     .hamburger-btn {
       display: none;
@@ -1032,12 +1032,12 @@
       justify-content: center;
       border-radius: 12px;
       background: rgba(255,255,255,0.95);
-      border: 1px solid rgba(37, 99, 235, 0.15);
-      color: #2563EB;
+      border: 1px solid rgba(15, 118, 110, 0.15);
+      color: #0F766E;
       cursor: pointer;
       z-index: 150;
       transition: all 0.2s;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+      box-shadow: 0 4px 12px rgba(15, 118, 110, 0.08);
     }
     .hamburger-btn:active { transform: scale(0.95); }
     .hamburger-line {
@@ -1175,16 +1175,16 @@
       }
     }
     
-    /* High contrast mode - BRIGHT */
+    /* High contrast mode - ELEGANT TEAL */
     @media (prefers-contrast: high) {
-      .glass { background: white; border: 2px solid #2563EB; }
-      .dark .glass { background: white; border: 2px solid #2563EB; }
+      .glass { background: white; border: 2px solid #0F766E; }
+      .dark .glass { background: white; border: 2px solid #0F766E; }
       .nav-item { border: 1px solid transparent; }
-      .nav-item.active { border-color: #2563EB; color: #1E3A8A; font-weight: 700; }
+      .nav-item.active { border-color: #0F766E; color: #0D9488; font-weight: 700; }
     }
   
     /* ============================================
-       CRUD BUTTONS - Colorful & Attractive
+       CRUD BUTTONS - Elegant Teal Theme
        ============================================ */
     
     .btn-crud {
@@ -1215,31 +1215,31 @@
     }
     .btn-crud:hover::before { left: 100%; }
     
-    /* CREATE - Emerald Green */
+    /* CREATE - Elegant Teal */
     .btn-create {
-      background: linear-gradient(135deg, #059669, #10b981);
+      background: linear-gradient(135deg, #0F766E, #14B8A6);
       color: white;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+      box-shadow: 0 4px 14px rgba(15, 118, 110, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
     }
     .btn-create:hover {
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+      box-shadow: 0 6px 20px rgba(15, 118, 110, 0.45), inset 0 1px 0 rgba(255,255,255,0.3);
       transform: translateY(-2px);
     }
     
-    /* READ/VIEW - Blue Indigo */
+    /* READ/VIEW - Soft Teal */
     .btn-view {
-      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      background: linear-gradient(135deg, #14B8A6, #2DD4BF);
       color: white;
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+      box-shadow: 0 4px 14px rgba(20, 184, 166, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
     }
     .btn-view:hover {
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+      box-shadow: 0 6px 20px rgba(20, 184, 166, 0.45), inset 0 1px 0 rgba(255,255,255,0.3);
       transform: translateY(-2px);
     }
     
-    /* UPDATE/EDIT - Amber Orange */
+    /* UPDATE/EDIT - Amber Gold */
     .btn-edit {
-      background: linear-gradient(135deg, #d97706, #f59e0b);
+      background: linear-gradient(135deg, #D97706, #F59E0B);
       color: white;
       box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
     }
@@ -1248,9 +1248,9 @@
       transform: translateY(-2px);
     }
     
-    /* DELETE - Rose Red */
+    /* DELETE - Rose Red (keep as accent) */
     .btn-delete {
-      background: linear-gradient(135deg, #e11d48, #f43f5e);
+      background: linear-gradient(135deg, #E11D48, #F43F5E);
       color: white;
       box-shadow: 0 4px 14px rgba(244, 63, 94, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
     }
@@ -1259,9 +1259,9 @@
       transform: translateY(-2px);
     }
     
-    /* APPROVE - Teal */
+    /* APPROVE - Deep Teal */
     .btn-approve {
-      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      background: linear-gradient(135deg, #0D9488, #14B8A6);
       color: white;
       box-shadow: 0 4px 14px rgba(20, 184, 166, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
     }
@@ -1269,9 +1269,9 @@
       box-shadow: 0 6px 20px rgba(20, 184, 166, 0.45), transform: translateY(-2px);
     }
     
-    /* REJECT - Slate */
+    /* REJECT - Slate (neutral) */
     .btn-reject {
-      background: linear-gradient(135deg, #475569, #64748b);
+      background: linear-gradient(135deg, #475569, #64748B);
       color: white;
       box-shadow: 0 4px 14px rgba(100, 116, 139, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
     }
@@ -1279,14 +1279,14 @@
       box-shadow: 0 6px 20px rgba(100, 116, 139, 0.45), transform: translateY(-2px);
     }
     
-    /* EXPORT - Purple */
+    /* EXPORT - Warm Amber-Teal */
     .btn-export {
-      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      background: linear-gradient(135deg, #0F766E, #F59E0B);
       color: white;
-      box-shadow: 0 4px 14px rgba(167, 139, 250, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
     }
     .btn-export:hover {
-      box-shadow: 0 6px 20px rgba(167, 139, 250, 0.45), transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45), transform: translateY(-2px);
     }
     
     /* Small variant */
@@ -2530,10 +2530,10 @@
 </style>
 </head>
 
-<body class="bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/20 text-slate-800" id="mainBody">
+<body class="bg-gradient-to-br from-teal-50/80 via-cyan-50/40 to-amber-50/30 text-teal-900" id="mainBody">
 
   <!-- ===== LANDING PAGE (3 DETIK) - BRIGHT LUMINOUS ===== -->
-  <div id="landingPage" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #EFF6FF 0%, #F0FDFA 40%, #ECFDF5 70%, #F0F9FF 100%);">
+  <div id="landingPage" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 30%, #FEF3C7 70%, #F0FDFA 100%);">
 
     <!-- Background effects -->
     <div class="orb orb-1"></div>
@@ -2617,14 +2617,14 @@
   <div class="flex min-h-screen pt-16 lg:pt-0">
 
     <!-- ===== SIDEBAR - BRIGHT ===== -->
-    <aside id="sidebar" class="sidebar fixed lg:sticky top-0 left-0 z-50 h-screen w-72 lg:w-64 xl:w-72 bg-white/95 lg:bg-white border-r border-blue-100/50 flex flex-col -translate-x-full lg:translate-x-0 shadow-lg shadow-blue-900/5">
+    <aside id="sidebar" class="sidebar fixed lg:sticky top-0 left-0 z-50 h-screen w-72 lg:w-64 xl:w-72 bg-white/95 lg:bg-white border-r border-teal-100/50 flex flex-col -translate-x-full lg:translate-x-0 shadow-lg shadow-teal-900/5">
       
       <!-- Sidebar Header -->
-      <div class="p-4 lg:p-6 border-b border-blue-100/50 hidden lg:flex flex-col items-center text-center">
+      <div class="p-4 lg:p-6 border-b border-teal-100/50 hidden lg:flex flex-col items-center text-center">
         <img src="logo_dedikasih.png" 
              alt="Logo Dinas Kesehatan Kab. Kutai Kartanegara"
-             class="w-16 h-16 rounded-full object-contain bg-white p-1 shadow-lg mb-3 border-2 border-blue-400/30"
-             onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22sg%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%232563EB%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%2310B981%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23sg)%22/><text x=%2250%22 y=%2265%22 font-size=%2238%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
+             class="w-16 h-16 rounded-full object-contain bg-white p-1 shadow-lg mb-3 border-2 border-teal-400/30"
+             onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22sg%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%230F766E%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%23F59E0B%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23sg)%22/><text x=%2250%22 y=%2265%22 font-size=%2238%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
         <h2 class="font-display text-base gradient-text">DEDIKASIH</h2>
         <p class="text-[10px] text-slate-500 mt-1">v1.0 • Dinkes Kab. Kukar</p>
       </div>
@@ -3859,7 +3859,7 @@
             <input type="text" id="sertifikatKegiatan" class="lightbox-input" placeholder="Nama kegiatan" required>
           </div>
           <div class="lightbox-form-group">
-            <label class="lightbox-label"><i class="fa-solid fa-calendar-days mr-1"></i>Tanggal Pelaksana</label>
+            <label class="lightbox-label"><i class="fa-solid fa-calendar-days mr-1"></i>Tanggal Pelaksanaan</label>
             <input type="date" id="sertifikatTanggalPelaksana" class="lightbox-input">
           </div>
         </div>
@@ -5103,7 +5103,7 @@ function renderSertifikatTable() {
       document.getElementById('sertifikatNIK').value = item.nik || '';
       document.getElementById('sertifikatPenyelenggara').value = item.penyelenggara || '';
       document.getElementById('sertifikatKegiatan').value = item.namaKegiatan || '';
-      document.getElementById('sertifikatTanggalPelaksana').value = formatDateISO(item.tanggalPelaksana);
+      document.getElementById('sertifikatTanggalPelaksana').value = formatDateISO(item.tanggalPelaksanaan);
       document.getElementById('sertifikatTanggalTerbit').value = formatDateISO(item.tanggalTerbit);
       document.getElementById('sertifikatLink').value = item.linkSertifikat || '';
       
@@ -5125,7 +5125,7 @@ function renderSertifikatTable() {
         '<div class="detail-item"><div class="detail-label">NIK</div><div class="detail-value font-mono">' + (item.nik || '-') + '</div></div>' +
         '<div class="detail-item"><div class="detail-label">Penyelenggara</div><div class="detail-value">' + (item.penyelenggara || '-') + '</div></div>' +
         '<div class="detail-item"><div class="detail-label">Nama Kegiatan</div><div class="detail-value">' + item.namaKegiatan + '</div></div>' +
-        '<div class="detail-item"><div class="detail-label">Tanggal Pelaksana</div><div class="detail-value">' + (item.tanggalPelaksana ? formatDateIndo(item.tanggalPelaksana) : '<span class="text-slate-500">-</span>') + '</div></div>' +
+        '<div class="detail-item"><div class="detail-label">Tanggal Pelaksanaan</div><div class="detail-value">' + (item.tanggalPelaksanaan ? formatDateIndo(item.tanggalPelaksanaan) : '<span class="text-slate-500">-</span>') + '</div></div>' +
         '<div class="detail-item"><div class="detail-label">Tanggal Terbit</div><div class="detail-value">' + formatDateIndo(item.tanggalTerbit) + '</div></div>' +
         '<div class="detail-item col-span-full"><div class="detail-label">Link Sertifikat</div><div class="detail-value"><a href="' + (item.linkSertifikat || '#') + '" target="_blank" class="text-teal-400 hover:text-teal-300">' + (item.linkSertifikat || '-') + '</a></div></div>' +
       '</div>';
