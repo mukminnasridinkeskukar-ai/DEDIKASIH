@@ -286,7 +286,18 @@
           printHtml += content;
           printHtml += '<div class="footer"><p>Dokumen ini dicetak dari sistem DEDIKASIH</p><p>&copy; 2026 Dinas Kesehatan Kabupaten Kutai Kartanegara</p></div>';
           printHtml += '<' + 'script>window.onload=function(){window.print()}<' + '/script>';
-    
+          
+          // Open print window
+          var printWindow = window.open("", "_blank");
+          if (printWindow) {
+            printWindow.document.write(printHtml);
+            printWindow.document.close();
+            printWindow.focus();
+          } else {
+            showToast("Popup diblokir! Izinkan popup untuk fitur print.", "warning");
+          }
+        }
+
     /* ============================================
          RENDER STATUS RESULT DENGAN TOMBOL PERBAIKI
       ============================================ */
@@ -732,16 +743,6 @@
 
     console.log('[DEDIKASIH] ✅ Fitur Cek Status & Perbaikan Formulir berhasil dimuat!');
 
-          // Open print window
-          var printWindow = window.open("", "_blank");
-          if (printWindow) {
-            printWindow.document.write(printHtml);
-            printWindow.document.close();
-            printWindow.focus();
-          } else {
-            showToast("Popup diblokir! Izinkan popup untuk fitur print.", "warning");
-          }
-        }
     function generatePrintContent(type, data) {
       var html = '<table>';
       
@@ -2999,7 +3000,7 @@
 
       <!-- Logo Dinas Kesehatan Kab. Kutai Kartanegara -->
       <div class="logo-ring mb-6 sm:mb-8" style="animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;">
-        <img src="logo_dedikasih.png" 
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233a7070'/><stop offset='50%' stop-color='%2314B8A6'/><stop offset='100%' stop-color='%2310B981'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='url(%23lg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-weight='bold'>D</text></svg>" 
              alt="Logo Dinas Kesehatan Kabupaten Kutai Kartanegara"
              class="w-20 h-20 sm:w-28 sm:h-28 rounded-full object-contain bg-white p-1.5 shadow-[0_8px_32px_rgba(58,112,112,0.2),0_4px_12px_rgba(20,184,166,0.15)] border-2 border-teal-600/30"
              onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22lg%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%233a7070%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%2310B981%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23lg)%22/><text x=%2250%22 y=%2265%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
@@ -3047,7 +3048,7 @@
       <span class="hamburger-line"></span>
     </button>
     <div class="flex items-center gap-3">
-      <img src="logo_dedikasih.png" 
+      <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233a7070'/><stop offset='50%' stop-color='%2314B8A6'/><stop offset='100%' stop-color='%2310B981'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='url(%23lg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-weight='bold'>D</text></svg>" 
            alt="Logo Dinkes Kukar" 
            class="w-8 h-8 rounded-full object-contain bg-white p-0.5 border border-teal-600/30 shadow-sm"
            onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22mh%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%233a7070%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%2310B981%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23mh)%22/><text x=%2250%22 y=%2265%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
@@ -3066,7 +3067,7 @@
       
       <!-- Sidebar Header -->
       <div class="p-4 lg:p-6 border-b border-teal-100/50 hidden lg:flex flex-col items-center text-center">
-        <img src="logo_dedikasih.png" 
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233a7070'/><stop offset='50%' stop-color='%2314B8A6'/><stop offset='100%' stop-color='%2310B981'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='url(%23lg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-weight='bold'>D</text></svg>" 
              alt="Logo Dinas Kesehatan Kab. Kutai Kartanegara"
              class="w-16 h-16 rounded-full object-contain bg-white p-1 shadow-lg mb-3 border-2 border-teal-400/30"
              onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22sg%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%230F766E%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%23F59E0B%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23sg)%22/><text x=%2250%22 y=%2265%22 font-size=%2238%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
@@ -4766,12 +4767,15 @@
           }
         }
         
-        const { data, error } = await queryBuilder.maybeSingle();
+        const { data: rawData, error } = await queryBuilder.limit(1);
         
         if (error) {
           console.error('[DEDIKASIH] Supabase error:', error);
           throw error;
         }
+        
+        // Handle data - could be array or single object
+        var data = Array.isArray(rawData) ? (rawData.length > 0 ? rawData[0] : null) : rawData;
         
         if (!data) {
           return { 
