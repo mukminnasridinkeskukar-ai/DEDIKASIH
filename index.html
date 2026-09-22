@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
   <meta charset="UTF-8">
   
@@ -11,8 +11,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="DEDIKASIH">
-  <meta name="theme-color" content="#3a7070">
-  <meta name="msapplication-TileColor" content="#3a7070">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="msapplication-TileColor" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
   
   <!-- PWA Icons - Using inline SVG favicon -->
@@ -45,10 +45,10 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="bg-gradient-to-br from-teal-50/80 via-cyan-50/40 to-amber-50/30 text-teal-900" id="mainBody">
+<body class="bg-slate-950 text-slate-200 dark" id="mainBody">
 
   <!-- ===== LANDING PAGE (3 DETIK) - BRIGHT LUMINOUS ===== -->
-  <div id="landingPage" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #eae8e4 0%, #e8e4dc 30%, rgba(160, 120, 24, 0.15) 70%, #eae8e4 100%);">
+  <div id="landingPage" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #0a0f1a 0%, #0d1626 35%, rgba(20, 58, 58, 0.35) 65%, #0a0f1a 100%);">
 
     <!-- Background effects -->
     <div class="orb orb-1"></div>
@@ -79,11 +79,11 @@
       <h1 class="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 tracking-tight"
           style="animation: titleReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;">
         <span class="gradient-text">DEDIKASIH</span>
-        <span class="text-sm sm:text-base ml-2 text-slate-500 font-normal">v1.0</span>
+        <span class="text-sm sm:text-base ml-2 text-slate-400 font-normal">v1.0</span>
       </h1>
 
       <!-- Subtitle -->
-      <p class="text-xs sm:text-sm md:text-base text-slate-600 max-w-md mx-auto leading-relaxed mb-6 sm:mb-8"
+      <p class="text-xs sm:text-sm md:text-base text-slate-300 max-w-md mx-auto leading-relaxed mb-6 sm:mb-8"
          style="animation: subtitleFade 0.6s ease 1s both;">
         Digitalisasi Kegiatan Pengabdian Masyarakat<br class="hidden sm:block">SDM Kesehatan<br class="hidden sm:block">Dinas Kesehatan Kabupaten Kutai Kartanegara
       </p>
@@ -94,7 +94,7 @@
 
       <!-- Loading indicator -->
       <div class="space-y-3" style="animation: subtitleFade 0.5s ease 1.5s both;">
-        <p class="text-xs text-slate-500">Memuat platform...</p>
+        <p class="text-xs text-slate-400">Memuat platform...</p>
         <div class="landing-progress-track w-48 sm:w-56 mx-auto">
           <div class="landing-progress-bar" id="landingProgress"></div>
         </div>
@@ -637,7 +637,7 @@
 
             <div class="space-y-4">
               <a href="#" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 hover:bg-slate-800/50 transition-colors">
-                <div class="w-12 h-12 rounded-xl bg-slate-1000/10 flex items-center justify-center">
+                <div class="w-12 h-12 rounded-xl bg-slate-500/10 flex items-center justify-center">
                   <i class="fa-solid fa-location-dot text-teal-600"></i>
                 </div>
                 <div>
