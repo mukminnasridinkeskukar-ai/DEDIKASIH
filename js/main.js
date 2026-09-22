@@ -125,7 +125,7 @@
         var s = (status || 'aktif').toLowerCase();
         var colors = {
           'aktif': 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
-          'nonaktif': 'bg-slate-500/20 text-slate-400 border-slate-500/30',
+          'nonaktif': 'bg-slate-100 text-slate-600 border-slate-200',
           'draft': 'bg-amber-500/20 text-amber-400 border-amber-500/30'
         };
         var cls = colors[s] || colors['aktif'];
@@ -189,9 +189,9 @@
       function getJadwalStatusBadge(status, id) {
         var s = (status || 'terjadwal').toLowerCase();
         var colors = {
-          'terjadwal': 'bg-slate-1000/20 text-teal-600 border-teal-700/30',
+          'terjadwal': 'bg-teal-600/10 text-teal-700 border-teal-600/20',
           'berlangsung': 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
-          'selesai': 'bg-slate-500/20 text-slate-400 border-slate-500/30',
+          'selesai': 'bg-slate-100 text-slate-600 border-slate-200',
           'dibatalkan': 'bg-red-500/20 text-red-400 border-red-500/30'
         };
         var cls = colors[s] || colors['terjadwal'];
@@ -800,10 +800,10 @@
     
     // Color mapping for stats
     var statColors = {
-      teal: { bg: 'bg-teal-500/10', text: 'text-teal-400', gradient: 'from-teal-500 to-emerald-500' },
-      amber: { bg: 'bg-amber-500/10', text: 'text-amber-400', gradient: 'from-amber-500 to-orange-500' },
-      emerald: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', gradient: 'from-emerald-500 to-green-500' },
-      red: { bg: 'bg-red-500/10', text: 'text-red-400', gradient: 'from-red-500 to-rose-500' }
+      teal: { bg: 'bg-teal-500/10', text: 'text-teal-600', gradient: 'from-teal-500 to-emerald-500' },
+      amber: { bg: 'bg-amber-500/10', text: 'text-amber-600', gradient: 'from-amber-500 to-orange-500' },
+      emerald: { bg: 'bg-emerald-500/10', text: 'text-emerald-600', gradient: 'from-emerald-500 to-green-500' },
+      red: { bg: 'bg-red-500/10', text: 'text-red-600', gradient: 'from-red-500 to-rose-500' }
     };
     
     // Source data configuration (NON-SENSITIVE only)
@@ -939,26 +939,36 @@
       initTailwind();
       initFormHelpers();
       
-      // Load saved theme - apply correctly based on saved preference
+      // Load saved theme — DEFAULT: TERANG (Healthcare Government Premium UI).
+      // Mode gelap hanya aktif bila user pernah memilihnya (dedikasi_dark = '1').
       var savedTheme = localStorage.getItem('dedikasi_dark');
       var html = document.documentElement;
       var body = document.getElementById('mainBody');
-      
-      if(savedTheme === '0') {
-        // User prefers LIGHT mode - remove dark classes
-        html.classList.remove('dark');
+
+      if(savedTheme === '1') {
+        // User prefers DARK mode — healthcare dark identity
+        html.classList.add('dark');
         if(body) {
-          body.classList.remove('bg-slate-950', 'text-slate-200', 'dark');
-          body.classList.add('bg-gradient-to-br', 'from-slate-100', 'to-slate-200', 'text-slate-800');
+          body.classList.remove('bg-slate-50', 'text-slate-600');
+          body.classList.add('bg-slate-950', 'text-slate-200');
         }
         var icon = document.getElementById('themeIcon');
         var iconMobile = document.getElementById('themeIconMobile');
-        if(icon) icon.className = 'fa-solid fa-sun text-amber-500';
-        if(iconMobile) iconMobile.className = 'fa-solid fa-sun text-amber-500';
-        console.log('[DEDIKASIH] Theme initialized: Light');
-      } else {
-        // Default DARK mode
+        if(icon) icon.className = 'fa-solid fa-moon text-teal-300';
+        if(iconMobile) iconMobile.className = 'fa-solid fa-moon text-teal-300';
         console.log('[DEDIKASIH] Theme initialized: Dark');
+      } else {
+        // Default LIGHT mode (premium healthcare terang)
+        html.classList.remove('dark');
+        if(body) {
+          body.classList.remove('bg-slate-950', 'text-slate-200', 'dark');
+          body.classList.add('bg-slate-50', 'text-slate-600');
+        }
+        var icon = document.getElementById('themeIcon');
+        var iconMobile = document.getElementById('themeIconMobile');
+        if(icon) icon.className = 'fa-solid fa-sun text-teal-600';
+        if(iconMobile) iconMobile.className = 'fa-solid fa-sun text-teal-600';
+        console.log('[DEDIKASIH] Theme initialized: Light');
       }
       
       // Connect to Supabase

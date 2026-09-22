@@ -114,29 +114,36 @@
       var body = document.getElementById('mainBody');
       var icon = document.getElementById('themeIcon');
       var iconMobile = document.getElementById('themeIconMobile');
-      
+
       if(html.classList.contains('dark')) {
-        // Switch to LIGHT mode
+        // Switch to LIGHT mode (default premium healthcare)
         html.classList.remove('dark');
         if(body) {
-          body.classList.remove('bg-slate-950', 'text-slate-200', 'dark');
-          body.classList.add('bg-gradient-to-br', 'from-slate-100', 'to-slate-200', 'text-slate-800');
+          body.classList.remove('bg-slate-950', 'text-slate-200');
+          body.classList.add('bg-slate-50', 'text-slate-600');
         }
-        if(icon) icon.className = 'fa-solid fa-sun text-amber-500';
-        if(iconMobile) iconMobile.className = 'fa-solid fa-sun text-amber-500';
+        if(icon) icon.className = 'fa-solid fa-sun text-teal-600';
+        if(iconMobile) iconMobile.className = 'fa-solid fa-sun text-teal-600';
         localStorage.setItem('dedikasi_dark','0');
         console.log('[DEDIKASIH] Theme: Light');
       } else {
-        // Switch to DARK mode
+        // Switch to DARK mode (healthcare dark identity)
         html.classList.add('dark');
         if(body) {
-          body.classList.remove('bg-gradient-to-br', 'from-slate-100', 'to-slate-200', 'text-slate-800');
-          body.classList.add('bg-slate-950', 'text-slate-200', 'dark');
+          body.classList.remove('bg-slate-50', 'text-slate-600');
+          body.classList.add('bg-slate-950', 'text-slate-200');
         }
-        if(icon) icon.className = 'fa-solid fa-moon text-teal-400';
-        if(iconMobile) iconMobile.className = 'fa-solid fa-moon text-teal-400';
+        if(icon) icon.className = 'fa-solid fa-moon text-teal-300';
+        if(iconMobile) iconMobile.className = 'fa-solid fa-moon text-teal-300';
         localStorage.setItem('dedikasi_dark','1');
         console.log('[DEDIKASIH] Theme: Dark');
+      }
+      // Samakan warna teks chart dengan tema aktif
+      if(typeof statusChartInstance !== 'undefined' && statusChartInstance) {
+        try {
+          statusChartInstance.options.plugins.legend.labels.color = getChartTextColor();
+          statusChartInstance.update();
+        } catch(e) {}
       }
     }
 
@@ -147,7 +154,7 @@
     
     function showToast(msg,type) {
       type = type || 'info';
-      var colors = {success:'bg-emerald-500',error:'bg-red-500',info:'bg-teal-500',warning:'bg-amber-500'};
+      var colors = {success:'bg-emerald-500',error:'bg-red-500',info:'bg-blue-500',warning:'bg-amber-500'};
       var icons = {success:'check-circle',error:'circle-xmark',info:'info-circle',warning:'triangle-exclamation'};
       var c = document.getElementById('toastContainer');
       var t = document.createElement('div');
@@ -389,6 +396,10 @@
       showLoading(false);
     }
 
+    function getChartTextColor() {
+      return document.documentElement.classList.contains('dark') ? '#CBD5E1' : '#475569';
+    }
+
     function updateStatusChart(stats) {
       var ctx = document.getElementById('statusChart');
       if(!ctx) return;
@@ -399,7 +410,7 @@
           labels: ['Menunggu', 'Disetujui', 'Ditolak'],
           datasets: [{
             data: [stats.menunggu, stats.disetujui, stats.ditolak],
-            backgroundColor: ['#f59e0b', '#10b981', '#ef4444'],
+            backgroundColor: ['#F59E0B', '#16A34A', '#DC2626'],
             borderWidth: 0,
             hoverOffset: 8
           }]
@@ -411,7 +422,7 @@
           plugins: {
             legend: {
               position: 'bottom',
-              labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 12, family: "'Inter', sans-serif" } }
+              labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', color: getChartTextColor(), font: { size: 12, family: "'Inter', sans-serif" } }
             }
           }
         }
@@ -425,7 +436,7 @@
       if(result.success && result.data.length > 0) {
         container.innerHTML = result.data.map(function(u) {
           var badgeClass = u.status === 'Disetujui' ? 'badge-disetujui' : u.status === 'Ditolak' ? 'badge-ditolak' : 'badge-menunggu';
-          return '<div class="flex items-center justify-between p-3 rounded-xl bg-slate-800/30 hover:bg-slate-800/50 transition-colors cursor-pointer" onclick="navigateTo(\'formulir\')">'+
+          return '<div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-teal-50/70 transition-colors cursor-pointer" onclick="navigateTo(\'formulir\')">'+
             '<div class="min-w-0 flex-1">'+
               '<p class="font-medium text-sm truncate">'+u.namaPengusul+'</p>'+
               '<p class="text-xs text-slate-400 truncate">'+u.namaKegiatan+'</p>'+
@@ -449,7 +460,7 @@
               '<h3 class="font-semibold text-base sm:text-lg">'+p.judul+'</h3>'+
               '<span class="text-xs text-slate-500 whitespace-nowrap">'+formatDateIndo(p.tanggal)+'</span>'+
             '</div>'+
-            '<p class="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">'+p.isi+'</p>'+
+            '<p class="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap">'+p.isi+'</p>'+
           '</article>';
         }).join('');
       } else {

@@ -223,31 +223,31 @@
           
           <!-- Detail Data -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-            <div class="bg-slate-800/30 rounded-lg p-3">
+            <div class="bg-slate-50 rounded-lg p-3">
               <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-building mr-1"></i>Asal Institusi</p>
               <p class="font-medium">${d.asalInstitusi || '-'}</p>
             </div>
-            <div class="bg-slate-800/30 rounded-lg p-3">
+            <div class="bg-slate-50 rounded-lg p-3">
               <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-phone mr-1"></i>Telepon</p>
               <p class="font-medium">${d.telpon || '-'}</p>
             </div>
-            <div class="bg-slate-800/30 rounded-lg p-3">
+            <div class="bg-slate-50 rounded-lg p-3">
               <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-calendar mr-1"></i>Tanggal Pelaksanaan</p>
               <p class="font-medium">${formatDateIndo(d.tanggalPelaksanaan) || '-'}</p>
             </div>
-            <div class="bg-slate-800/30 rounded-lg p-3">
+            <div class="bg-slate-50 rounded-lg p-3">
               <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-clock mr-1"></i>Waktu</p>
               <p class="font-medium">${d.waktuPelaksanaan || '-'}</p>
             </div>
-            <div class="bg-slate-800/30 rounded-lg p-3 sm:col-span-2">
+            <div class="bg-slate-50 rounded-lg p-3 sm:col-span-2">
               <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-location-dot mr-1"></i>Tempat Kegiatan</p>
               <p class="font-medium">${d.tempatKegiatan || '-'}</p>
             </div>
-            <div class="bg-slate-800/30 rounded-lg p-3 sm:col-span-2">
+            <div class="bg-slate-50 rounded-lg p-3 sm:col-span-2">
               <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-clipboard-list mr-1"></i>Nama Kegiatan</p>
               <p class="font-medium">${d.namaKegiatan || '-'}</p>
             </div>
-            <div class="bg-slate-800/30 rounded-lg p-3">
+            <div class="bg-slate-50 rounded-lg p-3">
               <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-users mr-1"></i>Jumlah Peserta</p>
               <p class="font-medium">${d.jumlahPeserta || '-'} orang</p>
             </div>
@@ -299,14 +299,14 @@
             <div class="lightbox-container" style="max-width:900px; max-height:90vh; overflow-y:auto;" onclick="event.stopPropagation()">
               
               <!-- Modal Header -->
-              <div class="lightbox-header" style="border-bottom: 1px solid rgba(58,112,112,0.15); padding-bottom:1rem;">
+              <div class="lightbox-header" style="border-bottom: 1px solid rgba(15,118,110,0.15); padding-bottom:1rem;">
                 <div class="lightbox-title">
-                  <div class="lightbox-icon" style="background: linear-gradient(135deg, rgba(160,120,24,0.15), rgba(160,120,24,0.08)); color: #a07818;">
+                  <div class="lightbox-icon" style="background: linear-gradient(135deg, rgba(217,119,6,0.15), rgba(217,119,6,0.08)); color: #D97706;">
                     <i class="fa-solid fa-rotate-left"></i>
                   </div>
                   <div>
-                    <h3 style="font-size:1.25rem; font-weight:700; color:#1e293b;">Formulir Perbaikan Usulan</h3>
-                    <p style="font-size:0.75rem; color:#64748b; margin-top:0.25rem;">No.Reg: <span id="perbaikanNoReg" class="font-mono font-semibold text-teal-600"></span></p>
+                    <h3 style="font-size:1.25rem; font-weight:700; color:var(--color-text-primary);">Formulir Perbaikan Usulan</h3>
+                    <p style="font-size:0.75rem; color:var(--color-text-muted); margin-top:0.25rem;">No.Reg: <span id="perbaikanNoReg" class="font-mono font-semibold text-teal-600"></span></p>
                   </div>
                 </div>
                 <div class="lightbox-close" onclick="closePerbaikanModal()" style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.15); color:#EF4444;">
@@ -329,139 +329,139 @@
                   
                   <!-- Data Pengusul -->
                   <div class="space-y-4">
-                    <h3 class="text-sm font-semibold flex items-center gap-2 pb-2 border-b" style="color:#3a7070; border-color:rgba(58,112,112,0.15);">
+                    <h3 class="text-sm font-semibold flex items-center gap-2 pb-2 border-b" style="color:var(--color-primary); border-color:var(--color-border);">
                       <i class="fa-solid fa-user"></i> Data Pengusul
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">NIK <span class="text-red-500">*</span></label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">NIK <span class="text-red-500">*</span></label>
                         <input type="text" id="perbaikan_nik" maxlength="16" required readonly
-                               class="w-full px-4 py-3 bg-gray-100 border rounded-xl text-sm"
-                               style="border-color:#e5e7eb; color:#6b7280;" placeholder="16 digit NIK">
-                        <p class="text-xs text-gray-400 mt-1">NIK tidak dapat diubah</p>
+                               class="w-full px-4 py-3 bg-slate-50 border rounded-xl text-sm"
+                               style="border-color:var(--color-input-border); color:var(--color-text-muted);" placeholder="16 digit NIK">
+                        <p class="text-xs text-slate-500 mt-1">NIK tidak dapat diubah</p>
                       </div>
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">No. Telepon <span class="text-red-500">*</span></label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">No. Telepon <span class="text-red-500">*</span></label>
                         <input type="tel" id="perbaikan_telpon" placeholder="08xxxxxxxxxx" required
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                     </div>
 
                     <div>
-                      <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Nama Lengkap <span class="text-red-500">*</span></label>
+                      <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Nama Lengkap <span class="text-red-500">*</span></label>
                       <input type="text" id="perbaikan_nama" placeholder="Nama lengkap sesuai KTP" required
                              class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                             style="border-color:#e5e7eb;">
+                             style="border-color:var(--color-input-border);">
                     </div>
 
                     <div>
-                      <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Asal Institusi <span class="text-red-500">*</span></label>
+                      <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Asal Institusi <span class="text-red-500">*</span></label>
                       <input type="text" id="perbaikan_institusi" placeholder="Rumah Sakit / Puskesmas / Instansi" required
                              class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                             style="border-color:#e5e7eb;">
+                             style="border-color:var(--color-input-border);">
                     </div>
                   </div>
 
                   <!-- Detail Kegiatan -->
                   <div class="space-y-4">
-                    <h3 class="text-sm font-semibold flex items-center gap-2 pb-2 border-b" style="color:#3a7070; border-color:rgba(58,112,112,0.15);">
+                    <h3 class="text-sm font-semibold flex items-center gap-2 pb-2 border-b" style="color:var(--color-primary); border-color:var(--color-border);">
                       <i class="fa-solid fa-clipboard-list"></i> Detail Kegiatan
                     </h3>
 
                     <div>
-                      <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Nama Kegiatan <span class="text-red-500">*</span></label>
+                      <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Nama Kegiatan <span class="text-red-500">*</span></label>
                       <input type="text" id="perbaikan_kegiatan" placeholder="Contoh: Donor Darah, Pelatihan EMAS, dll" required
                              class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                             style="border-color:#e5e7eb;">
+                             style="border-color:var(--color-input-border);">
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Tempat Kegiatan <span class="text-red-500">*</span></label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Tempat Kegiatan <span class="text-red-500">*</span></label>
                         <input type="text" id="perbaikan_tempat" placeholder="Lokasi pelaksanaan" required
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Tanggal <span class="text-red-500">*</span></label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Tanggal <span class="text-red-500">*</span></label>
                         <input type="date" id="perbaikan_tanggal" required
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Waktu Pelaksanaan <span class="text-red-500">*</span></label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Waktu Pelaksanaan <span class="text-red-500">*</span></label>
                         <input type="text" id="perbaikan_waktu" placeholder="Contoh: 08.00 - 13.00 WITA" required
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Jumlah Peserta <span class="text-red-500">*</span></label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Jumlah Peserta <span class="text-red-500">*</span></label>
                         <input type="number" id="perbaikan_peserta" placeholder="Minimal 20" min="20" required
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                     </div>
                   </div>
 
                   <!-- Link Dokumentasi -->
                   <div class="space-y-4">
-                    <h3 class="text-sm font-semibold flex items-center gap-2 pb-2 border-b" style="color:#3a7070; border-color:rgba(58,112,112,0.15);">
+                    <h3 class="text-sm font-semibold flex items-center gap-2 pb-2 border-b" style="color:var(--color-primary); border-color:var(--color-border);">
                       <i class="fa-solid fa-link"></i> Link Dokumentasi (Opsional)
                     </h3>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Spreadsheet Peserta</label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Spreadsheet Peserta</label>
                         <input type="url" id="perbaikan_spreadsheet" placeholder="Google Sheets URL"
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Surat Tugas</label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Surat Tugas</label>
                         <input type="url" id="perbaikan_surtug" placeholder="Google Drive URL"
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Dokumentasi Foto</label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Dokumentasi Foto</label>
                         <input type="url" id="perbaikan_foto" placeholder="Google Drive Folder URL"
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Dokumentasi Video</label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Dokumentasi Video</label>
                         <input type="url" id="perbaikan_video" placeholder="Google Drive URL"
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Surat Pemberitahuan</label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Surat Pemberitahuan</label>
                         <input type="url" id="perbaikan_pemberitahuan" placeholder="URL"
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Daftar Hadir</label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Daftar Hadir</label>
                         <input type="url" id="perbaikan_hadir" placeholder="URL"
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                       <div>
-                        <label class="block text-xs font-medium mb-1.5" style="color:#374151;">Berita Acara</label>
+                        <label class="block text-xs font-medium mb-1.5" style="color:var(--color-text-secondary);">Berita Acara</label>
                         <input type="url" id="perbaikan_beritaacara" placeholder="URL"
                                class="w-full px-4 py-3 bg-white border rounded-xl text-sm focus:ring-2 focus:ring-teal-500"
-                               style="border-color:#e5e7eb;">
+                               style="border-color:var(--color-input-border);">
                       </div>
                     </div>
                   </div>
@@ -473,15 +473,15 @@
               </div>
               
               <!-- Modal Footer -->
-              <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4" style="border-top: 1px solid rgba(58,112,112,0.1); margin-top:auto; padding:1rem 1.5rem 1.5rem;">
+              <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4" style="border-top: 1px solid rgba(15,118,110,0.1); margin-top:auto; padding:1rem 1.5rem 1.5rem;">
                 <button type="button" onclick="closePerbaikanModal()" 
                         class="px-6 py-3 rounded-xl font-medium transition-all"
-                        style="background:rgba(255,255,255,0.9); border:1px solid rgba(58,112,112,0.2); color:#3a7070;">
+                        style="background:var(--color-surface); border:1px solid rgba(15,118,110,0.2); color:var(--color-primary);">
                   Batal
                 </button>
                 <button type="submit" form="formPerbaikan"
                         class="px-8 py-3 rounded-xl font-semibold text-white transition-all"
-                        style="background:linear-gradient(135deg, #3a7070, #4a8888); box-shadow:0 4px 14px rgba(58,112,112,0.25);">
+                        style="background:linear-gradient(135deg, #0F766E, #14B8A6); box-shadow:0 4px 14px rgba(15,118,110,0.25);">
                   <i class="fa-solid fa-save mr-2"></i>Simpan Perbaikan
                 </button>
               </div>

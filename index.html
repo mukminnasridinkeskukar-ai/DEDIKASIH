@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   
@@ -11,13 +11,13 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="DEDIKASIH">
-  <meta name="theme-color" content="#0b1220">
-  <meta name="msapplication-TileColor" content="#0b1220">
+  <meta name="theme-color" content="#F8FAFC">
+  <meta name="msapplication-TileColor" content="#F8FAFC">
   <meta name="format-detection" content="telephone=no">
   
   <!-- PWA Icons - Using inline SVG favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%233a7070'/><stop offset='50%25' stop-color='%237a9a88'/><stop offset='100%25' stop-color='%23a07818'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23fg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%233a7070'/><stop offset='50%25' stop-color='%237a9a88'/><stop offset='100%25' stop-color='%23a07818'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23fg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%230F766E'/><stop offset='50%25' stop-color='%2314B8A6'/><stop offset='100%25' stop-color='%232563EB'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23fg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%230F766E'/><stop offset='50%25' stop-color='%2314B8A6'/><stop offset='100%25' stop-color='%232563EB'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23fg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>D</text></svg>">
   
   <title>DEDIKASIH v1.0 • Digitalisasi Kegiatan Pengabdian Masyarakat SDM Kesehatan</title>
   
@@ -45,10 +45,11 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="bg-slate-950 text-slate-200 dark" id="mainBody">
+<body class="bg-slate-50 text-slate-600" id="mainBody">
 
   <!-- ===== LANDING PAGE (3 DETIK) - BRIGHT LUMINOUS ===== -->
-  <div id="landingPage" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #0a0f1a 0%, #0d1626 35%, rgba(20, 58, 58, 0.35) 65%, #0a0f1a 100%);">
+  <!-- Healthcare Government hero: gradient health (hijau -> biru) sesuai design system -->
+  <div id="landingPage" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #115E59 0%, #0F766E 35%, #1D4ED8 100%);">
 
     <!-- Background effects -->
     <div class="orb orb-1"></div>
@@ -69,10 +70,10 @@
 
       <!-- Logo Dinas Kesehatan Kab. Kutai Kartanegara -->
       <div class="logo-ring mb-6 sm:mb-8" style="animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;">
-        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233a7070'/><stop offset='50%' stop-color='%2314B8A6'/><stop offset='100%' stop-color='%2310B981'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='url(%23lg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-weight='bold'>D</text></svg>" 
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%230F766E'/><stop offset='50%' stop-color='%2314B8A6'/><stop offset='100%' stop-color='%232563EB'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='url(%23lg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-weight='bold'>D</text></svg>" 
              alt="Logo Dinas Kesehatan Kabupaten Kutai Kartanegara"
              class="w-20 h-20 sm:w-28 sm:h-28 rounded-full object-contain bg-white p-1.5 shadow-[0_8px_32px_rgba(58,112,112,0.2),0_4px_12px_rgba(20,184,166,0.15)] border-2 border-teal-600/30"
-             onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22lg%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%233a7070%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%2310B981%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23lg)%22/><text x=%2250%22 y=%2265%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
+             onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22lg%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%230F766E%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%232563EB%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23lg)%22/><text x=%2250%22 y=%2265%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
       </div>
 
       <!-- Platform name -->
@@ -117,10 +118,10 @@
       <span class="hamburger-line"></span>
     </button>
     <div class="flex items-center gap-3">
-      <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233a7070'/><stop offset='50%' stop-color='%2314B8A6'/><stop offset='100%' stop-color='%2310B981'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='url(%23lg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-weight='bold'>D</text></svg>" 
+      <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%230F766E'/><stop offset='50%' stop-color='%2314B8A6'/><stop offset='100%' stop-color='%232563EB'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='url(%23lg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-weight='bold'>D</text></svg>" 
            alt="Logo Dinkes Kukar" 
            class="w-8 h-8 rounded-full object-contain bg-white p-0.5 border border-teal-600/30 shadow-sm"
-           onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22mh%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%233a7070%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%2310B981%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23mh)%22/><text x=%2250%22 y=%2265%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
+           onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22mh%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%230F766E%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%232563EB%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23mh)%22/><text x=%2250%22 y=%2265%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
       <span class="font-display text-sm font-semibold gradient-text">DEDIKASIH</span>
     </div>
     <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-white/80 flex items-center justify-center shadow-sm border border-slate-300/50" aria-label="Toggle theme">
@@ -136,7 +137,7 @@
       
       <!-- Sidebar Header -->
       <div class="p-4 lg:p-6 border-b border-teal-100/50 hidden lg:flex flex-col items-center text-center">
-        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233a7070'/><stop offset='50%' stop-color='%2314B8A6'/><stop offset='100%' stop-color='%2310B981'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='url(%23lg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-weight='bold'>D</text></svg>" 
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%230F766E'/><stop offset='50%' stop-color='%2314B8A6'/><stop offset='100%' stop-color='%232563EB'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='url(%23lg)'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white' font-weight='bold'>D</text></svg>" 
              alt="Logo Dinas Kesehatan Kab. Kutai Kartanegara"
              class="w-16 h-16 rounded-full object-contain bg-white p-1 shadow-lg mb-3 border-2 border-teal-400/30"
              onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22sg%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 stop-color=%22%230F766E%22/><stop offset=%2250%%22 stop-color=%22%2314B8A6%22/><stop offset=%22100%%22 stop-color=%22%23F59E0B%22/></linearGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22url(%23sg)%22/><text x=%2250%22 y=%2265%22 font-size=%2238%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>D</text></svg>';">
@@ -168,34 +169,34 @@
           <span>Form Usulan</span>
         </div>
         <div class="nav-item" id="nav-pengumuman" onclick="navigateTo('pengumuman'); if(window.innerWidth<1024)toggleSidebar();">
-          <i class="fa-solid fa-bullhorn text-amber-500 w-5 text-center"></i>
+          <i class="fa-solid fa-bullhorn text-blue-600 w-5 text-center"></i>
           <span>Pengumuman</span>
         </div>
         <div class="nav-item" id="nav-jadwal" onclick="navigateTo('jadwal'); if(window.innerWidth<1024)toggleSidebar();">
-          <i class="fa-solid fa-calendar-days text-purple-500 w-5 text-center"></i>
+          <i class="fa-solid fa-calendar-days text-blue-600 w-5 text-center"></i>
           <span>Jadwal Kegiatan</span>
         </div>
         <div class="nav-item" id="nav-sertifikat" onclick="navigateTo('sertifikat'); if(window.innerWidth<1024)toggleSidebar();">
-          <i class="fa-solid fa-certificate text-yellow-500 w-5 text-center"></i>
+          <i class="fa-solid fa-certificate text-emerald-600 w-5 text-center"></i>
           <span>Sertifikat</span>
         </div>
         <div class="nav-item" id="nav-cekstatus" onclick="navigateTo('cekstatus'); if(window.innerWidth<1024)toggleSidebar();">
-          <i class="fa-solid fa-magnifying-glass-chart text-pink-500 w-5 text-center"></i>
+          <i class="fa-solid fa-magnifying-glass-chart text-blue-600 w-5 text-center"></i>
           <span>Cek Status</span>
         </div>
         <div class="nav-item" id="nav-petunjuk" onclick="navigateTo('petunjuk'); if(window.innerWidth<1024)toggleSidebar();">
-          <i class="fa-solid fa-book-open text-cyan-600 w-5 text-center"></i>
+          <i class="fa-solid fa-book-open text-slate-500 w-5 text-center"></i>
           <span>Petunjuk Penggunaan</span>
         </div>
         <div class="nav-item" id="nav-kontak" onclick="navigateTo('kontak'); if(window.innerWidth<1024)toggleSidebar();">
-          <i class="fa-solid fa-envelope text-green-500 w-5 text-center"></i>
+          <i class="fa-solid fa-envelope text-blue-600 w-5 text-center"></i>
           <span>Kontak</span>
         </div>
 
         <!-- ===== GRUP 3: PANEL ADMIN ===== -->
         <p class="nav-group-title">Panel Admin</p>
         <div class="nav-item" id="nav-admin" onclick="navigateTo('admin'); if(window.innerWidth<1024)toggleSidebar();">
-          <i class="fa-solid fa-lock text-red-500 w-5 text-center"></i>
+          <i class="fa-solid fa-lock text-red-600 w-5 text-center"></i>
           <span>Panel Admin</span>
         </div>
       </nav>
@@ -244,9 +245,9 @@
             <div class="stat-card glass rounded-2xl p-4 sm:p-6" onclick="showDashboardLightbox('totalUsulan', 'Usulan Masuk', 'fa-file-lines', 'teal')">
               <div class="flex items-center justify-between mb-3">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-teal-500/10 flex items-center justify-center">
-                  <i class="fa-solid fa-file-lines text-teal-400 text-lg"></i>
+                  <i class="fa-solid fa-file-lines text-teal-600 text-lg"></i>
                 </div>
-                <span class="text-[10px] text-slate-500 bg-slate-800/50 px-2 py-1 rounded-full">Total</span>
+                <span class="text-[10px] text-slate-500 bg-slate-100 px-2 py-1 rounded-full">Total</span>
               </div>
               <p class="metric-value text-xl sm:text-2xl lg:text-3xl font-bold text-white" id="stat-totalUsulan">0</p>
               <p class="text-xs text-slate-400 mt-1">Usulan Masuk</p>
@@ -255,7 +256,7 @@
             <div class="stat-card glass rounded-2xl p-4 sm:p-6" onclick="showDashboardLightbox('menunggu', 'Menunggu Verifikasi', 'fa-clock', 'amber')">
               <div class="flex items-center justify-between mb-3">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-500/10 flex items-center justify-center">
-                  <i class="fa-solid fa-clock text-amber-400 text-lg"></i>
+                  <i class="fa-solid fa-clock text-amber-600 text-lg"></i>
                 </div>
                 <span class="badge badge-menunggu">Pending</span>
               </div>
@@ -266,7 +267,7 @@
             <div class="stat-card glass rounded-2xl p-4 sm:p-6" onclick="showDashboardLightbox('disetujui', 'Disetujui', 'fa-circle-check', 'emerald')">
               <div class="flex items-center justify-between mb-3">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-                  <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+                  <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
                 </div>
                 <span class="badge badge-disetujui">Approved</span>
               </div>
@@ -277,7 +278,7 @@
             <div class="stat-card glass rounded-2xl p-4 sm:p-6 col-span-2 lg:col-span-1" onclick="showDashboardLightbox('ditolak', 'Ditolak', 'fa-circle-xmark', 'red')">
               <div class="flex items-center justify-between mb-3">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
-                  <i class="fa-solid fa-circle-xmark text-red-400 text-lg"></i>
+                  <i class="fa-solid fa-circle-xmark text-red-600 text-lg"></i>
                 </div>
                 <span class="badge badge-ditolak">Rejected</span>
               </div>
@@ -292,7 +293,7 @@
             <!-- Chart Card -->
             <div class="glass rounded-2xl p-4 sm:p-6 enterprise-shadow">
               <h3 class="font-semibold text-sm sm:text-base mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-chart-pie text-teal-400"></i>
+                <i class="fa-solid fa-chart-pie text-teal-600"></i>
                 Distribusi Status
               </h3>
               <div class="relative h-48 sm:h-64">
@@ -318,17 +319,17 @@
           <!-- Quick Stats Row -->
           <div class="grid grid-cols-3 gap-3 sm:gap-4">
             <div class="glass rounded-xl p-3 sm:p-4 text-center">
-              <i class="fa-solid fa-bullhorn text-amber-400 text-lg mb-2"></i>
+              <i class="fa-solid fa-bullhorn text-blue-600 text-lg mb-2"></i>
               <p class="text-lg sm:text-xl font-bold" id="stat-totalPengumuman">0</p>
               <p class="text-[10px] sm:text-xs text-slate-400">Pengumuman</p>
             </div>
             <div class="glass rounded-xl p-3 sm:p-4 text-center">
-              <i class="fa-solid fa-calendar-check text-purple-400 text-lg mb-2"></i>
+              <i class="fa-solid fa-calendar-check text-blue-600 text-lg mb-2"></i>
               <p class="text-lg sm:text-xl font-bold" id="stat-totalJadwal">0</p>
               <p class="text-[10px] sm:text-xs text-slate-400">Jadwal</p>
             </div>
             <div class="glass rounded-xl p-3 sm:p-4 text-center">
-              <i class="fa-solid fa-certificate text-yellow-400 text-lg mb-2"></i>
+              <i class="fa-solid fa-certificate text-amber-600 text-lg mb-2"></i>
               <p class="text-lg sm:text-xl font-bold" id="stat-totalSertifikat">0</p>
               <p class="text-[10px] sm:text-xs text-slate-400">Sertifikat</p>
             </div>
@@ -350,78 +351,78 @@
               
               <!-- Data Pengusul -->
               <div class="space-y-4">
-                <h3 class="text-sm font-semibold text-teal-400 flex items-center gap-2 pb-2 border-b border-white/10">
+                <h3 class="text-sm font-semibold text-teal-600 flex items-center gap-2 pb-2 border-b border-white/10">
                   <i class="fa-solid fa-user"></i> Data Pengusul
                 </h3>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">NIK <span class="text-red-400">*</span></label>
+                    <label class="block text-xs font-medium text-slate-400 mb-1.5">NIK <span class="text-red-600">*</span></label>
                     <input type="text" id="nik" maxlength="16" placeholder="16 digit NIK" required
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                   <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">No. Telepon <span class="text-red-400">*</span></label>
+                    <label class="block text-xs font-medium text-slate-400 mb-1.5">No. Telepon <span class="text-red-600">*</span></label>
                     <input type="tel" id="telpon" placeholder="08xxxxxxxxxx" required
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                 </div>
 
                 <div>
-                  <label class="block text-xs font-medium text-slate-400 mb-1.5">Nama Lengkap <span class="text-red-400">*</span></label>
+                  <label class="block text-xs font-medium text-slate-400 mb-1.5">Nama Lengkap <span class="text-red-600">*</span></label>
                   <input type="text" id="namaPengusul" placeholder="Nama lengkap sesuai KTP" required
-                         class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                         class="form-input w-full rounded-xl text-sm">
                 </div>
 
                 <div>
-                  <label class="block text-xs font-medium text-slate-400 mb-1.5">Asal Institusi <span class="text-red-400">*</span></label>
+                  <label class="block text-xs font-medium text-slate-400 mb-1.5">Asal Institusi <span class="text-red-600">*</span></label>
                   <input type="text" id="asalInstitusi" placeholder="Rumah Sakit / Puskesmas / Instansi" required
-                         class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                         class="form-input w-full rounded-xl text-sm">
                 </div>
               </div>
 
               <!-- Detail Kegiatan -->
               <div class="space-y-4">
-                <h3 class="text-sm font-semibold text-teal-400 flex items-center gap-2 pb-2 border-b border-white/10">
+                <h3 class="text-sm font-semibold text-teal-600 flex items-center gap-2 pb-2 border-b border-white/10">
                   <i class="fa-solid fa-clipboard-list"></i> Detail Kegiatan
                 </h3>
 
                 <div>
-                  <label class="block text-xs font-medium text-slate-400 mb-1.5">Nama Kegiatan <span class="text-red-400">*</span></label>
+                  <label class="block text-xs font-medium text-slate-400 mb-1.5">Nama Kegiatan <span class="text-red-600">*</span></label>
                   <input type="text" id="namaKegiatan" placeholder="Contoh: Donor Darah, Pelatihan EMAS, dll" required
-                         class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                         class="form-input w-full rounded-xl text-sm">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Tempat Kegiatan <span class="text-red-400">*</span></label>
+                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Tempat Kegiatan <span class="text-red-600">*</span></label>
                     <input type="text" id="tempatKegiatan" placeholder="Lokasi pelaksanaan" required
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                   <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Tanggal <span class="text-red-400">*</span></label>
+                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Tanggal <span class="text-red-600">*</span></label>
                     <input type="date" id="tanggalKegiatan" required
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Waktu Pelaksanaan <span class="text-red-400">*</span></label>
+                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Waktu Pelaksanaan <span class="text-red-600">*</span></label>
                     <input type="text" id="waktuPelaksanaan" placeholder="Contoh: 08.00 - 13.00 WITA" required
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                   <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Jumlah Peserta <span class="text-red-400">*</span></label>
+                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Jumlah Peserta <span class="text-red-600">*</span></label>
                     <input type="number" id="jumlahPeserta" placeholder="Minimal 20" min="20" required
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                 </div>
               </div>
 
               <!-- Link Dokumentasi -->
               <div class="space-y-4">
-                <h3 class="text-sm font-semibold text-teal-400 flex items-center gap-2 pb-2 border-b border-white/10">
+                <h3 class="text-sm font-semibold text-teal-600 flex items-center gap-2 pb-2 border-b border-white/10">
                   <i class="fa-solid fa-link"></i> Link Dokumentasi (Opsional)
                 </h3>
 
@@ -429,12 +430,12 @@
                   <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1.5">Spreadsheet Peserta</label>
                     <input type="url" id="linkSpreadsheetPeserta" placeholder="Google Sheets URL"
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                   <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1.5">Surat Tugas</label>
                     <input type="url" id="linkSuratTugas" placeholder="Google Drive URL"
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                 </div>
 
@@ -442,12 +443,12 @@
                   <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1.5">Dokumentasi Foto</label>
                     <input type="url" id="linkDokumentasiFoto" placeholder="Google Drive Folder URL"
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                   <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1.5">Dokumentasi Video</label>
                     <input type="url" id="linkDokumentasiVideo" placeholder="Google Drive URL"
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                 </div>
 
@@ -455,17 +456,17 @@
                   <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1.5">Surat Pemberitahuan</label>
                     <input type="url" id="linkSuratPemberitahuan" placeholder="URL"
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                   <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1.5">Daftar Hadir</label>
                     <input type="url" id="linkDaftarHadir" placeholder="URL"
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                   <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1.5">Berita Acara</label>
                     <input type="url" id="linkBeritaAcara" placeholder="URL"
-                           class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                           class="form-input w-full rounded-xl text-sm">
                   </div>
                 </div>
               </div>
@@ -485,13 +486,13 @@
         <section id="view-pengumuman" class="section hidden space-y-4 sm:space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <h2 class="font-display text-lg sm:text-xl font-bold flex items-center gap-2">
-              <i class="fa-solid fa-bullhorn text-amber-400"></i> Pengumuman
+              <i class="fa-solid fa-bullhorn text-blue-600"></i> Pengumuman
             </h2>
           </div>
           
           <div id="pengumumanList" class="space-y-4">
             <div class="glass rounded-xl p-6 text-center">
-              <i class="fa-solid fa-spinner animate-spin text-2xl text-teal-400 mb-2"></i>
+              <i class="fa-solid fa-spinner animate-spin text-2xl text-teal-600 mb-2"></i>
               <p class="text-slate-400 text-sm">Memuat pengumuman...</p>
             </div>
           </div>
@@ -501,13 +502,13 @@
         <section id="view-jadwal" class="section hidden space-y-4 sm:space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <h2 class="font-display text-lg sm:text-xl font-bold flex items-center gap-2">
-              <i class="fa-solid fa-calendar-days text-purple-400"></i> Jadwal Kegiatan
+              <i class="fa-solid fa-calendar-days text-blue-600"></i> Jadwal Kegiatan
             </h2>
           </div>
           
           <div id="jadwalList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="glass rounded-xl p-6 text-center col-span-full">
-              <i class="fa-solid fa-spinner animate-spin text-2xl text-teal-400 mb-2"></i>
+              <i class="fa-solid fa-spinner animate-spin text-2xl text-teal-600 mb-2"></i>
               <p class="text-slate-400 text-sm">Memuat jadwal...</p>
             </div>
           </div>
@@ -517,14 +518,14 @@
         <section id="view-sertifikat" class="section hidden space-y-4 sm:space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <h2 class="font-display text-lg sm:text-xl font-bold flex items-center gap-2">
-              <i class="fa-solid fa-certificate text-yellow-400"></i> Sertifikat Digital
+              <i class="fa-solid fa-certificate text-amber-600"></i> Sertifikat Digital
             </h2>
           </div>
           
 <!-- FILTER PENCARIAN SERTIFIKAT -->
           <div class="glass rounded-xl p-4 sm:p-5">
             <div class="flex items-center gap-2 mb-3">
-              <i class="fa-solid fa-filter text-teal-400 text-sm"></i>
+              <i class="fa-solid fa-filter text-teal-600 text-sm"></i>
               <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Filter Pencarian</span>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -535,7 +536,7 @@
                 </label>
                 <input type="text" id="filterNamaSertifikat" placeholder="Cari nama peserta..."
                        onkeyup="applySertifikatFilter()" 
-                       class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm"
+                       class="form-input w-full rounded-xl text-sm"
                        style="padding: 10px 14px; min-height: auto; font-size: 14px;">
               </div>
               <!-- Filter Kegiatan -->
@@ -545,7 +546,7 @@
                 </label>
                 <input type="text" id="filterKegiatanSertifikat" placeholder="Cari nama kegiatan..."
                        onkeyup="applySertifikatFilter()"
-                       class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm"
+                       class="form-input w-full rounded-xl text-sm"
                        style="padding: 10px 14px; min-height: auto; font-size: 14px;">
               </div>
               <!-- Filter Tanggal Mulai -->
@@ -555,7 +556,7 @@
                 </label>
                 <input type="date" id="filterTanggalDari" 
                        onchange="applySertifikatFilter()"
-                       class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm"
+                       class="form-input w-full rounded-xl text-sm"
                        style="padding: 10px 14px; min-height: auto; font-size: 14px;">
               </div>
               <!-- Filter Tanggal Sampai -->
@@ -565,13 +566,13 @@
                 </label>
                 <input type="date" id="filterTanggalSampai"
                        onchange="applySertifikatFilter()"
-                       class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm"
+                       class="form-input w-full rounded-xl text-sm"
                        style="padding: 10px 14px; min-height: auto; font-size: 14px;">
               </div>
             </div>
-            <div class="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-slate-700/50">
+            <div class="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-slate-200">
               <button onclick="resetSertifikatFilter()" 
-                      class="text-xs px-3 py-1.5 rounded-lg bg-slate-700/50 hover:bg-slate-700 text-slate-300 transition-colors flex items-center gap-1.5">
+                      class="text-xs px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-teal-50 text-slate-600 transition-colors flex items-center gap-1.5">
                 <i class="fa-solid fa-rotate-left"></i> Reset Filter
               </button>
               <span id="sertifikatFilterInfo" class="text-xs text-slate-500 hidden"></span>
@@ -602,7 +603,7 @@
         <section id="view-cekstatus" class="section hidden space-y-6">
           <div class="glass rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto enterprise-shadow">
             <div class="text-center mb-6">
-              <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-4">
+              <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#0F766E] to-[#2563EB] flex items-center justify-center mb-4">
                 <i class="fa-solid fa-magnifying-glass-chart text-white text-2xl"></i>
               </div>
               <h2 class="font-display text-xl font-bold">Cek Status Usulan</h2>
@@ -613,7 +614,7 @@
               <div>
                 <label class="block text-xs font-medium text-slate-400 mb-1.5">NIK atau Nomor Registrasi</label>
                 <input type="text" id="statusQuery" placeholder="Masukkan 16 digit NIK atau DK-XXXXXX-XXXX"
-                       class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                       class="form-input w-full rounded-xl text-sm">
               </div>
               <button onclick="handleCheckStatus()" class="btn btn-primary w-full">
                 <i class="fa-solid fa-search"></i> Cek Status
@@ -636,7 +637,7 @@
             </div>
 
             <div class="space-y-4">
-              <a href="#" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 hover:bg-slate-800/50 transition-colors">
+              <a href="#" class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 hover:bg-teal-50/70 transition-colors">
                 <div class="w-12 h-12 rounded-xl bg-slate-500/10 flex items-center justify-center">
                   <i class="fa-solid fa-location-dot text-teal-600"></i>
                 </div>
@@ -646,9 +647,9 @@
                 </div>
               </a>
               
-              <a href="tel:+62541201234" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 hover:bg-slate-800/50 transition-colors">
+              <a href="tel:+62541201234" class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 hover:bg-teal-50/70 transition-colors">
                 <div class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-                  <i class="fa-solid fa-phone text-green-400"></i>
+                  <i class="fa-solid fa-phone text-emerald-600"></i>
                 </div>
                 <div>
                   <p class="font-medium text-sm">Telepon</p>
@@ -656,9 +657,9 @@
                 </div>
               </a>
               
-              <a href="mailto:dinkes@kutaikartanegerakab.go.id" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 hover:bg-slate-800/50 transition-colors">
+              <a href="mailto:dinkes@kutaikartanegerakab.go.id" class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 hover:bg-teal-50/70 transition-colors">
                 <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center">
-                  <i class="fa-solid fa-envelope text-amber-400"></i>
+                  <i class="fa-solid fa-envelope text-amber-600"></i>
                 </div>
                 <div>
                   <p class="font-medium text-sm">Email</p>
@@ -666,9 +667,9 @@
                 </div>
               </a>
               
-              <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/30">
+              <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-50">
                 <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center">
-                  <i class="fa-solid fa-clock text-purple-400"></i>
+                  <i class="fa-solid fa-clock text-blue-600"></i>
                 </div>
                 <div>
                   <p class="font-medium text-sm">Jam Operasional</p>
@@ -686,7 +687,7 @@
           <div class="glass rounded-2xl p-5 sm:p-6 enterprise-shadow">
             <div class="flex items-start gap-4">
               <div class="w-12 h-12 shrink-0 rounded-xl bg-cyan-500/10 flex items-center justify-center">
-                <i class="fa-solid fa-book-open text-cyan-400 text-xl"></i>
+                <i class="fa-solid fa-book-open text-blue-600 text-xl"></i>
               </div>
               <div>
                 <h2 class="font-display text-lg sm:text-xl font-bold">Petunjuk Penggunaan</h2>
@@ -699,28 +700,28 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <div class="glass rounded-2xl p-4 break-inside-avoid">
               <div class="flex items-center gap-2 mb-2">
-                <span class="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-400 text-xs font-bold flex items-center justify-center">1</span>
+                <span class="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-600 text-xs font-bold flex items-center justify-center">1</span>
                 <p class="font-semibold text-sm">Baca Pedoman</p>
               </div>
               <p class="text-xs text-slate-400 leading-relaxed">Buka buku pedoman digital di bawah halaman ini. Buku hanya dapat dibaca langsung, tidak dapat diunduh.</p>
             </div>
             <div class="glass rounded-2xl p-4 break-inside-avoid">
               <div class="flex items-center gap-2 mb-2">
-                <span class="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-400 text-xs font-bold flex items-center justify-center">2</span>
+                <span class="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-600 text-xs font-bold flex items-center justify-center">2</span>
                 <p class="font-semibold text-sm">Isi Form Usulan</p>
               </div>
               <p class="text-xs text-slate-400 leading-relaxed">Lengkapi data pengusul dan kegiatan pada menu Layanan > Form Usulan, lalu unggah tautan dokumen persyaratan.</p>
             </div>
             <div class="glass rounded-2xl p-4 break-inside-avoid">
               <div class="flex items-center gap-2 mb-2">
-                <span class="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-400 text-xs font-bold flex items-center justify-center">3</span>
+                <span class="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-600 text-xs font-bold flex items-center justify-center">3</span>
                 <p class="font-semibold text-sm">Simpan Nomor</p>
               </div>
               <p class="text-xs text-slate-400 leading-relaxed">Catat nomor registrasi (format DK-XXXXXX-XXXX) yang muncul setelah usulan berhasil diajukan.</p>
             </div>
             <div class="glass rounded-2xl p-4 break-inside-avoid">
               <div class="flex items-center gap-2 mb-2">
-                <span class="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-400 text-xs font-bold flex items-center justify-center">4</span>
+                <span class="w-7 h-7 rounded-lg bg-teal-500/10 text-teal-600 text-xs font-bold flex items-center justify-center">4</span>
                 <p class="font-semibold text-sm">Pantau Status</p>
               </div>
               <p class="text-xs text-slate-400 leading-relaxed">Gunakan menu Cek Status dengan NIK atau nomor registrasi untuk memantau proses verifikasi.</p>
@@ -729,10 +730,10 @@
 
           <!-- PDF Reader (read-only) -->
           <div class="glass rounded-2xl overflow-hidden enterprise-shadow">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 border-b border-slate-700/50">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 border-b border-slate-200">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
-                  <i class="fa-solid fa-file-pdf text-red-400"></i>
+                  <i class="fa-solid fa-file-pdf text-red-600"></i>
                 </div>
                 <div>
                   <p class="font-semibold text-sm">Buku Pedoman DEDIKASIH</p>
@@ -740,33 +741,33 @@
                 </div>
               </div>
               <div class="flex items-center gap-2">
-                <button onclick="pedomanZoom(-1)" class="w-9 h-9 rounded-lg bg-slate-800/60 hover:bg-slate-700/60 text-slate-300 flex items-center justify-center" title="Perkecil">
+                <button onclick="pedomanZoom(-1)" class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center" title="Perkecil">
                   <i class="fa-solid fa-minus text-xs"></i>
                 </button>
                 <span id="pedomanZoomLabel" class="text-xs text-slate-400 w-12 text-center">100%</span>
-                <button onclick="pedomanZoom(1)" class="w-9 h-9 rounded-lg bg-slate-800/60 hover:bg-slate-700/60 text-slate-300 flex items-center justify-center" title="Perbesar">
+                <button onclick="pedomanZoom(1)" class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center" title="Perbesar">
                   <i class="fa-solid fa-plus text-xs"></i>
                 </button>
-                <button onclick="pedomanFullscreen()" class="w-9 h-9 rounded-lg bg-slate-800/60 hover:bg-slate-700/60 text-slate-300 flex items-center justify-center" title="Layar penuh">
+                <button onclick="pedomanFullscreen()" class="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center" title="Layar penuh">
                   <i class="fa-solid fa-expand text-xs"></i>
                 </button>
               </div>
             </div>
-            <div id="pedomanViewer" class="pedoman-viewer relative bg-slate-900/60" style="min-height:320px;">
+            <div id="pedomanViewer" class="pedoman-viewer relative bg-slate-100" style="min-height:320px;">
               <div id="pedomanLoading" class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate-400">
-                <i class="fa-solid fa-spinner animate-spin text-2xl text-teal-400"></i>
+                <i class="fa-solid fa-spinner animate-spin text-2xl text-teal-600"></i>
                 <p class="text-xs">Memuat buku pedoman...</p>
               </div>
               <div id="pedomanPages" class="flex flex-col items-center gap-4 py-4"></div>
               <div id="pedomanError" class="hidden absolute inset-0 flex flex-col items-center justify-center gap-2 text-slate-400 p-6 text-center">
-                <i class="fa-solid fa-triangle-exclamation text-2xl text-amber-400"></i>
+                <i class="fa-solid fa-triangle-exclamation text-2xl text-amber-600"></i>
                 <p class="text-sm">Buku pedoman sementara tidak dapat dimuat.</p>
                 <p class="text-xs">Pastikan berkas <code>pdf/buku-pedoman-dedikasih.pdf</code> tersedia, lalu muat ulang halaman.</p>
               </div>
             </div>
-            <div class="flex items-center justify-between px-4 py-2 border-t border-slate-700/50 text-xs text-slate-500">
+            <div class="flex items-center justify-between px-4 py-2 border-t border-slate-200 text-xs text-slate-500">
               <span id="pedomanPageInfo">Halaman -/-</span>
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-teal-500"></i> Mode baca-saja &middot; unduh &amp; cetak dinonaktifkan</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-teal-600"></i> Mode baca-saja &middot; unduh &amp; cetak dinonaktifkan</span>
             </div>
           </div>
 
@@ -778,7 +779,7 @@
           <!-- Login Form -->
           <div id="adminLoginSection" class="glass rounded-2xl p-6 sm:p-8 max-w-md mx-auto enterprise-shadow">
             <div class="text-center mb-6">
-              <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center mb-4">
+              <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-teal-700 to-blue-600 flex items-center justify-center mb-4">
                 <i class="fa-solid fa-lock text-white text-2xl"></i>
               </div>
               <h2 class="font-display text-xl font-bold">Panel Admin</h2>
@@ -789,12 +790,12 @@
               <div>
                 <label class="block text-xs font-medium text-slate-400 mb-1.5">Username</label>
                 <input type="text" id="adminUser" placeholder="Admin username"
-                       class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                       class="form-input w-full rounded-xl text-sm">
               </div>
               <div>
                 <label class="block text-xs font-medium text-slate-400 mb-1.5">Password</label>
                 <input type="password" id="adminPass" placeholder="••••••••"
-                       class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
+                       class="form-input w-full rounded-xl text-sm">
               </div>
               <button onclick="handleAdminLogin()" class="btn btn-primary w-full">
                 <i class="fa-solid fa-right-to-bracket"></i> Login
@@ -833,8 +834,8 @@
               <div id="adminTab-usulan" class="p-4">
                 <div class="admin-table-header mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div class="admin-table-title">
-                    <i class="fa-solid fa-file-lines text-emerald-400 mr-2"></i>Kelola Usulan Masuk
-                    <span id="usulanCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
+                    <i class="fa-solid fa-file-lines text-emerald-600 mr-2"></i>Kelola Usulan Masuk
+                    <span id="usulanCountBadge" class="ml-2 px-2 py-0.5 bg-slate-100 rounded-full text-[10px] text-slate-600">0 data</span>
                   </div>
                   <div class="admin-table-actions flex flex-wrap items-center gap-2">
                     <button onclick="showAddUsulanModal()" class="btn-crud btn-create btn-sm">
@@ -847,7 +848,7 @@
                       <i class="fa-solid fa-print"></i> Print
                     </button>
                     <div class="admin-search-box relative">
-                      <input type="text" id="searchUsulan" placeholder="Cari usulan..." onkeyup="filterAdminTable('usulan')" class="bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
+                      <input type="text" id="searchUsulan" placeholder="Cari usulan..." onkeyup="filterAdminTable('usulan')" class="bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
                       <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     </div>
                   </div>
@@ -855,7 +856,7 @@
                 <div class="table-responsive overflow-x-auto">
                   <table class="premium-table text-xs w-full min-w-[1200px]">
                     <thead>
-                      <tr class="bg-gradient-to-r from-slate-800 to-slate-900">
+                      <tr class="">
                         <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">No.Reg</th>
                         <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Nama Pengusul</th>
                         <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">NIK</th>
@@ -886,8 +887,8 @@
               <div id="adminTab-pengumuman" class="p-4 hidden">
                 <div class="admin-table-header mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div class="admin-table-title">
-                    <i class="fa-solid fa-bullhorn text-purple-400 mr-2"></i>Kelola Pengumuman
-                    <span id="pengumumanCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
+                    <i class="fa-solid fa-bullhorn text-blue-600 mr-2"></i>Kelola Pengumuman
+                    <span id="pengumumanCountBadge" class="ml-2 px-2 py-0.5 bg-slate-100 rounded-full text-[10px] text-slate-600">0 data</span>
                   </div>
                   <div class="admin-table-actions flex flex-wrap items-center gap-2">
                     <button onclick="showAddPengumumanModal()" class="btn-crud btn-create btn-sm">
@@ -900,7 +901,7 @@
                       <i class="fa-solid fa-print"></i> Print
                     </button>
                     <div class="admin-search-box relative">
-                      <input type="text" id="searchPengumuman" placeholder="Cari pengumuman..." onkeyup="filterAdminTable('pengumuman')" class="bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
+                      <input type="text" id="searchPengumuman" placeholder="Cari pengumuman..." onkeyup="filterAdminTable('pengumuman')" class="bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
                       <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     </div>
                   </div>
@@ -908,7 +909,7 @@
                 <div class="table-responsive overflow-x-auto">
                   <table class="premium-table text-xs w-full min-w-[900px]">
                     <thead>
-                      <tr class="bg-gradient-to-r from-slate-800 to-slate-900">
+                      <tr class="">
                         <th class="px-3 py-3 text-left font-semibold whitespace-nowrap w-16">ID</th>
                         <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Judul Pengumuman</th>
                         <th class="px-3 py-3 text-left font-semibold whitespace-nowrap w-32">Tanggal</th>
@@ -934,7 +935,7 @@
                 <div class="admin-table-header mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div class="admin-table-title">
                     <i class="fa-solid fa-calendar-days text-teal-600 mr-2"></i>Kelola Jadwal Kegiatan
-                    <span id="jadwalCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
+                    <span id="jadwalCountBadge" class="ml-2 px-2 py-0.5 bg-slate-100 rounded-full text-[10px] text-slate-600">0 data</span>
                   </div>
                   <div class="admin-table-actions flex flex-wrap items-center gap-2">
                     <button onclick="showAddJadwalModal()" class="btn-crud btn-create btn-sm">
@@ -947,7 +948,7 @@
                       <i class="fa-solid fa-print"></i> Print
                     </button>
                     <div class="admin-search-box relative">
-                      <input type="text" id="searchJadwal" placeholder="Cari jadwal..." onkeyup="filterAdminTable('jadwal')" class="bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
+                      <input type="text" id="searchJadwal" placeholder="Cari jadwal..." onkeyup="filterAdminTable('jadwal')" class="bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
                       <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     </div>
                   </div>
@@ -955,7 +956,7 @@
                 <div class="table-responsive overflow-x-auto">
                   <table class="premium-table text-xs w-full min-w-[1100px]">
                     <thead>
-                      <tr class="bg-gradient-to-r from-slate-800 to-slate-900">
+                      <tr class="">
                         <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Nama Kegiatan</th>
                         <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">Tempat</th>
                         <th class="px-3 py-3 text-left font-semibold whitespace-nowrap">PIC</th>
@@ -982,8 +983,8 @@
               <div id="adminTab-sertifikat" class="p-4 hidden">
                 <div class="admin-table-header mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div class="admin-table-title">
-                    <i class="fa-solid fa-certificate text-yellow-400 mr-2"></i>Kelola Data Sertifikat
-                    <span id="sertifikatCountBadge" class="ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-[10px]">0 data</span>
+                    <i class="fa-solid fa-certificate text-amber-600 mr-2"></i>Kelola Data Sertifikat
+                    <span id="sertifikatCountBadge" class="ml-2 px-2 py-0.5 bg-slate-100 rounded-full text-[10px] text-slate-600">0 data</span>
                   </div>
                   <div class="admin-table-actions flex flex-wrap items-center gap-2">
                     <button onclick="showAddSertifikatModal()" class="btn-crud btn-create btn-sm">
@@ -996,7 +997,7 @@
                       <i class="fa-solid fa-print"></i> Print
                     </button>
                     <div class="admin-search-box relative">
-                      <input type="text" id="searchSertifikat" placeholder="Cari sertifikat..." onkeyup="filterAdminTable('sertifikat')" class="bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
+                      <input type="text" id="searchSertifikat" placeholder="Cari sertifikat..." onkeyup="filterAdminTable('sertifikat')" class="bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs pl-8 w-40 focus:w-56 transition-all">
                       <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     </div>
                   </div>
@@ -1040,7 +1041,7 @@
   <!-- ===== LOADING OVERLAY ===== -->
   <div id="loadingOverlay" class="fixed inset-0 z-[100] bg-black/70 flex items-center justify-center hidden">
     <div class="glass rounded-2xl p-8 text-center">
-      <i class="fa-solid fa-spinner animate-spin text-3xl text-teal-400 mb-4"></i>
+      <i class="fa-solid fa-spinner animate-spin text-3xl text-teal-600 mb-4"></i>
       <p class="text-sm">Memproses...</p>
     </div>
   </div>
@@ -1052,12 +1053,12 @@
   <div id="modalUpdateStatus" class="hidden fixed inset-0 z-[95] bg-black/70 flex items-center justify-center p-4" onclick="if(event.target.id==='modalUpdateStatus') hideModal('modalUpdateStatus')">
     <div class="modal glass w-full max-w-md rounded-2xl sm:rounded-3xl p-6 border border-white/10 max-h-[90vh] overflow-y-auto" onclick="event.stopImmediatePropagation()">
         <h3 class="font-semibold text-base sm:text-lg mb-1">Update Status Usulan</h3>
-        <p class="text-xs text-slate-400 mb-4">Nomor: <span id="updateNomorInfo" class="font-mono text-teal-400"></span></p>
+        <p class="text-xs text-slate-400 mb-4">Nomor: <span id="updateNomorInfo" class="font-mono text-teal-600"></span></p>
         
         <div class="space-y-3">
           <div>
             <label class="block text-xs font-medium text-slate-400 mb-1.5">Status Baru</label>
-            <select id="newStatus" class="form-input w-full bg-slate-900 border border-slate-700 rounded-xl text-sm">
+            <select id="newStatus" class="form-input w-full bg-white border border-slate-300 rounded-xl text-sm">
               <option value="Menunggu Verifikasi">Menunggu Verifikasi</option>
               <option value="Disetujui">Disetujui</option>
               <option value="Ditolak">Ditolak</option>
@@ -1065,7 +1066,7 @@
           </div>
           <div>
             <label class="block text-xs font-medium text-slate-400 mb-1.5">Catatan (opsional)</label>
-            <textarea id="newCatatan" rows="3" class="form-input w-full bg-slate-950 border border-slate-700 rounded-xl text-sm"></textarea>
+            <textarea id="newCatatan" rows="3" class="form-input w-full bg-white border border-slate-300 rounded-xl text-sm"></textarea>
           </div>
         </div>
         <div class="flex flex-col sm:flex-row gap-3 mt-6">
@@ -1090,7 +1091,7 @@
   <!-- MODAL: CONFIRM -->
   <div id="modalConfirm" class="hidden fixed inset-0 z-[95] bg-black/70 flex items-center justify-center p-4" onclick="if(event.target.id==='modalConfirm') hideModal('modalConfirm')">
     <div class="modal glass w-full max-w-xs rounded-2xl sm:rounded-3xl p-6 text-center border border-white/10" onclick="event.stopImmediatePropagation()">
-      <i class="fa-solid fa-exclamation-triangle text-2xl sm:text-3xl text-red-400 mb-3"></i>
+      <i class="fa-solid fa-exclamation-triangle text-2xl sm:text-3xl text-red-600 mb-3"></i>
       <div id="confirmMessage" class="mb-5 text-sm"></div>
       <div class="flex gap-3">
         <button onclick="hideModal('modalConfirm')" class="btn btn-secondary flex-1 py-2 rounded-xl text-sm">Batal</button>
@@ -1170,10 +1171,10 @@
         </div>
         
         <!-- Link Dokumentasi Section -->
-        <div class="mt-4 pt-4 border-t border-slate-700/50">
+        <div class="mt-4 pt-4 border-t border-slate-200">
           <div class="flex items-center gap-2 mb-3">
-            <i class="fa-solid fa-link text-teal-400 text-sm"></i>
-            <span class="text-xs font-semibold text-teal-400 uppercase tracking-wider">Link Dokumentasi & Berkas</span>
+            <i class="fa-solid fa-link text-teal-600 text-sm"></i>
+            <span class="text-xs font-semibold text-teal-600 uppercase tracking-wider">Link Dokumentasi & Berkas</span>
           </div>
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1232,7 +1233,7 @@
     <div class="lightbox-container">
       <div class="lightbox-header">
         <div class="lightbox-title">
-          <div class="lightbox-icon bg-gradient-to-br from-teal-600 to-slate-700 text-white">
+          <div class="lightbox-icon bg-gradient-to-br from-[#0F766E] to-[#115E59] text-white">
             <i class="fa-solid fa-eye"></i>
           </div>
           <span>Detail Usulan</span>
@@ -1264,7 +1265,7 @@
     <div class="lightbox-container">
       <div class="lightbox-header">
         <div class="lightbox-title">
-          <div class="lightbox-icon bg-gradient-to-br from-purple-500 to-violet-600 text-white">
+          <div class="lightbox-icon bg-gradient-to-br from-blue-600 to-blue-800 text-white">
             <i class="fa-solid fa-bullhorn" id="pengumumanLightboxIcon"></i>
           </div>
           <span id="pengumumanLightboxTitle">Tambah Pengumuman</span>
@@ -1311,7 +1312,7 @@
     <div class="lightbox-container">
       <div class="lightbox-header">
         <div class="lightbox-title">
-          <div class="lightbox-icon bg-gradient-to-br from-teal-600 to-slate-700 text-white">
+          <div class="lightbox-icon bg-gradient-to-br from-[#0F766E] to-[#115E59] text-white">
             <i class="fa-solid fa-eye"></i>
           </div>
           <span>Detail Pengumuman</span>
@@ -1343,7 +1344,7 @@
     <div class="lightbox-container">
       <div class="lightbox-header">
         <div class="lightbox-title">
-          <div class="lightbox-icon bg-gradient-to-br from-[#5a7a6a] to-[#4a8888] text-white">
+          <div class="lightbox-icon bg-gradient-to-br from-[#0F766E] to-[#14B8A6] text-white">
             <i class="fa-solid fa-calendar-days" id="jadwalLightboxIcon"></i>
           </div>
           <span id="jadwalLightboxTitle">Tambah Jadwal Kegiatan</span>
@@ -1407,7 +1408,7 @@
     <div class="lightbox-container">
       <div class="lightbox-header">
         <div class="lightbox-title">
-          <div class="lightbox-icon bg-gradient-to-br from-teal-600 to-slate-700 text-white">
+          <div class="lightbox-icon bg-gradient-to-br from-[#0F766E] to-[#115E59] text-white">
             <i class="fa-solid fa-eye"></i>
           </div>
           <span>Detail Jadwal</span>
@@ -1439,7 +1440,7 @@
     <div class="lightbox-container">
       <div class="lightbox-header">
         <div class="lightbox-title">
-          <div class="lightbox-icon bg-gradient-to-br from-yellow-500 to-orange-600 text-white">
+          <div class="lightbox-icon bg-gradient-to-br from-blue-600 to-blue-800 text-white">
             <i class="fa-solid fa-certificate" id="sertifikatLightboxIcon"></i>
           </div>
           <span id="sertifikatLightboxTitle">Tambah Sertifikat</span>
@@ -1515,7 +1516,7 @@
     <div class="lightbox-container">
       <div class="lightbox-header">
         <div class="lightbox-title">
-          <div class="lightbox-icon bg-gradient-to-br from-teal-600 to-slate-700 text-white">
+          <div class="lightbox-icon bg-gradient-to-br from-[#0F766E] to-[#115E59] text-white">
             <i class="fa-solid fa-eye"></i>
           </div>
           <span>Detail Sertifikat</span>
@@ -1550,7 +1551,7 @@
     <div class="lightbox-container" style="max-width: 420px;">
       <div class="lightbox-header" style="justify-content: center;">
         <div class="lightbox-title" style="flex-direction: column; text-align: center;">
-          <div class="lightbox-icon mx-auto mb-3 w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-rose-600 text-white text-2xl">
+          <div class="lightbox-icon mx-auto mb-3 w-16 h-16 rounded-full bg-gradient-to-br from-teal-700 to-blue-600 text-white text-2xl">
             <i class="fa-solid fa-triangle-exclamation"></i>
           </div>
           <span>Konfirmasi Hapus</span>
@@ -1559,7 +1560,7 @@
       
       <div class="lightbox-body text-center">
         <p class="text-slate-300 mb-2" id="deleteConfirmMessage">Apakah Anda yakin ingin menghapus data ini?</p>
-        <p class="text-red-400 text-sm font-semibold" id="deleteItemName"></p>
+        <p class="text-red-600 text-sm font-semibold" id="deleteItemName"></p>
       </div>
       
       <div class="lightbox-footer justify-center">
@@ -1593,9 +1594,9 @@
       <form id="statusUpdateForm" onsubmit="submitStatusUpdate(event)" class="lightbox-body">
         <input type="hidden" id="statusUpdateId" value="">
         
-        <div class="mb-4 p-3 rounded-lg bg-slate-800/50 border border-slate-700/50">
+        <div class="mb-4 p-3 rounded-lg bg-teal-600/5 border border-teal-600/15">
           <p class="text-xs text-slate-400">Nomor Registrasi:</p>
-          <p class="font-mono text-teal-400 font-semibold" id="statusUpdateNomor">-</p>
+          <p class="font-mono text-teal-600 font-semibold" id="statusUpdateNomor">-</p>
         </div>
         
         <div class="lightbox-form-group">
@@ -1642,14 +1643,14 @@
       <!-- Header -->
       <div class="flex items-center justify-between mb-6">
         <h3 id="lightbox-stat-title" class="text-xl font-bold text-white">Detail Statistik</h3>
-        <button onclick="closeDashboardLightbox()" class="w-10 h-10 rounded-full bg-slate-800/50 hover:bg-slate-700/50 flex items-center justify-center transition-all">
+        <button onclick="closeDashboardLightbox()" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-all">
           <i class="fa-solid fa-xmark text-slate-400"></i>
         </button>
       </div>
       
       <!-- Stat Value -->
       <div id="lightbox-stat-icon" class="lightbox-stat-icon bg-teal-500/10">
-        <i class="fa-solid fa-chart-bar text-teal-400"></i>
+        <i class="fa-solid fa-chart-bar text-teal-600"></i>
       </div>
       <p id="lightbox-stat-value" class="text-5xl font-bold text-white mb-2">0</p>
       <p id="lightbox-stat-label" class="text-slate-400">Label</p>
@@ -1680,7 +1681,7 @@
       
       <!-- Action Buttons -->
       <div class="flex gap-3 mt-6">
-        <button onclick="closeDashboardLightbox()" class="flex-1 py-3 px-4 rounded-xl bg-slate-800/50 hover:bg-slate-700/50 text-white font-medium transition-all">
+        <button onclick="closeDashboardLightbox()" class="flex-1 py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition-all">
           Tutup
         </button>
         <button id="lightbox-action-btn" onclick="navigateFromLightbox()" class="flex-1 py-3 px-4 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-medium transition-all">

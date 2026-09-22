@@ -118,7 +118,7 @@
       // Build documentation section HTML
       var docsHtml = '';
       if (hasDocs) {
-        docsHtml = '<div class="file-link-section mt-4 pt-4 border-t border-slate-700/50">' +
+        docsHtml = '<div class="file-link-section mt-4 pt-4 border-t border-slate-200">' +
           '<div class="file-link-title mb-3"><i class="fa-solid fa-paperclip"></i> Dokumen & Berkas Terkait</div>' +
           '<div class="file-link-grid">' +
             makeFileLink('Spreadsheet Peserta', item.linkSpreadsheetPeserta, 'fa-solid fa-table-cells', 'btn-sheet') +
@@ -130,7 +130,7 @@
             makeFileLink('Berita Acara', item.linkBeritaAcara, 'fa-solid fa-file-lines', 'btn-pdf') +
           '</div></div>';
       } else {
-        docsHtml = '<div class="file-link-section mt-4 pt-4 border-t border-slate-700/50">' +
+        docsHtml = '<div class="file-link-section mt-4 pt-4 border-t border-slate-200">' +
           '<div class="no-file-links text-center py-3"><i class="fa-solid fa-folder-open mr-1"></i>Tidak ada dokumen terlampir</div></div>';
       }
       
@@ -162,7 +162,7 @@
         '</div>' +
         
         // Catatan Admin (if exists)
-        (item.catatan ? '<div class="mt-4 pt-4 border-t border-slate-700/30">' +
+        (item.catatan ? '<div class="mt-4 pt-4 border-t border-slate-200">' +
           '<div class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-2">' +
             '<i class="fa-solid fa-comment-dots mr-1"></i>Catatan Admin</div>' +
           '<div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-sm text-amber-200">' + item.catatan + '</div></div>' : '') +
