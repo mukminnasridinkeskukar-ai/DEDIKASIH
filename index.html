@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
-<script>
-    window.location.replace("https://mukminnasri.com/");
-</script>
-  
   <meta charset="UTF-8">
   
   <!-- ============================================ -->
@@ -3540,7 +3535,7 @@
             <div class="space-y-4">
               <div>
                 <label class="block text-xs font-medium text-slate-400 mb-1.5">NIK atau Nomor Registrasi</label>
-                <input type="text" id="statusQuery" placeholder="Masukkan 16 digit NIK atau DK-XXXXX-XXXX"
+                <input type="text" id="statusQuery" placeholder="Masukkan 16 digit NIK atau DK-XXXXXX-XXXX"
                        class="form-input w-full bg-slate-900/50 border border-slate-700 rounded-xl text-sm">
               </div>
               <button onclick="handleCheckStatus()" class="btn btn-primary w-full">
@@ -4748,9 +4743,9 @@
         // Bersihkan input
         var cleanQuery = query.trim();
         
-        // Deteksi jenis query: NIK (16 digit angka) atau Nomor Registrasi (format DK-XXXXX-XXXX)
+        // Deteksi jenis query: NIK (16 digit angka) atau Nomor Registrasi (format DB: DK-202608-6352 -> DK-YYYYMM-XXXX)
         var isNIK = /^\d{16}$/.test(cleanQuery);
-        var isNomorReg = /^DK-\d{5}-\d{4}$/i.test(cleanQuery);
+        var isNomorReg = /^DK-\d{5,6}-\d{4}$/i.test(cleanQuery);
         
         console.log('[DEDIKASIH] Check Status Query:', cleanQuery, '| isNIK:', isNIK, '| isNomorReg:', isNomorReg);
         
@@ -4790,7 +4785,7 @@
         if (!data) {
           return { 
             success: false, 
-            message: 'Data tidak ditemukan. Pastikan NIK (16 digit) atau Nomor Registrasi (DK-XXXXX-XXXX) benar.' 
+            message: 'Data tidak ditemukan. Pastikan NIK (16 digit) atau Nomor Registrasi (DK-XXXXXX-XXXX) benar.' 
           };
         }
         
@@ -5552,6 +5547,21 @@ function renderSertifikatTable() {
       setTimeout(function() { showEditJadwalModal(currentViewId); }, 300);
     }
     
+    // Fallback bila skema DB belum memiliki kolom tertentu (mis. 'pic' pada jadwal_kegiatan).
+    // Mengembalikan payload tanpa kolom yang ditolak Supabase (error PGRST204), atau null bila tak relevan.
+    function stripMissingCols(err, data) {
+      try {
+        var m = /Could not find the '([^']+)' column/.exec(err && err.message || '');
+        if (m && Object.prototype.hasOwnProperty.call(data, m[1])) {
+          var clone = Object.assign({}, data);
+          delete clone[m[1]];
+          console.warn('[DEDIKASIH] Kolom "' + m[1] + '" belum ada di database — disimpan tanpa kolom tersebut. Jalankan ALTER TABLE untuk menambahkannya.');
+          return clone;
+        }
+      } catch (e) {}
+      return null;
+    }
+    
     async function submitJadwalForm(e) {
       e.preventDefault();
       showLoading(true);
@@ -5568,10 +5578,18 @@ function renderSertifikatTable() {
         
         if(currentEditType === 'create') {
           var { error } = await supabase.from('jadwal_kegiatan').insert(data);
+          if (error && error.code === 'PGRST204') {
+            var fixed = stripMissingCols(error, data);
+            if (fixed) { var r = await supabase.from('jadwal_kegiatan').insert(fixed); error = r.error; }
+          }
           if(error) throw error;
           showToast('Jadwal berhasil ditambahkan!', 'success');
         } else {
           var { error } = await supabase.from('jadwal_kegiatan').update(data).eq('id', currentEditId);
+          if (error && error.code === 'PGRST204') {
+            var fixed = stripMissingCols(error, data);
+            if (fixed) { var r = await supabase.from('jadwal_kegiatan').update(fixed).eq('id', currentEditId); error = r.error; }
+          }
           if(error) throw error;
           showToast('Jadwal berhasil diperbarui!', 'success');
         }
@@ -5691,10 +5709,18 @@ function renderSertifikatTable() {
         
         if(currentEditType === 'create') {
           var { error } = await supabase.from('sertifikat').insert(data);
+          if (error && error.code === 'PGRST204') {
+            var fixed = stripMissingCols(error, data);
+            if (fixed) { var r = await supabase.from('sertifikat').insert(fixed); error = r.error; }
+          }
           if(error) throw error;
           showToast('Sertifikat berhasil ditambahkan!', 'success');
         } else {
           var { error } = await supabase.from('sertifikat').update(data).eq('id', currentEditId);
+          if (error && error.code === 'PGRST204') {
+            var fixed = stripMissingCols(error, data);
+            if (fixed) { var r = await supabase.from('sertifikat').update(fixed).eq('id', currentEditId); error = r.error; }
+          }
           if(error) throw error;
           showToast('Sertifikat berhasil diperbarui!', 'success');
         }
